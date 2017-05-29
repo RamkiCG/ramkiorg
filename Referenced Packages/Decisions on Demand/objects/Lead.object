@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <webLinks>
+        <fullName>AssignLead</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Assign</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>{!URLFOR(&quot;../apex/DecsOnD__ApplyPolicy&quot;, &quot;&quot;)}?id={!Lead.Id}&amp;policy=Assignment</url>
+    </webLinks>
+    <webLinks>
+        <fullName>AssignList</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Assign</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>var objectName = &apos;Lead&apos;;
+var policyName = &apos;Assignment&apos;;
+var idArray = {!GETRECORDIDS($ObjectType.Lead)};
+
+var applyPolicyURL=&apos;/apex/DecsOnD__ApplyPolicyToList?object=&apos; + objectName + &apos;&amp;policy=&apos; + policyName + &apos;&amp;ids=&apos; + encodeURIComponent(idArray) + &apos;&amp;redirect=&apos; + encodeURIComponent(document.URL);
+
+// To force or disable creation of execution records, uncomment one of these lines
+// By default logging is controlled by the Log_Level__c field of the policy
+//applyPolicyURL += &apos;&amp;log=false&apos;; 
+//applyPolicyURL += &apos;&amp;log=true&apos;; 
+
+// Review mode allows the user to validate changes before they are applied
+//applyPolicyURL += &apos;&amp;mode=review&apos;; 
+
+window.location.href=applyPolicyURL;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>EmailsAndTasks</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Emails &amp; tasks</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>{!URLFOR(&quot;../apex/DecsOnD__ApplyPolicy&quot;, &quot;&quot;)}?id={!Lead.Id}&amp;policy=EmailsAndTasks</url>
+    </webLinks>
+</CustomObject>

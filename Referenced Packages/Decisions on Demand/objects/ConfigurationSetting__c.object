@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Store Decisions on Demand configuration settings</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>ElementName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>User interface (or other) element to which the setting applies. For instance the name of a table column</description>
+        <externalId>false</externalId>
+        <label>Element</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>External ID</label>
+        <length>150</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Object__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the object to which the setting applies</description>
+        <externalId>false</externalId>
+        <label>Object Name</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PolicyName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the policy to which the setting applies</description>
+        <externalId>false</externalId>
+        <label>Policy</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SettingType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Type of the setting, for instance &quot;ColumnWidth&quot;</description>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <length>50</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TableName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the decision table to which the setting applies</description>
+        <externalId>false</externalId>
+        <label>Table</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UserId__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>User ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Value__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Setting Value, for instance &quot;200px&quot; for the width of a column</description>
+        <externalId>false</externalId>
+        <label>Value</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Decisions on Demand Configuration</label>
+    <visibility>Public</visibility>
+</CustomObject>

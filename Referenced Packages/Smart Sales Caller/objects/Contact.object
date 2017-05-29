@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Location_Map__c</fullName>
+        <deprecated>false</deprecated>
+        <description>To find the location of the contact</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;http://maps.google.com/?q=&quot;&amp;TEXT(  Location_of_the_contact__Latitude__s )&amp;&quot;,&quot;&amp;TEXT(  Location_of_the_contact__Longitude__s  ),
+&quot;Click to see Map&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>To find the location of the contact</inlineHelpText>
+        <label>Location Map</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location_of_the_contact__c</fullName>
+        <deprecated>false</deprecated>
+        <description>current location of the contact</description>
+        <displayLocationInDecimal>false</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <inlineHelpText>current location of the contact</inlineHelpText>
+        <label>Location of the contact</label>
+        <required>false</required>
+        <scale>7</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Location</type>
+    </fields>
+</CustomObject>

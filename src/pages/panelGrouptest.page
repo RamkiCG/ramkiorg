@@ -1,0 +1,17 @@
+<apex:page standardController="Account" recordSetVar="accounts">
+
+
+    <apex:repeat value="{!accounts}" var="a" >
+    
+
+    <apex:panelGrid columns="3" id="theGrid">
+       <apex:panelGroup >
+        <apex:outputText value="{!a.Id}"/>
+        <apex:outputText value="{!a.name}"/>
+      </apex:panelGroup>
+
+  
+    </apex:panelGrid>
+    </apex:repeat>
+
+</apex:page>

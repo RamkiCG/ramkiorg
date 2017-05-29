@@ -1,0 +1,94 @@
+<!-- PATCH 1.5.1 remove sidebar -->
+<apex:page id="thePage" controller="DecsOnD.ApplyPolicyToListController" sidebar="false" action="{!applyPolicyToList}"> 
+    <apex:pageMessages showDetail="true"/> 
+    
+    <apex:outputPanel id="ErrorPanel" rendered="{!NOT(policyAppliedSuccessfully)}">                
+        <apex:form id="ErrorForm">
+            <!-- This section will only be shown if issues occur. See below for page shown on successful application -->
+            <apex:pageBlock id="ErrorBlock" >
+                <p>Unable to successfully apply policy&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!policy.ID}" target="_blank">{!policyName}</apex:outputLink> to selected objects. More details can be found above.</p>
+                <p>No changes will be made to your data</p>
+                <p>Please contact your system administrator for help in resolving this issue.</p>
+                <p><apex:outputLink value="{!redirectURL}" target="_parent">Return to list</apex:outputLink></p>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>    
+    
+    <apex:outputPanel id="NoChangePanel" rendered="{!AND(policyAppliedSuccessfully, NOT(changesMade))}">
+        <apex:form id="NoChangeForm">
+            <!-- This section will only be shown if the policy did not result in any changes -->
+            <apex:pageBlock id="NoChangeBlock" >
+                <p>Policy&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!policy.ID}" target="_blank">{!policyName}</apex:outputLink> was successfully applied to selected {!recordType} records. But no changes were made to the records, and no other actions were applied.</p>
+                <p>Please review the policy to ensure all cases are covered.</p>
+                <p><apex:outputLink value="{!redirectURL}" target="_parent">Return to list</apex:outputLink></p>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>    
+    
+    <apex:outputPanel id="ConfirmationPanel" rendered="{!AND(policyAppliedSuccessfully, changesMade, NOT(autoMode))}">        
+        
+        <apex:pageBlock id="ConfirmationHeaderBlock" title="Confirmation">
+           <p>Policy&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!policy.ID}" target="_blank" style="font-weight:bold;" disabled="{!NOT(hasPolicyReadAccess)}">{!policyName}</apex:outputLink> was successfully applied to
+			listing items 
+<!--            <apex:outputLink value="{!$Site.CurrentSiteUrl}/{!record.ID}">{!recordName}</apex:outputLink>--></p>
+           <apex:outputLabel value="For more information on this policy, please contact " rendered="{!NOT(OR(ISBLANK(policy.OwnerId), hasPolicyReadAccess))}"> <apex:outputField value="{!policy.OwnerId}"/></apex:outputLabel>
+           <p>Please review the proposed updates below, then click <b>Accept changes</b> to apply them or <b>Cancel</b> to leave your data unchanged.</p>
+        </apex:pageBlock>
+        <apex:form id="ConfirmationForm">
+            <apex:pageBlock id="ConfirmationBodyBlock" title="Results" mode="edit">
+                <apex:pageBlockButtons id="ConfirmationBodyBlockButtons">
+                    <apex:commandButton id="selectedChangesButton" value="Accept selected changes" action="{!acceptChanges}" disabled="{!numSelectedActions==0}" rendered="{!policyAppliedSuccessfully}"/>
+                    <apex:commandButton value="Accept all changes" action="{!acceptAllChanges}" rendered="{!policyAppliedSuccessfully}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}" />               
+                </apex:pageBlockButtons>
+				<apex:pageBlockTable value="{!actionContextWrappers}" var="actionWrapper" id="actionList" onRowMouseOver="hiOff(this);">
+					<apex:column headerValue="Apply" width="30px">
+						<apex:inputCheckbox value="{!actionWrapper.isSelected}" disabled="{!actionWrapper.IsNoAction}">
+                            <!--  JVG Patch 1.8.16 Story #327 -->
+                            <!--  Finer-grained re-render does not work -- or only for the top button -->
+                            <apex:actionSupport event="onchange" reRender="ConfirmationBodyBlock"/>
+                        </apex:inputCheckbox>
+					</apex:column>
+                    <apex:column value="{!actionWrapper.mainObjectName}" headerValue="Name" width="210px"/>
+                    <apex:column headerValue="Update Type" width="140px">
+                    	<apex:outPutText value="{!actionWrapper.actionRecord.actionLabel}" rendered="{!actionWrapper.DisplayOneRow}"/>
+                    	<apex:outPutText value="No Change" rendered="{!actionWrapper.IsNoAction}"/>
+                    	<apex:outPutText value="Various" rendered="{!actionWrapper.showMore}"/>
+                    </apex:column> 
+                    <apex:column width="200px">
+                        <apex:facet name="header">Object(s)</apex:facet>
+                        <apex:outputText rendered="{!actionWrapper.DisplayOneRow}">
+							<apex:repeat value="{!actionWrapper.actionRecord.targetObjectNames}" var="objectName" id="objectList">
+								{!objectName}<br/>
+							</apex:repeat>
+						</apex:outputText>
+						<apex:outPutText value="N/A" rendered="{!actionWrapper.IsNoAction}"/>
+						<apex:outPutText value="Multiple" rendered="{!actionWrapper.showMore}"/>
+                    </apex:column> 
+                    <apex:column >
+                        <apex:facet name="header">Details</apex:facet>
+                        <apex:outputText rendered="{!actionWrapper.IsNoActionWithError}">
+                        	<apex:repeat value="{!actionWrapper.response.ErrorMessages}" var="message" id="errorList">
+								{!message}<br/>
+							</apex:repeat>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!actionWrapper.IsNoAction}">
+                        	{!actionWrapper.noActionMsg}
+                        </apex:outputText>
+                        <apex:outputText rendered="{!actionWrapper.DisplayOneRow}">
+							<apex:repeat value="{!actionWrapper.actionRecord.messages}" var="message" id="actionList">
+								{!message}<br/>
+							</apex:repeat>
+						</apex:outputText>
+						<apex:outputPanel rendered="{!actionWrapper.showMore}">
+	                    	<apex:commandLink value="{!actionWrapper.actionRecords.size} updates" onclick="document.getElementById('popup{!actionWrapper.mainId}').style.display='inline';return false;"/>
+	                    	<div id="popup{!actionWrapper.mainId}" style="display:none;">
+		                        <c:PolicyActionContextDetails id="tblSurvey" Title="{!actionWrapper.mainId}" PanelId="popup{!actionWrapper.mainId}" PolicyActionRecordList="{!actionWrapper.actionRecords}"/>
+		                    </div>
+	                    </apex:outputPanel>
+                    </apex:column> 
+				</apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>    
+</apex:page>

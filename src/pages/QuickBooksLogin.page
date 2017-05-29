@@ -1,0 +1,17 @@
+<apex:page controller="QuickBooksLoginController" action="{! completeAuthorization }">
+    <apex:form id="main_form">
+        <apex:pageBlock title="Quick Books" >
+        <apex:outputLabel value="CustomerName" />
+        <apex:inputText value="{!CustomerName}"  >
+                   <apex:actionSupport event="onchange" action="{!customerNameValue}"/>
+        </apex:inputText>
+         <apex:commandButton value="Create Custommer" action="{!qbConnector.createCustomers}" />   
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Authorize" action="{!qbConnector.authorize }" />
+              <!--  <apex:commandButton value="Retrieve Accounts" action="{!qbConnector.retrieveAllQBAccounts }" />-->
+                           
+              
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,46 @@
+<apex:page sidebar="false" controller="CodeCoverageController" tabStyle="Code_Coverage__tab">
+<!-- colorbox css -->
+<apex:stylesheet value="{!URLFOR($Resource.jquerycolorbox,'/colorbox.css')}" />
+
+<!-- Js -->
+<script data-require="angular.js@*" data-semver="1.2.0-rc3-nonmin" src="{!URLFOR($Resource.jquerycolorbox,'/angular.js')}"></script>
+<script data-require="ng-table@*" data-semver="0.3.1" src="{!URLFOR($Resource.jquerycolorbox,'/ng-table.js')}"></script>
+
+<!-- Css -->
+<link data-require="ng-table@*" data-semver="0.3.1" rel="stylesheet" href="{!URLFOR($Resource.jquerycolorbox,'/ng-table.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.jquerycolorbox,'/bootstrap.css')}" /> 
+
+<div ng-app="main" ng-controller="DemoCtrl">
+    <apex:pageBlock >
+    	<apex:pageMessages />
+        <apex:pageBlockSection columns="1">
+            <table ng-table="tableParams" class="table list" border="0" cellpadding="0" cellspacing="0">
+                    <tr ng-repeat="user in $data">
+                        
+                        <td data-title="'Code Unit Name'" sortable="'name'">                            
+                           <a href="#" ng-click="openPage('{{user.id}}' , '{{user.unittype}}');" > {{user.name}} </a>
+                        </td>
+                        <td data-title="'% Coverage.'" sortable="'codeCoverage'">
+                            {{user.codeCoverage}}
+                        </td>                        
+                    </tr>
+            </table>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+<script src="{!URLFOR($Resource.appjs)}"></script>
+
+<script src="{!URLFOR($Resource.jquerycolorbox,'/JqueryMinJs.js')}" />
+<script src="{!URLFOR($Resource.jquerycolorbox,'/jquery.colorbox-min.js')}" />
+<script>
+    _PageURLs = {
+            codeBodyPage : '{!$Page.Code_Body}'
+            
+        }
+        
+     _tableData = {
+        codeUnitData : {!codeUnits}
+     }
+</script>
+</div>
+</apex:page>

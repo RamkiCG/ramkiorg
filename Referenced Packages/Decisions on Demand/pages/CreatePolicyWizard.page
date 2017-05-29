@@ -1,0 +1,84 @@
+<!-- This page has temporarily been replaced with content from new CreateNewPolicy page in order to include it in the patch
+FIXME Restore to original content
+-->
+<apex:page id="thePageCreateNewPolicy" controller="DecsOnD.CreatePolicyWizardController"> 
+  
+  <head>
+    <style>
+          .GridCol1{
+                color: #333 !important;
+                font-size: 91%;
+                font-weight: bold;
+                text-align: left;
+                width: 85px;
+                padding: 0px 10px 10px 6px;
+                
+            }
+            .GridCol2{
+                text-align:left;
+                padding: 0px 0px 10px 6px;
+            }
+    </style>
+  </head>
+  
+  <apex:form id="frmCreateNewPolicy">
+    <apex:outputPanel layout="block" rendered="{!hasError}">
+        <apex:pageMessages showDetail="true"/>
+    </apex:outputPanel>
+    
+    <apex:pageBlock mode="edit" id="theMainBlock" rendered="{!NOT(hasError)}">
+        <apex:pageMessages id="theMsg" showDetail="true"/>
+        
+        <apex:pageBlockButtons >
+            <apex:actionFunction name="clonePolicy" action="{!clonePolicy}" reRender="frmCreateNewPolicy" status="btnStatus"/>
+            <apex:actionFunction name="installTemplate" action="{!installTemplate}" reRender="frmCreateNewPolicy" status="btnStatus"/>
+            
+            <apex:commandButton onclick="clonePolicy();return false;" value="Clone" rendered="{!isClone}"/>
+            <apex:commandButton onclick="installTemplate();return false;" value="Install" rendered="{!isInstallTemplate}"/>
+            <apex:commandButton action="{!cancel}" value="Cancel"/>
+        </apex:pageBlockButtons>  
+        
+        <apex:pageBlockSection ></apex:pageBlockSection>
+        <apex:pageBlockSection id="pbsPolicyInfo" columns="1" title="Policy Information" collapsible="false">
+            <apex:panelGrid columns="2" id="theGrid" width="100%" columnClasses="GridCol1,GridCol2" border="0"> 
+                <apex:outputLabel value="Policy Name" />
+                <apex:outputPanel layout="block" styleClass="requiredInput">
+                   <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                   <apex:inputText value="{!newPolicyInfo.name}" style="width:89.6%;"/>
+                   <apex:outputLabel id="label1"> 
+                      <apex:outputPanel id="duplicatNameErrorMsgPanel" style="color:#D74C3B;" rendered="{!LEN(policyNameErrMsg)!=0}">
+                        <div> <strong>Error: </strong>&nbsp;{!policyNameErrMsg}</div>
+                      </apex:outputPanel>
+                   </apex:outputLabel>
+                </apex:outputPanel>
+                
+                <apex:outputLabel value="Applies To" />
+                <apex:outputText id="appliesTo" value="{!newPolicyInfo.appliesTo}"/>
+                
+                <apex:outputPanel layout="block" style="padding-top:3px;">
+                    <apex:outputLabel value="Activate Policy?"/>
+                </apex:outputPanel>
+                <apex:inputCheckbox value="{!newPolicyInfo.activatePolicy}"/>
+                
+                <apex:outputLabel value="Description" />
+                <apex:inputTextarea id="note" value="{!newPolicyInfo.description}" rows="6" style="width:89.5%;"/>
+                
+                <apex:outputLabel value="Documentation"/>
+                <apex:inputText value="{!newPolicyInfo.document_URL}" style="width:89.6%;"/>
+                
+                <apex:outputLabel value="Version Label"/>
+                <apex:inputText value="{!newPolicyInfo.version.label}" style="width:89.6%;"/>
+                
+                <apex:outputLabel value="Version Notes" />
+                <apex:inputTextarea value="{!newPolicyInfo.version.notes}" rows="6" style="width:89.5%;"/>
+                
+            </apex:panelGrid> 
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+    <apex:actionStatus id="btnStatus">
+       <apex:facet name="start"><c:Load BackColor="#FFFFFF;" borderColor="#efefef" height="30px" width="{!IF(isClone, '150px', '170px')}" Message="{!IF(isClone, 'Cloning Policy...', 'Installing Template...')}" imageUrl="/img/loading.gif" /></apex:facet>
+    </apex:actionStatus>
+    
+  </apex:form>
+</apex:page>

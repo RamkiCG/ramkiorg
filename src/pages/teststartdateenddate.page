@@ -1,0 +1,17 @@
+<apex:page standardController="Opportunity" Extensions="teststartdateext">
+ <apex:form >
+  Start Date: <apex:inputText value="{!startdate}" id="startdate" onfocus="DatePicker.pickDate(false, this , false);" >   
+   
+  </apex:inputtext> 
+  End Date:   <apex:inputText value="{!enddate}"  id="endate" onfocus="DatePicker.pickDate(false, this , false);"/>
+ 
+  
+  
+    
+      
+ 
+  <apex:commandButton value="MySearch" action="{!calculatedate}"/>
+  
+  </apex:form>
+  
+</apex:page>

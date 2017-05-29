@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MappingObjects>
+	<MappingObject>
+		<Name>Order</Name>
+		<DefaultSFDCMapping>Opportunity</DefaultSFDCMapping>
+		<MappingName>Opportunity Default Mapping</MappingName>
+		<MappingFields>
+			<TargetField>Order.Id</TargetField>
+		</MappingFields>
+	</MappingObject>
+	<MappingObject>
+		<Name>Order</Name>
+		<DefaultSFDCMapping>Opportunity</DefaultSFDCMapping>
+		<MappingName>Opportunity Default Mapping</MappingName>
+		<MappingFields>
+			<TargetField>Transaction.Line</TargetField>
+			<TargetField>Transaction.SubLine</TargetField>
+			<TargetField>Transaction.EventType</TargetField>
+			<TargetField>Transaction.Comp Date</TargetField>
+			<TargetField>Transaction.Value</TargetField>
+			<TargetField>Transaction.Acct Date</TargetField>
+			<TargetField>Transaction.Data Source</TargetField>
+			<TargetField>Transaction.Reason Code</TargetField>
+			<TargetField>Transaction.PO Number</TargetField>
+			<TargetField>Transaction.Comments</TargetField>
+			<TargetField>Transaction.Product ID</TargetField>
+			<TargetField>Transaction.Native Amt</TargetField>
+			<TargetField>Transaction.Num Units</TargetField>
+			<TargetField>Transaction.Product Name</TargetField>
+			<TargetField>Transaction.Product Desc</TargetField>
+		</MappingFields>
+	</MappingObject>
+	<MappingObject>
+		<Name>Participant</Name>
+		<DefaultSFDCMapping>User</DefaultSFDCMapping>
+		<MappingName>Participant Default Mapping</MappingName>
+		<MappingFields>
+			<TargetField>Participant.ParticipantID</TargetField>
+			<TargetField>Participant.Firstname</TargetField>
+			<TargetField>Participant.Lastname</TargetField>
+			<TargetField>Participant.Username</TargetField>
+			<TargetField>Participant.Email</TargetField>
+		</MappingFields>
+	</MappingObject>
+	<MappingObject>
+		<Name>Position</Name>
+		<DefaultSFDCMapping>User</DefaultSFDCMapping>
+		<MappingName>Position Default Mapping</MappingName>
+		<MappingFields>
+			<TargetField>Position.Name</TargetField>
+			<TargetField>Position.Title</TargetField>
+			<TargetField>Position.Manager</TargetField>
+		</MappingFields>
+	</MappingObject>
+</MappingObjects>

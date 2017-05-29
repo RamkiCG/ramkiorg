@@ -1,0 +1,5 @@
+<apex:page >
+    <apex:insert name="name" />
+     <apex:insert name="name1" />
+      <apex:insert name="name2" />
+</apex:page>

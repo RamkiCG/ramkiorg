@@ -1,0 +1,73 @@
+<apex:page standardController="SBQQ__BlockPrice__c" extensions="SBQQ.BlockPriceEditorController" recordSetVar="prices">
+	<apex:sectionHeader title="Edit Block Prices" subtitle="{!product.Name}"/>
+	
+	<apex:pageMessages />
+	
+	<apex:form >
+	<apex:pageBlock title="Block Prices" mode="edit">
+		<apex:pageBlockButtons >
+			<apex:commandButton action="{!onSave}" value="Save"/>
+			<apex:commandButton action="{!onCancel}" value="Cancel" immediate="true"/>
+		</apex:pageBlockButtons>
+		<apex:outputPanel id="prices">
+			<table class="list" border="0" cellspacing="0" cellpadding="0">
+				<thead class="dr-table-thead">
+					<tr class="headerRow">
+						<th class="headerRow">
+							<apex:outputText value="{!$ObjectType.SBQQ__BlockPrice__c.fields.Name.label}"/>
+						</th>
+						<th class="headerRow">
+							<apex:outputText value="{!$ObjectType.SBQQ__BlockPrice__c.fields.SBQQ__LowerBound__c.label}"/>
+						</th>
+						<th class="headerRow">
+							<apex:outputText value="{!$ObjectType.SBQQ__BlockPrice__c.fields.SBQQ__UpperBound__c.label}"/>
+						</th>
+						<apex:repeat var="currency" value="{!priceModel.columnHeadings}">
+							<th class="headerRow">
+								<apex:outputText value="{!$ObjectType.SBQQ__BlockPrice__c.fields.SBQQ__Price__c.label} ({!currency})"/>
+								<apex:outputPanel rendered="{!priceModel.hasOverageRate}">
+									<br/>
+									<apex:outputText value="{!priceModel.overageRateFieldLabel} ({!currency})"/>
+								</apex:outputPanel>
+							</th>
+						</apex:repeat>
+						<th class="headerRow"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<apex:repeat var="row" value="{!priceModel.priceRows}">
+					<tr class="dataRow">
+						<td class="dataCell">
+							<apex:inputText value="{!row.template.Name}"/>
+						</td>
+						<td class="dataCell">
+							<apex:inputField value="{!row.template.SBQQ__LowerBound__c}"/>
+						</td>
+						<td class="dataCell">
+							<apex:inputField value="{!row.template.SBQQ__UpperBound__c}"/>
+						</td>
+						<apex:repeat var="price" value="{!row.prices}">
+							<td class="dataCell">
+								<apex:inputField value="{!price.SBQQ__Price__c}"/>
+								<apex:outputPanel rendered="{!priceModel.hasOverageRate}">
+									<br/>
+									<apex:inputField value="{!price[priceModel.overageRateFieldName]}"/>
+								</apex:outputPanel>
+							</td>
+						</apex:repeat>
+						<td class="dataCell">
+							<apex:commandButton value="+" action="{!onAddPrice}" rerender="prices">
+								<apex:param name="selection" assignTo="{!targetRowId}" value="{!row.id}"/>
+							</apex:commandButton>
+							<apex:commandButton value="-" immediate="true" action="{!onRemovePrice}" rerender="prices" rendered="{!OR(priceModel.rowCount > 1,NOT(row.first))}">
+								<apex:param name="selection" assignTo="{!targetRowId}" value="{!row.id}"/>
+							</apex:commandButton>
+						</td>
+					</tr>
+					</apex:repeat>
+				</tbody>
+			</table>
+		</apex:outputPanel>
+	</apex:pageBlock>
+	</apex:form>
+</apex:page>

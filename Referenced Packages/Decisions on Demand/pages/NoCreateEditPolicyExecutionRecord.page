@@ -1,0 +1,16 @@
+<apex:page standardController="DecsOnD__PolicyExecutionRecord__c" sidebar="false">
+    <head>
+        <style>
+        .cancelLink{
+            position : relative;
+            left : 20px;
+            color : #2EA2E2;
+        }
+        </style>
+    </head>
+    <apex:form >
+        <apex:sectionHeader title="New/Editing" subtitle="Policy Execution Records"/>
+        <apex:pageMessage summary="You cannot manually create or edit Policy Execution Records." severity="Error" strength="2" escape="false" />
+        <apex:commandLink action="{!cancel}" value="Back to previous screen" styleClass="cancelLink"/>
+    </apex:form>
+</apex:page>

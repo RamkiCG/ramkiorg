@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>ConfigurationRuleHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Links product-scoped Product Rules to specific bundle to validate correct configuration.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates whether this rule should be used in validating configurations.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates whether this rule should be used in validating configurations.</inlineHelpText>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ProductRule__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The actual rule that defines logic used to validate product configuration.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the product rule that has the logic you want used to validate product configurations.</inlineHelpText>
+        <label>Product Rule</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>ProductRule__c.Scope__c</field>
+                <operation>equals</operation>
+                <value>Product</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>ProductRule__c</referenceTo>
+        <relationshipLabel>Configuration Rules</relationshipLabel>
+        <relationshipName>ConfigurationRules</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Product__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Configured product to be validated by this rule.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the configured product you want this rule to validate.</inlineHelpText>
+        <label>Product</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Configuration Rules</relationshipLabel>
+        <relationshipName>ConfigurationRules</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RuleEvaluationEvent__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Evaluation event of referenced rule. Convenience field to avoid querying related rule record.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(ProductRule__r.EvaluationEvent__c)</formula>
+        <inlineHelpText>Evaluation event of referenced rule.</inlineHelpText>
+        <label>Rule Evaluation Event</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RuleType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Type of referenced rule. Convenience field to avoid querying related rule record.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(ProductRule__r.Type__c)</formula>
+        <inlineHelpText>Type of product rule referenced by this configuration rule.</inlineHelpText>
+        <label>Rule Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Configuration Rule</label>
+    <nameField>
+        <displayFormat>CR-{000000}</displayFormat>
+        <label>Rule #</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Configuration Rules</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

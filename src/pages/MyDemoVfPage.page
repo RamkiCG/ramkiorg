@@ -1,0 +1,8 @@
+<apex:page docType="html-5.0" >
+  <!-- Begin Default Content REMOVE THIS -->
+ 
+  <apex:form >
+  <apex:inputField id="name" label="Name" />
+  </apex:form>
+  
+</apex:page>

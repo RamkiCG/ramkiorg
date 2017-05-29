@@ -1,0 +1,7 @@
+<apex:page controller="MyController" extensions="ExtOne,ExtTwo" tabStyle="Account">
+    <apex:form >
+        <apex:pageBlock title="Congratulations {!$User.FirstName}">
+            <apex:outputText value="{!foo}" />
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

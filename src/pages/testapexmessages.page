@@ -1,0 +1,15 @@
+<apex:page standardController="Opportunity">
+
+  <!-- Begin Default Content REMOVE THIS -->
+  <apex:form >
+   
+ <apex:inputField value="{!Opportunity.name}">
+  <apex:message />
+ </apex:inputField>
+
+ <apex:inputField value="{!Opportunity.StageName}" >
+ </apex:inputField>
+   <apex:commandButton action="{!save}" value="Save New Account Name"/>
+  
+  </apex:form>
+</apex:page>

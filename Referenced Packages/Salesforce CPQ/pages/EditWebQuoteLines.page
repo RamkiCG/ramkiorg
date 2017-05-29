@@ -1,0 +1,73 @@
+<apex:page standardController="SBQQ__WebQuote__c" extensions="SBQQ.QuoteLineEditorController" docType="html-5.0" showHeader="{!formFactor == 'desktop'}" standardStylesheets="false">
+	<apex:variable var="stylesheet" value="{!IF(formFactor == 'desktop', 'sb', 'MobileCSS')}" />
+	<apex:stylesheet value="{!$Resource[stylesheet]}"/>
+
+	<script src="/soap/ajax/31.0/connection.js" type="text/javascript"></script>
+	<script type="text/javascript" src="{!$Resource.jQuery}"></script>
+	<script type="text/javascript" src="{!$Resource.jQueryUI}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.AngularJS,'angular.min.js')}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.AngularJS,'angular-sanitize.min.js')}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.AngularJS,'/i18n/angular-locale_' + angularLocale + '.js')}"></script>
+	<script type="text/javascript" src="{!$Resource.AngularDnD}"></script>
+	<script type="text/javascript" src="{!$Resource.Directives}"></script>
+	<script type="text/javascript" src="{!$Resource.UI}"></script>
+	<script type="text/javascript" src="{!$Resource.WebUI}"></script>
+	<script type="text/javascript" src="{!$Resource.RemotingServiceProxies}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.CKEditor, '/ckeditor/ckeditor.js')}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var quoteName = '{!$ObjectType.WebQuote__c.name}';
+			var decimalSymbol = '{!decimalSymbol}';
+			var namespace = (quoteName.toLowerCase().substring(0,4) == 'sbqq') ? 'SBQQ' : '';
+			qqBootstrapWeb({namespace:namespace,decimalSymbol:decimalSymbol,sessionId:'{!$API.Session_ID}'});
+			document.getElementById('qq').style.display = 'block';
+
+			//Dynamically add jQuery Datepicker src file
+			var locale = DynamicFieldController.prototype.getUserLocale();
+			if (locale != '') {
+				var jScript = document.createElement('script');
+				jScript.setAttribute("type", "text/javascript");
+				jScript.setAttribute("src", "{!URLFOR($Resource.DatepickerLocales)}" + "/DatepickerLocales/datepicker-" + locale + ".js");
+				$('head').append(jScript);
+			};
+
+			// Timeout error handling
+			var originalOnError = Visualforce.remoting.Util.error;
+			Visualforce.remoting.Util.error = function(a,b){
+				// When the user has been logged out,
+				// send to the login page
+ 				if (b&&(b.message.indexOf('Logged in?')!==-1)){
+      				window.location = 'https://login.salesforce.com';
+   				} else {
+     				// Perform the normal behavior
+					originalOnError && originalOnError(a,b);
+   				}
+			};
+    	});
+    </script>
+    <div id="qq" style="display: none">
+		<div id="mainContent">
+			<form id="mainForm" name="mainForm">
+			<c:quoteLineEditor headerTitle="Edit Quote Products" headerSubtitle="{!SBQQ__WebQuote__c.Name}" objectNames="{!$ObjectType.SBQQ__WebQuote__c.name},{!$ObjectType.SBQQ__WebQuoteLine__c.name}" quoteId="{!IF(ISBLANK($CurrentPage.parameters.id),$CurrentPage.parameters.newid,$CurrentPage.parameters.id)}"/>
+			<c:productLookup headerTitle="{!$Label.sbqq__lbl_product_selection}" headerSubtitle="{!SBQQ__WebQuote__c.Name}"/>
+			<c:productConfigurator headerTitle="{!$Label.sbqq__lbl_configure_products}" headerSubtitle="{!SBQQ__WebQuote__c.Name}"/>
+			<c:productUpgrader headerTitle="{!$Label.sbqq__lbl_asset_selection}" headerSubtitle="{!SBQQ__WebQuote__c.Name}"/>
+			<c:subscriptionLookup headerTitle="{!$Label.sbqq__lbl_subscription_selection}" headerSubtitle="{!SBQQ__WebQuote__c.Name}"/>
+			<c:assetLookup headerTitle="{!$Label.sbqq__lbl_asset_selection}" headerSubtitle="{!SBQQ__WebQuote__c.Name}"/>
+			</form>
+		</div>
+    </div>
+    <script>
+        /* Salesforce-prescribed workaround for platform defect where scrolling on ios 8 causes blank screen */
+        (function () {
+            try {
+                var a = navigator.userAgent;
+                if ((a.indexOf('Salesforce') != -1) && (a.indexOf('iPhone') != -1 || a.indexOf('iPad') != -1) && (a.indexOf('OS/8') != -1 || a.indexOf('OS 8') != -1) && (a.indexOf('Safari') == -1)) {
+                    var s = document.createElement('style');
+                    s.innerHTML = 'html,html body{overflow: auto;-webkit-overflow-scrolling:touch;}body{position:absolute;left:0;right:0;top:0;bottom:0;}';
+                    document.getElementsByTagName('head')[0].appendChild(s);
+                }} catch (e) {}})();
+      handleFixedPageHeader();
+      handleSearchTableResize();
+    </script>
+</apex:page>

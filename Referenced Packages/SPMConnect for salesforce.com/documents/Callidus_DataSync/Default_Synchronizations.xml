@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<SynchronizationProcesses>
+	<Synchronization>
+		<Name>Order Synchronization Process</Name>
+		<BatchName>OrderSynchronizationProcess</BatchName>
+		<SelectedCallidusObject>Order</SelectedCallidusObject>
+		<MappingName>Opportunity Default Mapping</MappingName>
+		<StageName>Closed Won</StageName>
+		<ScheduleOption>day</ScheduleOption>
+		<DataFilter>All</DataFilter>
+	</Synchronization>
+</SynchronizationProcesses>

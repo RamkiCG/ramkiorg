@@ -1,0 +1,113 @@
+<apex:page controller="SingleOrganizationResponse">
+ <apex:pageMessages />
+<apex:form >
+
+<apex:commandButton value="Update Organization" action="{!parseJSONSingleOrganizationResponse}"/>
+
+
+ <apex:pageBlock title="DataInfo" id="DataInfotable">
+        <apex:pageBlockTable value="{!OrganizationCrunchValue.Data}" var="value">
+         <apex:column value="{!value.uuid}" headerValue="UUID"/> 
+         <apex:column value="{!value.type}" headerValue="Type"/>     
+        </apex:pageBlockTable>                
+   </apex:pageBlock>
+    
+     <apex:pageBlock title="PropertiesInfo" id="PropertiesInfotable">    
+            
+            <apex:pageblockTable value="{!OrganizationCrunchValue.Properties}" var="prop">
+                <apex:column value="{!prop.Name}" headerValue="Name"/>
+                <apex:column value="{!prop.description}" headerValue="Description"/>
+                <apex:column value="{!prop.short_description}" headerValue="Short description"/>        
+                <apex:column value="{!prop.number_of_employees}" headerValue="Number of Employees"/> 
+                <apex:column value="{!prop.founded_on}" headerValue="Founded On"/>  
+                <apex:column value="{!prop.homepage_url}" headerValue="Homepage URL"/>                
+            </apex:pageBlockTable>
+     </apex:pageBlock>
+    
+ 
+   
+   <apex:pageBlock title="PastTeam">
+           <apex:pageblockTable value="{!OrganizationCrunchValue.past_team.items}" var="pastteam">                            
+                            <apex:column value="{!pastteam.title}" headerValue="Title"/> 
+                            <apex:column value="{!pastteam.first_name}" headerValue="FirstName"/>
+                            <apex:column value="{!pastteam.last_name}" headerValue="LastName"/>
+                            <apex:column value="{!pastteam.started_on}" headerValue="Started On"/>
+                            <apex:column value="{!pastteam.ended_on}" headerValue="Ended On"/>
+                        </apex:pageBlockTable>
+    </apex:pageBlock>  
+    
+     <apex:pageBlock title="CurrentTeam">
+                    <apex:pageblockTable value="{!OrganizationCrunchValue.current_team.items}" var="currteam">
+                      
+                        <apex:column value="{!currteam.title}" headerValue="Title"/>    
+                        <apex:column value="{!currteam.first_name}" headerValue="FirstName"/>
+                            <apex:column value="{!currteam.last_name}" headerValue="LastName"/>
+                            <apex:column value="{!currteam.started_on}" headerValue="Started On"/>
+                            <apex:column value="{!currteam.ended_on}" headerValue="Ended On"/>                 
+                   </apex:pageBlockTable>
+               </apex:pageBlock>
+    
+     <apex:pageBlock title="Categories">
+           <apex:pageblockTable value="{!OrganizationCrunchValue.categories.items}" var="categoriesitem">
+                            <apex:column value="{!categoriesitem.type}" headerValue="Type"/>
+                            <apex:column value="{!categoriesitem.uuid}" headerValue="UUID"/>
+                             <apex:column value="{!categoriesitem.name}" headerValue="Name"/>
+                                            
+            </apex:pageBlockTable>
+            
+             
+    </apex:pageBlock>
+          
+               
+                <apex:pageBlock title="Products">
+                    <apex:pageblockTable value="{!OrganizationCrunchValue.products.items}" var="product">
+                        <apex:column value="{!product.name}" headerValue="Name"/>
+                        <apex:column value="{!product.type}" headerValue="Type"/>                     
+                   </apex:pageBlockTable>
+               </apex:pageBlock>
+    
+    <apex:pageBlock title="Websites">
+                    <apex:pageblockTable value="{!OrganizationCrunchValue.Websites.items}" var="web">
+                     
+                     
+                     <apex:column value="{!web.title}" headerValue="Title"/>
+                        <apex:column headerValue="URL">
+                             <apex:outputLink value="{!web.url}">  {!web.url}                    
+                      </apex:outputLink>
+                      </apex:column>
+                        <apex:column value="{!web.type}" headerValue="Type"/>                     
+                   </apex:pageBlockTable>
+               </apex:pageBlock>
+               
+                 <apex:pageBlock title="Acquisitions">
+                    <apex:pageblockTable value="{!OrganizationCrunchValue.Acquisitions.items}" var="acq">
+                     
+                     
+                     <apex:column value="{!acq.Name}" headerValue="Name"/>
+                       <apex:column value="{!acq.announced_on}" headerValue="Announced On"/>
+                       <apex:column headerValue="Path">
+                      <apex:outputLink value="http://www.crunchbase.com/{!acq.path}">  {!acq.path}
+                    
+                      </apex:outputLink>
+                      </apex:column>
+                        <apex:column value="{!acq.type}" headerValue="Type"/>                     
+                   </apex:pageBlockTable>
+               </apex:pageBlock>
+               
+                <apex:pageBlock title="Investments">
+                    <apex:pageblockTable value="{!OrganizationCrunchValue.Investments.items}" var="inv">
+                     
+                     
+                     <apex:column value="{!inv.money_invested_currency_code}" headerValue="Currency Code"/>
+                       <apex:column value="{!inv.funding_round}" headerValue="Funding Round"/>
+                    
+                        <apex:column value="{!inv.type}" headerValue="Type"/>                     
+                   </apex:pageBlockTable>
+               </apex:pageBlock>
+               
+               
+               
+            
+    
+</apex:form>
+</apex:page>

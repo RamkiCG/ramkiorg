@@ -1,0 +1,13 @@
+<apex:page controller="MyController" tabStyle="Account">
+    <apex:messages />
+    <apex:form > 
+        <apex:pageBlock title="Hello {!$User.FirstName}!">
+        This is your new page for the {!name} controller. <br/>
+        You are viewing the {!account.name} account.
+
+       
+        <apex:commandButton action="{!save}" value="Save"/>    
+         <p />
+        </apex:pageBlock>  
+    </apex:form>  
+</apex:page>

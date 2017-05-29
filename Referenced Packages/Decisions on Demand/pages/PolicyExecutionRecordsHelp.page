@@ -1,0 +1,22 @@
+<apex:page sidebar="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+     </head>
+  <apex:image id="theImage" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="400 px"/>
+  <br/>
+  <h1 class="help">Viewing Policy Execution Records</h1>
+  <p class="help">Every time a business policy is invoked, a Policy Execution Record can be created. 
+  The main tab collects all execution records for all policies to which you have at least read-only access.</p>
+  <apex:panelGrid columns="2" rules="rows" columnClasses="width40, width60">
+      <apex:outputPanel styleClass="help"> 
+      To change the filter applied, select a view from the drop down and click <b>Go</b>.
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" width="90%" style="max-width:800px;min-width:400px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyExecutionRecordsSelectView_s.png')}"/>
+      <apex:outputPanel styleClass="help">Each record shows the policy and version, the actions applied, the main object, the user that invoked the policy as well as the time and date.
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" width="90%" style="max-width:800px;min-width:400px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyExecutionRecordsList_s.png')}"/>
+      <apex:outputPanel styleClass="help">More details including the specific rows of decision tables applied are available by clicking on the <b>Execution ID</b>.
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" width="90%" style="max-width:800px;min-width:400px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyExecutionRecordDetails_s.png')}"/>
+  </apex:panelGrid>
+</apex:page>

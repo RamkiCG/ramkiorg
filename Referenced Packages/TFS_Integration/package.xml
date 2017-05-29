@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TFS_Integration</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <namespacePrefix>SfToTfs</namespacePrefix>
+    <types>
+        <members>TFS_BugQuery</members>
+        <members>TFS_BugQuery_Test</members>
+        <members>TFS_DataFactory_Test_Utility</members>
+        <members>TFS_Data_Utility</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>TFS_Integration</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Bug_Area__c.Area_Path__c</members>
+        <members>Bug_Iteration__c.Iteration_Name__c</members>
+        <members>Bug_Tracker__c.Area_Name__c</members>
+        <members>Bug_Tracker__c.Area_Path__c</members>
+        <members>Bug_Tracker__c.Assigned_To__c</members>
+        <members>Bug_Tracker__c.Backlog_Priority__c</members>
+        <members>Bug_Tracker__c.BugChangedBy__c</members>
+        <members>Bug_Tracker__c.BugChangedDate__c</members>
+        <members>Bug_Tracker__c.BugCreatedBy__c</members>
+        <members>Bug_Tracker__c.BugCreatedDate__c</members>
+        <members>Bug_Tracker__c.Bug_Iteration__c</members>
+        <members>Bug_Tracker__c.CreatedFrom__c</members>
+        <members>Bug_Tracker__c.Effort__c</members>
+        <members>Bug_Tracker__c.IsNew__c</members>
+        <members>Bug_Tracker__c.IsUpdated__c</members>
+        <members>Bug_Tracker__c.Iteration_Name__c</members>
+        <members>Bug_Tracker__c.Reason__c</members>
+        <members>Bug_Tracker__c.Severity__c</members>
+        <members>Bug_Tracker__c.State__c</members>
+        <members>Bug_Tracker__c.TFSId__c</members>
+        <members>Bug_Tracker__c.TFS__c</members>
+        <members>Bug_Tracker__c.Update_From__c</members>
+        <members>Bug_Tracker__c.UpdatedPicklist__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Bug_Area__c</members>
+        <members>Bug_Iteration__c</members>
+        <members>Bug_TFSUser__c</members>
+        <members>Bug_Tracker__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Bug_TFSUser__c</members>
+        <members>Bug_Tracker__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Bug_Area__c-Bug_Area Layout</members>
+        <members>Bug_Iteration__c-Bug_ProjectName Layout</members>
+        <members>Bug_TFSUser__c-Bug_TFSUser Layout</members>
+        <members>Bug_Tracker__c-Bug_Tracker Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Bug_TFSUser__c.All</members>
+        <members>Bug_Tracker__c.All</members>
+        <name>ListView</name>
+    </types>
+    <types>
+        <members>Bug_Tracker__c.Validate_State_Committed</members>
+        <members>Bug_Tracker__c.Validate_State_Done</members>
+        <members>Bug_Tracker__c.Validate_State_Removed</members>
+        <members>Bug_Tracker__c.Validate_Update_From</members>
+        <name>ValidationRule</name>
+    </types>
+    <version>36.0</version>
+</Package>

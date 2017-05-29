@@ -1,0 +1,6 @@
+<apex:page >
+  <h1>Testing your Business Policy</h1>
+  This page explains how to test your business policy against some of the records in your org.
+  
+  <p>To be completed</p>
+</apex:page>

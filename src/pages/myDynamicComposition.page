@@ -1,0 +1,13 @@
+<apex:page >
+    <apex:composition template="myAppliedTemplate">
+       <apex:define name="name" >
+        Hello {!$User.LastName}, you look quite well.
+  </apex:define>
+   <apex:define name="name2" >
+        Hello1 {!$User.LastName}, you look quite well.
+  </apex:define>
+  <apex:define name="name3" >
+        Hello3 {!$User.LastName}, you look quite well.
+  </apex:define>
+    </apex:composition>
+</apex:page>

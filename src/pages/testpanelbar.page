@@ -1,0 +1,37 @@
+<apex:page >
+
+  <apex:pageMessages />
+ <apex:panelGrid columns="3" id="theGrid">
+        <apex:outputText value="First" id="theFirst"/>
+        <apex:outputText value="Second" id="theSecond"/>
+        <apex:panelGroup id="theGroup">
+            <apex:outputText value="Third" id="theThird"/>
+            <apex:outputText value="Fourth" id="theFourth"/>
+        </apex:panelGroup>
+    </apex:panelGrid>
+
+  <apex:panelBar >
+
+    <apex:panelBarItem label="Item One" 
+
+          onenter="alert('Entering item one');" 
+
+          onleave="alert('Leaving item one');">
+
+      Item one content
+
+    </apex:panelBarItem>
+
+    <apex:panelBarItem label="Item Two" 
+
+          onenter="alert('Entering item two');" 
+
+          onleave="alert('Leaving item two');">
+
+      Item two content
+
+    </apex:panelBarItem>
+
+  </apex:panelBar>
+
+</apex:page>

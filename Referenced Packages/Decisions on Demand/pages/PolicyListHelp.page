@@ -1,0 +1,68 @@
+<apex:page sidebar="false">
+	<head>
+	    <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+	</head>
+	<a id="Top"></a>
+	<apex:image id="theImage" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="200 px" styleClass="float-right"/>
+	<br/>
+	<h1 class="help">Business Policies Tab - Help Page</h1>
+        <p class="help">
+            The Business Policies tab is where you manage your Decisions on Demand business policies. It has two main sections:
+        </p>
+        <ul class="help">
+        <li>The <a class="help" href="#AvailableBusinessPolicies"><b>Available Business Policies</b></a> table shows all business policies currently installed in your organization
+        <br/>Click on the name of a policy to open its detail page, where you can view, edit and test the policy, as well as consult its version history</li> 
+        <li>The <a class="help" href="#TemplateLibrary"><b>Business Policy Template Library</b></a> shows additional business policies available for use
+            <br/>Click <b>View</b> to learn more about the template, or <b>Install</b> to start using it in your organization.
+        </li> 
+        </ul>
+    <br/>
+    <br/>
+    <a id="AvailableBusinessPolicies"></a>
+    <apex:pageBlock title="Viewing Available Business Policies">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width40, width60">
+	        <apex:outputPanel styleClass="help">
+		        <p class="help">This page lists all the business policies to which you have access, along with a brief overview of their current status.</p> 
+		        <p>Click on the name of a policy to open its detail page, where you can view, edit and test the policy, as well as consult its version history.</p>
+	        </apex:outputPanel>
+	        <apex:image styleClass="float-left" style="min-width:75%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_AvailablePolicies_s.png')}"/>
+	        <apex:outputPanel styleClass="help">The default view shows only active policies. To see archived and invalid policies select <b>All</b> from the <b>Select View</b> dropdown.
+	        </apex:outputPanel>
+	        <apex:image styleClass="float-left" style="min-width:25%;max-width:50%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_AvailablePoliciesViewSelector_s.png')}"/>
+	        <apex:outputPanel styleClass="help">The <b>Refresh from Server</b> button will install any new custom policies that have been deployed through the Decisions on Demand REST API.
+	            <br/>
+	            <br/>Note: you will only see this button if you have Salesforce or Decisions on Demand adminstrator rights.
+	        </apex:outputPanel>
+	        <apex:image styleClass="float-left" style="min-width:75%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_RefreshInstalledPolicies_s.png')}"/>  
+            <apex:outputPanel />
+	        <apex:outputPanel styleClass="help, float-right">
+	            <a class="help" href="#Top" target="_top">^ Top</a>
+	        </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <a id="TemplateLibrary"></a>
+    <apex:pageBlock title="Business Policy Template Library">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width40, width60">
+            <apex:outputPanel styleClass="help">
+            Each template in the Decisions on Demand library contains a ready-to-use set of decision tables for a common CRM decision point. 
+            Consult the documentation for specific information on each template, and click <b>Install</b> to create a copy in your org.
+            <br/><br/>This creates an empty policy and adds it to the list of available policies.
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:75%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_AvailableTemplates_s.png')}"/>
+            <apex:outputPanel />
+            <apex:outputPanel styleClass="help, float-right">
+                <a class="help" href="#Top" target="_top">^ Top</a>
+            </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <apex:pageBlock title="Additional resources">
+        <apex:outputPanel styleClass="help">
+            Please see the <a class="help" href="{!$Page.DecsOnD__Welcome}" target="_top">Welcome</a> tab for an overview of the app, and links to additional documentation and resources. 
+            Questions or comments? Please <a class="help" href="mailto:sfdc-support@decisionsondemand.com?Documentation question or comment">contact us!</a>
+        </apex:outputPanel>
+    </apex:pageBlock>
+<!--   <p class="help">
+  For additional information on the use and administration of the app, please see the documentation list on the <a class="help" href="{!$Page.Welcome}" target="_top">Welcome</a> tab.
+  </p>
+   -->  
+</apex:page>

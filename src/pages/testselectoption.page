@@ -1,0 +1,18 @@
+<apex:page controller="TestSelectOptions" docType="html-5.0"  >
+<apex:form >
+
+<apex:selectList size="1" value="{!No}" >
+<apex:selectOption itemValue="1" itemLabel="1" />
+<apex:selectOption itemValue="2" itemLabel="2" />
+<apex:selectOption itemValue="3" itemLabel="3" />
+<apex:selectOption itemValue="4" itemLabel="4" />
+<apex:selectOption itemValue="5" itemLabel="5" />
+<apex:actionSupport event="onchange" action="{!testSelect}" />
+</apex:selectList>
+
+
+<apex:outputPanel id="test">
+<apex:outputText value="{!No1}"> </apex:outputText>
+</apex:outputPanel>
+</apex:form>
+</apex:page>

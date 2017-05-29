@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Location_Map__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Location of task &amp; event</description>
+        <displayLocationInDecimal>false</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <inlineHelpText>Location of task &amp; event</inlineHelpText>
+        <label>Location Map</label>
+        <required>false</required>
+        <scale>7</scale>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>Map_Location__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;http://maps.google.com/?q=&quot;&amp;TEXT(   Location_Map__Latitude__s )&amp;&quot;,&quot;&amp;TEXT(  Location_Map__Longitude__s ),
+&quot;Click to see Map&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Map Location</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

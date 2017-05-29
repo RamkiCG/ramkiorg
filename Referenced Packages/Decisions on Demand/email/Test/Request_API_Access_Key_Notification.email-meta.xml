@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notify when automatically request API access key from server</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Request API Access Key Notification</name>
+    <style>none</style>
+    <subject>Access Key Notification</subject>
+    <type>text</type>
+</EmailTemplate>

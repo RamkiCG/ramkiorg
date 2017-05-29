@@ -1,0 +1,32 @@
+<apex:page controller="Callidus_Sync.Callidus_ActivityHistoryDetails" title="Log Details" sidebar="false" showHeader="false">
+    <br/>
+    &nbsp;&nbsp;&nbsp;<b><apex:outputText value="Synchronization of {!sfdcObjectName} completed with {!errorCount} errors/warnings"/></b>
+    <apex:panelgrid columns="2" id="gridID">
+        <apex:outputLabel style="font-weight: bold;" value="BatchName:"/>
+        <apex:outputField value="{!csah.Callidus_Sync__Batch_Name__c}"/>
+        <apex:outputLabel style="font-weight: bold;" value="Status:"/>
+        <apex:outputField value="{!csah.Callidus_Sync__Status__c}"/>
+        <apex:outputLabel style="font-weight: bold;" value="Start:"/>
+        <apex:outputField value="{!csah.Callidus_Sync__Start_Time__c}"/>
+        <apex:outputLabel style="font-weight: bold;" value="End:"/>
+        <apex:outputField value="{!csah.Callidus_Sync__Finish_Time__c}"/>
+        <apex:outputLabel style="font-weight: bold;" value="Create/Update Details:"/>
+        <apex:outputText value="{!createUpdateDetails}"/>
+    </apex:panelgrid>
+    <apex:pageBlock id="activityDetailsID" title="Activity Details" tabStyle="DataSync__tab">
+
+        <apex:pageBlockTable value="{!activityHistoryDetails}" var="a" id="activityTableID" rendered="{!NOT(ISNULL(activityHistoryDetails))}">
+            <apex:column headerValue="{!sfdcObjectName}">
+                <apex:outputText value="{!a.Callidus_Sync__Record__c}"/>
+            </apex:column>
+            <apex:column headerValue="Action">
+                <apex:outputText value="{!a.Callidus_Sync__Action__c}"/>
+            </apex:column>
+            <apex:column headerValue="Result">
+                <apex:outputText value="{!a.Callidus_Sync__Result__c}"/>
+            </apex:column>
+        </apex:pageBlockTable>
+        <apex:outputLabel value="There are no records that got synchronized in the process."  rendered="{!ISNULL(activityHistoryDetails)}"/>
+        
+    </apex:pageBlock> 
+</apex:page>

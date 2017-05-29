@@ -1,0 +1,896 @@
+<apex:page title="{!SPMConnect_For_SalesforceDotcom}" id="dataSyncID" controller="Callidus_Sync.Callidus_SynchronizeVF">
+    <style>
+        .labelFont {font-size: 12.5px;} 
+        .boldFont {font-size : 12.5; font-weight : bold} 
+        .tabLabel {font-size: 12px; font-weight: bold}  
+    </style>
+        
+    <head>
+        <script>
+            var myIntervalId = 0;
+            window.onload = function()
+            {
+                document.getElementById('{!$Component.naDiv}').style.display = 'none';
+                checkNAAttachmentsFunction();
+                
+                return false;
+            }
+
+            function removeNAButtons()
+            {
+                if('{!hasAttachments}' == 'true')
+                {
+                    var buttonTags = window.parent.document.getElementsByTagName('input');
+                    //alert(buttonTags.length);
+                    for(k=0;k<buttonTags.length;k++)
+                    {
+                      if(buttonTags[k].value == 'New Note')
+                      {
+                          var parentNode = buttonTags[k].parentNode;
+                    
+                         if (parentNode.hasChildNodes())
+                         {
+                             while ( parentNode.childNodes.length >= 1 )
+                             {
+                                   parentNode.removeChild( parentNode.firstChild );
+                             } 
+                         }
+                     
+                      }
+                    }
+                }
+            
+            }
+
+            function checkNA(val)
+            {
+                if(val == 'configure')
+                    document.getElementById('{!$Component.naDiv}').style.display = '';
+                else
+                    document.getElementById('{!$Component.naDiv}').style.display = 'none';
+            }
+            
+            function checkActivity()
+            {
+				YAHOO.spmconnect.processingModalPane.hide();            
+                myIntervalId = window.setInterval("myInterval()", 60*1000);
+                return false;
+            }
+            
+            function hideProcessingModal()
+            {
+				YAHOO.spmconnect.processingModalPane.hide();            
+                return false;
+            }
+            
+            function myInterval()
+            {
+                checkSynchronizationStatusFunction();
+
+                if('{!synchronizationStatus}' == 'true')//document.getElementById('{!$Component.uniteFormID.synchronizationStatusID}').value == 'true') 
+                {
+                    myIntervalId = window.clearInterval(myIntervalId);
+                }
+                
+            }
+            
+            function checkFilter(filter)
+            {
+                if(filter == '1')
+                    checkFilter1Action();
+                else if(filter == '2')
+                    checkFilter2Action();
+                else if(filter == '3')
+                    checkFilter3Action();
+                else if(filter == '4')
+                    checkFilter4Action();
+                
+                return false;
+            }
+        
+            function checkSchedule(schedule, cb)
+            {
+                if(schedule == '1')
+                    checkSchedule1Action();
+                else if(schedule == '2')
+                    checkSchedule2Action();
+                else if(schedule == '3')
+                    checkSchedule3Action();
+                else if(schedule == '4')
+                    checkSchedule4Action();
+                
+                return false;
+            }
+
+            function getMappingDetails()
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+            
+                mappingDetails();
+                return false;
+            }
+            
+            function getMNDetails()
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+            
+                mnDetails();
+                return false;
+            }
+
+            function updateOTMappingsTable(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateOTMappingsTableAction();
+                return false;
+            }
+
+            function updateOTMappingsTableBasedOnAttribute(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateOTMappingsTableBasedOnAttributeAction();
+                return false;
+            }
+            
+
+            function updateCustomersMappingsTable(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateCustomersMappingsTableAction();
+                return false;
+            }
+            
+            function updateCustomersMappingsTableBasedOnAttribute(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateCustomersMappingsTableBasedOnAttributeAction();
+                return false;
+            }
+
+            function updateProductMappingsTable(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateProductMappingsTableAction();
+                return false;
+            }
+            
+            function updateProductMappingsTableBasedOnAttribute(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateProductMappingsTableBasedOnAttributeAction();
+                return false;
+            }
+
+            function updatePositionHierarchyMappingsTable(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updatePositionHierarchyMappingsTableAction();
+                return false;
+            }
+            
+            function updatePositionHierarchyMappingsTableBasedOnAttribute(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updatePositionHierarchyMappingsTableBasedOnAttributeAction();
+                return false;
+            }
+
+            function updateParticipantMappingsTable(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateParticipantMappingsTableAction();
+                return false;
+            }
+            
+            function updateParticipantMappingsTableBasedOnAttribute(mappingRowNo)
+            {
+				document.getElementById('processingModal').style.display = 'block';
+				YAHOO.spmconnect.processingModalPane.show();              
+                document.getElementById('{!$Component.uniteFormID.mappingRowNoID}').value = mappingRowNo;
+                updateParticipantMappingsTableBasedOnAttributeAction();
+                return false;
+            }
+
+            function updateDataFilters(val1, val2)
+            {
+            	document.getElementById('{!$Component.uniteFormID.dataFilterFieldID}').value = val1;
+            	document.getElementById('{!$Component.uniteFormID.dataFilterFieldNameID}').value = val2;
+                updateDataFiltersAction();
+                return false;
+            }
+            
+            function removeDataFilters(val1, val2)
+            {
+            	document.getElementById('{!$Component.uniteFormID.dataFilterFieldID}').value = val1;
+            	document.getElementById('{!$Component.uniteFormID.dataFilterFieldNameID}').value = val2;
+                removeDataFiltersAction();
+                return false;
+            }
+        </script>
+        
+    </head>
+
+<!-- Start:   YUI  -->
+	<apex:styleSheet value="{!$Resource.Callidus_Sync__Callidus_SPMConnect_Modal_Skin}" />
+	 
+	<apex:includeScript value="{!$Resource.Callidus_Sync__Callidus_SPMConnect_Modal_Dom_Event}" />
+	<apex:includeScript value="{!$Resource.Callidus_Sync__Callidus_SPMConnect_Modal_Container}" />
+	<apex:includeScript value="{!$Resource.Callidus_Sync__Callidus_SPMConnect_Modal_Animation}" />
+	 
+	<script>
+	    
+	    // Create a namespace for our custom functions
+	    YAHOO.namespace("spmconnect");
+	
+	    // Function called when we want to show the dialog
+	    addModalForDataFilters = function() {
+	        document.getElementById("addFiltersPanel").style.display = "block";
+	        YAHOO.spmconnect.myDialog.show();
+	    }
+	   
+	    // Function called when we want to hide the dialog
+	    YAHOO.spmconnect.makeInvisible = function() {
+	        YAHOO.spmconnect.myDialog.hide();
+	    }
+	
+	    // Function called when the DOM is ready to create the dialog,
+	    // render the dialog into the document body, add our dialog skin
+	    // css to the body tag, and wire up the buttons on our dialog    
+	    YAHOO.spmconnect.init = function() {
+	        document.body.className = document.body.className + " yui-skin-sam";
+	        
+	        YAHOO.spmconnect.myDialog = new YAHOO.widget.Panel(
+	            "addFiltersPanel",  // The id of our dialog container
+	            { 
+	                    width           :   300,    // You can play with this until it's right
+	                    visible         :   false,  // Should be invisible when rendered
+	                    draggable       :   true,   // Make the dialog draggable
+	                    close           :   false,  // Don't include a close title button
+	                    modal           :   true,   // Make it modal
+	                    fixedCenter     :   true,   // Keep centered if window is scrolled
+	                    zindex          :   40,     // Make sure it's on top of everything
+	                    
+	                    // This line adds the appear/vanish fade effect
+	                    effect          :   {
+	                                          effect:YAHOO.widget.ContainerEffect.FADE,
+	                                          duration:0.35
+	                                        } 
+	            }
+	         );
+	        
+	        // Render the dialog to the document.body level of the DOM
+	        YAHOO.spmconnect.myDialog.render(document.body);
+
+	        YAHOO.spmconnect.processingModalPane = new YAHOO.widget.Panel(
+	            "processingModal",  // The id of our dialog container
+	            { 
+	                    width           :   80,    // You can play with this until it's right
+	                    visible         :   false,  // Should be invisible when rendered
+	                    draggable       :   true,   // Make the dialog draggable
+	                    close           :   false,  // Don't include a close title button
+	                    modal           :   true,   // Make it modal
+	                    fixedCenter     :   true,   // Keep centered if window is scrolled
+	                    zindex          :   40,     // Make sure it's on top of everything
+	                    
+	                    // This line adds the appear/vanish fade effect
+	                    effect          :   {
+	                                          effect:YAHOO.widget.ContainerEffect.FADE,
+	                                          duration:0.15
+	                                        } 
+	            }
+	         );
+	        
+	        // Render the dialog to the document.body level of the DOM
+	        YAHOO.spmconnect.processingModalPane.render(document.body);
+
+	    }
+	    
+	    // Add the init method to the window.load event
+	    YAHOO.util.Event.addListener(window, "load", YAHOO.spmconnect.init);
+	</script>
+<!--     End: YUI -->
+
+    
+    <apex:pageMessages id="msg"/>    
+    <apex:form id="uniteFormID">
+        <apex:actionStatus startText="Loading..." id="statusID"/>
+        <!-- <apex:actionStatus startText="Processing..." id="processStatusID"/>  -->
+		
+		
+		<apex:actionStatus id="processStatusID">
+			<apex:facet name="start">
+			    <apex:outputPanel >
+			        <apex:image value="/img/loading32.gif" style="height: 15px;"/>
+			        <apex:outputLabel value="Processing..."/>
+			    </apex:outputPanel>
+			</apex:facet>        
+		</apex:actionStatus>
+		
+        <apex:outputLabel value="« " rendered="{!showBreadCrumbs}"/><apex:commandLink value="Back to Synchronization Details" immediate="true" action="{!backToSynchronizationDetails}" rendered="{!showBreadCrumbs}" id="breadCrumbsID"/>   
+        <apex:actionFunction name="isOrderSelected" action="{!isOrderSelected}" rerender="caldObjID,filtersID"/>
+        <apex:actionFunction name="checkMappingName" action="{!checkMappingName}" rerender="caldObjID,filtersID,msg"/>
+        <apex:actionFunction name="isParticipantSelected" action="{!isParticipantSelected}" rerender="caldObjID,filtersID"/>
+        <apex:actionFunction name="isPositionSelected" action="{!isPositionSelected}" rerender="caldObjID,filtersID"/>
+        
+        <apex:actionFunction name="populateFilterFieldsListFunction" action="{!populateFilterFieldsList}" rerender="dataFiltersID" status="addFiltersStatusID" oncomplete="return addModalForDataFilters();" />
+        <apex:actionFunction name="checkNAAttachmentsFunction" action="{!checkNAAttachments}" rerender="na" oncomplete="return removeNAButtons();" />
+        <apex:actionFunction name="checkSynchronizationStatusFunction" action="{!checkSynchronizationStatus}" rerender="recentActivitiesID, msg"/>
+        <apex:actionFunction name="mappingDetails" action="{!mappingDetails}" rerender="mappingAndObjectID, mappingID, msg" status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="mnDetails" action="{!mnDetails}" rerender="mappingAndObjectID, mappingID, msg" status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="updateOTMappingsTableAction" action="{!updateOTMappingsTable}"  rerender="mappingAndObjectID,OrderTransactionTableID, msg"  status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="updateOTMappingsTableBasedOnAttributeAction" action="{!updateOTMappingsTableBasedOnAttribute}"  rerender="OrderTransactionTableID, msg"  status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="updatePositionHierarchyMappingsTableAction" action="{!updatePositionHierarchyMappingsTable}"  rerender="PositionTableID, msg"   status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="updatePositionHierarchyMappingsTableBasedOnAttributeAction" action="{!updatePositionHierarchyMappingsTableBasedOnAttribute}"  rerender="PositionTableID, msg"  status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="updateParticipantMappingsTableAction" action="{!updateParticipantMappingsTable}"  rerender="ParticipantTableID, msg"   status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="updateDataFiltersAction" action="{!updateDataFilters}"  rerender="dataFiltersID" status="filterStatusID"/>
+        <apex:actionFunction name="removeDataFiltersAction" action="{!removeFilter}"  rerender="dataFiltersID" status="filterStatusID"/>
+        <apex:actionFunction name="updateParticipantMappingsTableBasedOnAttributeAction" action="{!updateParticipantMappingsTableBasedOnAttribute}"  rerender="ParticipantTableID, msg"   status="processStatusID2" oncomplete="hideProcessingModal();"/>
+        <apex:actionFunction name="checkFilter1Action" action="{!checkFilterSelection}"  rerender="filtersID, msg"/>        
+        <apex:actionFunction name="checkFilter2Action" action="{!checkFilter2Selection}"  rerender="filtersID, msg"/>
+        <apex:actionFunction name="checkFilter3Action" action="{!checkFilter3Selection}"  rerender="filtersID, msg"/>
+        <apex:actionFunction name="checkFilter4Action" action="{!checkFilter4Selection}"  rerender="filtersID, msg"/>
+        <apex:actionFunction name="checkSchedule1Action" action="{!checkSchedule1Selection}"  rerender="scheduleID, msg"/>
+        <apex:actionFunction name="checkSchedule2Action" action="{!checkSchedule2Selection}"  rerender="scheduleID, msg"/>
+        <apex:actionFunction name="checkSchedule3Action" action="{!checkSchedule3Selection}"  rerender="scheduleID, msg"/>
+        <apex:actionFunction name="checkSchedule4Action" action="{!checkSchedule4Selection}"  rerender="scheduleID, msg"/>
+                
+        <apex:inputHidden value="{!mappingRowNo}" id="mappingRowNoID"/>
+        <apex:inputHidden value="{!isChildWindow}" id="childWindowID"/>
+        <apex:inputHidden value="{!dataFilterFieldPosition}" id="dataFilterFieldID"/>
+        <apex:inputHidden value="{!dataFilterFieldSelectedName}" id="dataFilterFieldNameID"/>
+
+        <apex:tabPanel switchType="client" selectedTab="synchronize" id="theTabPanel" activeTabClass="tabLabel">
+            <apex:tab label="Synchronization" name="synchronize" id="tabOne" styleClass="labelFont" ontabenter="return checkNA('synchronize')">
+                
+                <apex:pageBlock title="Synchronization Process" id="synchronizationID" rendered="{!showSyncDetailPage}">
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandButton id="newSyncID" value="New" action="{!defineSynchronization}"/>
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockTable id="synchronizationTableID" value="{!synchronizationDetails}" var="sl" rendered="{!NOT(ISNULL(synchronizationDetails))}">
+                        <apex:column headerValue="Process Name" value="{!sl.Name}"/>
+                        <apex:column headerValue="Description" value="{!sl.Callidus_Sync__Description__c}"/>
+                        <apex:column headerValue="Target Objects" value="{!sl.Callidus_Sync__Selected_Objects__c}"/>
+                        <apex:column headerValue="Last Job Run" value="{!sl.Callidus_Sync__Last_Sync__c}"/>
+                        <apex:column >
+                            <apex:commandLink action="{!defineSynchronization}" value="Edit">
+                                <apex:param value="{!sl.Id}" name="synchronizationRecordVal" assignTo="{!synchronizationRecordValue}"/>
+                            </apex:commandLink>
+                        </apex:column>
+                        <apex:column >
+                            <apex:commandLink action="{!batchSynchronization}" onclick="document.getElementById('processingModal').style.display = 'block';YAHOO.spmconnect.processingModalPane.show();" value="Run Now" rerender="synchronizationID, recentActivitiesID, activityPaginationID, msg" status="processStatusID2" oncomplete="return checkActivity();">
+                                <apex:param value="{!sl.Id}" name="syncRecordVal" assignTo="{!synchronizationRecordValue}"/>
+                                <apex:param value="{!sl.Callidus_Sync__Selected_Objects__c}" name="selectedObjectsVal" assignTo="{!synchronizationSelectedObjectsValue}"/>
+                            </apex:commandLink>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                    <apex:outputLabel value="{!listNullMessage}" rendered="{!ISNULL(synchronizationDetails)}"/>
+                </apex:pageBlock>
+                <apex:panelGrid columns="4" id="synchronizePaginationID" rendered="{!showSyncDetailPage}">
+                    <apex:commandLink action="{!firstS}" rendered="{!IF(OR(hasPreviousS = true, hasNextS = true), true, false)}" rerender="synchronizationTableID, synchronizePaginationID, msg">First</apex:commandlink>
+                    <apex:commandLink action="{!previousS}" rendered="{!hasPreviousS}" rerender="synchronizationTableID, synchronizePaginationID, msg">Previous</apex:commandlink>
+                    <apex:commandLink action="{!nextS}" rendered="{!hasNextS}" rerender="synchronizationTableID, synchronizePaginationID, msg">Next</apex:commandlink>
+                    <apex:commandLink action="{!lastS}" rendered="{!IF(OR(hasPreviousS = true, hasNextS = true), true, false)}" rerender="synchronizationTableID, synchronizePaginationID, msg">Last</apex:commandlink>
+                </apex:panelGrid>
+                <apex:pageBlock title="Recent Synchronization Jobs {!pageNumber}" id="recentActivitiesID" rendered="{!showSyncDetailPage}">
+                    <apex:pageBlockTable value="{!activityHistory}" var="a" rendered="{!NOT(ISNULL(activityHistory))}">
+                        <apex:column headerValue="Job Name" value="{!a.Callidus_Sync__Batch_Name__c}"/>
+                        <apex:column headerValue="Synchronization Process" value="{!a.Callidus_Sync__Synchronization_Name__c}"/>
+                        <apex:column headerValue="Start" value="{!a.Callidus_Sync__Start_Time__c}"/>
+                        <apex:column headerValue="Finish" value="{!a.Callidus_Sync__Finish_Time__c}"/>
+                        <apex:column headerValue="Status" value="{!a.Callidus_Sync__Status__c}"/>
+                        <apex:column headerValue="Mode" value="{!a.Callidus_Sync__Synchronization_Mode__c}"/>
+                        <apex:column >
+                            <apex:outputLink value="#" onclick="window.open('Callidus_Sync__Callidus_Activity_Details?id={!URLENCODE(a.id)}', 'mainWin','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=1011,height=710');">Details</apex:outputLink>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                    <apex:outputLabel value="{!listNullMessage}" rendered="{!ISNULL(activityHistory)}"/>
+                </apex:pageBlock>
+                <apex:panelGrid columns="12" id="activityPaginationID" rendered="{!showSyncDetailPage}">
+                    <apex:commandLink action="{!first}" rendered="{!IF(OR(hasPrevious = true, hasNext = true), true, false)}" rerender="recentActivitiesID, activityPaginationID, msg"><apex:outputLabel value="<<First" style="font-weight: bold;"/></apex:commandlink>&nbsp;
+                    <apex:commandLink action="{!previous}" rendered="{!hasPrevious}" rerender="recentActivitiesID, activityPaginationID, msg"><apex:outputLabel value="<<Previous" style="font-weight: bold;"/></apex:commandlink>&nbsp;
+                    <apex:commandLink action="{!next}" rendered="{!hasNext}" rerender="recentActivitiesID, activityPaginationID, msg"><apex:outputLabel value="Next>>" style="font-weight: bold;"/></apex:commandlink>&nbsp;
+                    <apex:commandLink action="{!last}" rendered="{!IF(OR(hasPrevious = true, hasNext = true), true, false)}" rerender="recentActivitiesID, activityPaginationID, msg"><apex:outputLabel value="Last>>" style="font-weight: bold;"/></apex:commandlink>
+                </apex:panelGrid>
+                <apex:pageBlock id="summaryID" title="Step-1: Enter Process Synchronization Summary" rendered="{!showSyncEditPage}">
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandButton value="Save" action="{!saveSynchronization}" rerender="summaryID, caldObjID, filtersID, msg" status="processStatusID"/>
+                        <apex:commandButton value="Save & Close" action="{!saveSynchronizationAndReturn}"/>
+                        <apex:commandButton value="Run Now" action="{!batchSynchronization}" onclick="document.getElementById('processingModal').style.display = 'block';YAHOO.spmconnect.processingModalPane.show();" rerender="msg" status="processStatusID2" oncomplete="return checkActivity();"/>
+                        <apex:commandButton value="Cancel" immediate="true" action="{!backToSynchronizationDetails}"/>
+                    </apex:pageBlockButtons>
+                    <apex:panelGrid columns="2">
+                        <apex:outputLabel value="Process Name"/>
+                        <apex:inputField value="{!csObj.Callidus_Sync__Synchronization_Name__c}"/>
+                        <apex:outputLabel value="Description"/>
+                        <apex:inputTextArea value="{!csObj.Callidus_Sync__Description__c}" rows="4" cols="50"/>
+                        <apex:outputLabel value="Job Name Prefix"/>
+                        <apex:inputField value="{!csObj.Callidus_Sync__Batch_Name__c}"/>
+<!--                         <apex:outputLabel value="Mapping Name"/>
+                        <apex:selectList size="1" value="{!mnSyncSelected}" id="mnSyncID">
+                            <apex:selectOptions value="{!mnSyncList}"/>
+                        </apex:selectList> -->
+                    </apex:panelGrid>
+                </apex:pageBlock>
+
+                <apex:pageBlock id="caldObjID" title="Step-2: Select Target Data" rendered="{!showSyncEditPage}">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <table width="70%">
+                                    <tr>
+                                        <th width="50%">
+                                            <b><apex:outputLabel value="Object"/></b>
+                                        </th>
+                                        <th width="50%">
+                                            <b><apex:outputLabel value="Mapping" rendered="{!OR(showOrderMNDropdown = true, showParticipantMNDropdown = true, showPositionMNDropdown = true)}"/></b>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <apex:selectRadio id="orderCheckboxValID" value="{!orderCheckboxVal}" onclick="return isOrderSelected();">
+                                                <apex:selectOptions value="{!orderCheckboxList}"/>
+                                            </apex:selectRadio>
+                                        </td>
+                                        <td width="50%">
+                                            <apex:selectList size="1" value="{!orderMNSelected}" id="mnSyncID"  rendered="{!showOrderMNDropdown}"  onchange="return checkMappingName();">
+                                                <apex:selectOptions value="{!orderMNList}"/>
+                                            </apex:selectList> 
+                                        </td>
+                                        
+                                    </tr>                       
+                                    <tr>
+                                        <td width="50%">
+                                            <apex:selectRadio id="participantCheckboxValID" value="{!participantCheckboxVal}" layout="pageDirection"  onclick="return isParticipantSelected();">
+                                                <apex:selectOptions value="{!participantCheckboxList}"/>
+                                            </apex:selectRadio>
+                                        </td>
+                                        <td width="50%">
+                                            <apex:selectList size="1" value="{!participantMNSelected}" id="mnSyncID1" rendered="{!showParticipantMNDropdown}">
+                                                <apex:selectOptions value="{!participantMNList}"/>
+                                            </apex:selectList> 
+                                        </td>
+                                    </tr>                       
+                                    <tr>
+                                        <td width="50%">
+                                            <apex:selectradio id="positionCheckboxValID" value="{!positionCheckboxVal}" layout="pageDirection"  onclick="return isPositionSelected();">
+                                                <apex:selectOptions value="{!positionCheckboxList}"/>
+                                            </apex:selectRadio>
+                                        </td>
+                                        <td width="50%">
+                                            <apex:selectList size="1" value="{!positionMNSelected}" id="mnSyncID2" rendered="{!showPositionMNDropdown}">
+                                                <apex:selectOptions value="{!positionMNList}"/>
+                                            </apex:selectList> 
+                                        </td>
+                                    </tr>                       
+                                </table>
+                            </td>
+                            <td>
+                                <table width="15%">
+                                    <tr>
+                                        <th>
+                                            <apex:outputLabel value="Opportunity Stages"  rendered="{!showStageList}"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <apex:selectList multiselect="true" size="4" value="{!selectedStagesList}" id="stageIDList" rendered="{!showStageList}">
+                                                <apex:selectOptions value="{!stageList}"/>
+                                            </apex:selectList>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table width="15%">
+                                    <tr>
+                                        <th>
+                                            <apex:outputLabel value="Record Type"  rendered="{!showStageList}"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <apex:selectList multiselect="true" size="4" value="{!selectedRecordTypeList}" id="stageIDList1" rendered="{!showStageList}">
+                                                <apex:selectOptions value="{!recordTypeList}"/>
+                                            </apex:selectList>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>                       
+                    </table>
+                </apex:pageBlock>
+                <apex:pageBlock id="filtersID" title="Step-3: Select Source Data" rendered="{!showSyncEditPage}">
+                    <apex:pageBlockButtons location="top">
+						<input type="button" class="btn" onclick="populateFilterFieldsListFunction();" value="Add Filters" />
+						<apex:actionStatus id="addFiltersStatusID">
+							<apex:facet name="start">
+							    <apex:outputPanel >
+							        <apex:image value="/img/loading32.gif" style="height: 15px;"/>
+							    </apex:outputPanel>
+							</apex:facet>        
+						</apex:actionStatus>
+										                    
+                	</apex:pageBlockButtons> 
+                    <apex:panelGrid columns="2">
+                        <apex:selectRadio value="{!filters1}" id="filterID" layout="pageDirection" onClick="checkFilter('1');">
+                            <apex:selectOptions value="{!filtersList1}"/>
+                        </apex:selectRadio>
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="10">
+                        <apex:selectRadio value="{!filters2}" id="filter2ID" layout="pageDirection" onClick="checkFilter('2');">
+                            <apex:selectOptions value="{!filtersList2}"/>
+                        </apex:selectRadio>
+                        <apex:inputField value="{!csObj.Callidus_Sync__Modified_Within_Range_From__c}"/>
+                        <table width="5%">
+                            <tr>
+                                <td>
+                                    <label>and</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <apex:inputField value="{!csObj.Callidus_Sync__Modified_Within_Range_To__c}"/>
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="10" rendered="{!showStageList}">
+                        <apex:selectRadio value="{!filters3}" id="filter3ID" layout="pageDirection" onClick="checkFilter('3');">
+                            <apex:selectOptions value="{!filtersList3}"/>
+                        </apex:selectRadio>
+                        <apex:inputField value="{!csObj.Callidus_Sync__CompDate_Modified_After__c}"/>
+                        <table width="5%">
+                            <tr>
+                                <td>
+                                    <label>and</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <apex:inputField value="{!csObj.Callidus_Sync__CompDate_Modified_Before__c}"/>
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="2" rendered="{!NOT(ISNULL(filters4))}">
+                        <apex:selectRadio value="{!filters4}" id="filter4ID" layout="pageDirection" onClick="checkFilter('4');">
+                            <apex:selectOptions value="{!filtersList4}"/>
+                        </apex:selectRadio>
+                    </apex:panelGrid>
+<!--                     <apex:panelGrid columns="2">
+	                    <apex:selectList size="1" value="{!}" id="filterFieldID" rendered="{!showPositionMNDropdown}">
+	                        <apex:selectOptions value="{!}"/>
+	                    </apex:selectList> 
+                    </apex:panelGrid> -->
+                </apex:pageBlock>
+                <apex:pageBlock id="scheduleID" title="Step-4: Select your scheduling options" rendered="{!showSyncEditPage}">
+                    <apex:panelGrid columns="10">
+                        <apex:selectRadio value="{!runOnce}" id="runOnceID" layout="pageDirection" onClick="checkSchedule('1', this);">
+                            <apex:selectOptions value="{!runOnceList}"/>
+                        </apex:selectRadio>
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="10">
+                        <apex:selectRadio value="{!day}" id="dayID" layout="pageDirection"  onClick="checkSchedule('2', this);">
+                            <apex:selectOptions value="{!dayScheduleList}"/>
+                        </apex:selectRadio>
+                        <apex:selectList size="1" value="{!dayTime}" id="dayTimeID">
+                            <apex:selectOptions value="{!dayTimeSelectList}"/>
+                        </apex:selectList>
+                        
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="10">
+                        <apex:selectRadio value="{!week}" id="weekID" layout="pageDirection"  onClick="checkSchedule('3', this);">
+                            <apex:selectOptions value="{!weekScheduleList}"/>
+                        </apex:selectRadio>
+                        <apex:selectList size="1" value="{!weekDay}" id="weekDayID">
+                            <apex:selectOptions value="{!weekDaySelectList}"/>
+                        </apex:selectList>
+                        <table width="5%">
+                            <tr>
+                                <td>
+                                    <label>at</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <apex:selectList size="1" value="{!weekTime}" id="weekTimeID">
+                            <apex:selectOptions value="{!weekTimeSelectList}"/>
+                        </apex:selectList>
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="10">
+                        <apex:selectRadio value="{!month}" id="monthID" layout="pageDirection"  onClick="checkSchedule('4', this);">
+                            <apex:selectOptions value="{!monthScheduleList}"/>
+                        </apex:selectRadio>
+                        <apex:selectList size="1" value="{!monthDay}" id="monthDayID">
+                            <apex:selectOptions value="{!monthDaySelectList}"/>
+                        </apex:selectList>
+                        <table width="5%">
+                            <tr>
+                                <td>
+                                    <label>at</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <apex:selectList size="1" value="{!monthTime}" id="monthTimeID">
+                            <apex:selectOptions value="{!monthTimeSelectList}"/>
+                        </apex:selectList>
+                    </apex:panelGrid>
+                </apex:pageBlock>
+
+                <apex:pageBlock title="Recent Synchronization Job" id="lastSyncDetailsID"  rendered="{!IF(AND(showSyncEditPage == true, iSNULL(lastSyncDetails) != true), true, false)}">
+                    <apex:pageBlockTable value="{!lastSyncDetails}" var="a" rendered="{!NOT(ISNULL(lastSyncDetails))}">
+                        <apex:column headerValue="Job Name" value="{!a.Callidus_Sync__Batch_Name__c}"/>
+                        <apex:column headerValue="Synchronization Process" value="{!a.Callidus_Sync__Synchronization_Name__c}"/>
+                        <apex:column headerValue="Start" value="{!a.Callidus_Sync__Start_Time__c}"/>
+                        <apex:column headerValue="Finish" value="{!a.Callidus_Sync__Finish_Time__c}"/>
+                        <apex:column headerValue="Status" value="{!a.Callidus_Sync__Status__c}"/>
+                        <apex:column headerValue="Mode" value="{!a.Callidus_Sync__Synchronization_Mode__c}"/>
+                        <apex:column >
+                            <apex:outputLink value="#" onclick="window.open('Callidus_Sync__Callidus_Activity_Details?id={!URLENCODE(a.id)}', 'mainWin','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=0,width=1011,height=710');">Details</apex:outputLink>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="Configuration" name="configure" id="tabTwo" styleClass="labelFont" ontabenter="return checkNA('configure')">
+                <apex:pageBlock id="configureID" title="Connection Details">
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandButton id="saveID" action="{!saveConnectionDetails}" value="Save" rerender="configureID, msg" status="processStatusID" />
+                        <apex:commandButton id="createDefaultMappingsID" action="{!createDefaultData}" value="Create Default Data" rerender="configureID, msg" status="processStatusID" />
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockSection columns="1">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Callidus Username"/>
+                            <apex:inputText value="{!cdObj.Callidus_Sync__Username__c}"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Password"/>
+                            <apex:inputSecret value="{!connectionPassword}" style="width:150px;" redisplay="true"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Connection URL"/>
+                            <apex:inputText value="{!conObj.Callidus_Sync__Connection_URL__c}"/>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Opportunity Transfer Batch Size" columns="1">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Enter Batch Size"/>
+                            <apex:inputField value="{!conObj.Callidus_Sync__Batch_Size__c}"/>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </apex:tab>
+            <apex:tab label="Mappings" name="mappings" id="tabThree" styleClass="labelFont" rerender="msg" ontabenter="return checkNA('mappings')">
+                <apex:panelGrid id="mappingAndObjectID" columns="3">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:outputLabel value="Which mapping would you like to configure?"/>
+                    <apex:panelGrid >
+                        <apex:selectList value="{!selectedMappingComboValue}" size="1" onchange="getMappingDetails();">
+                            <apex:selectOptions value="{!mappingObjectsList}"/>
+                        </apex:selectList>
+                    </apex:panelGrid>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:outputLabel value="Select Mapping Name"/>
+                    <apex:panelGrid columns="10">
+                        <apex:selectList value="{!mnSelected}" size="1"  onchange="getMNDetails();">
+                            <apex:selectOptions value="{!mnList}"/>
+                        </apex:selectList>
+<!--                        <apex:commandLink action="{!refreshMN}" value="{!mnLinkName}" rerender="mappingAndObjectID, msg"/>
+                        <apex:inputText value="{!newMappingValue}" id="showNewMappingID" rendered="{!showNewMappingField}"/> --> 
+                    </apex:panelGrid> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:outputLabel value="Select Source Object"/>
+                    <apex:panelGrid >
+                        <apex:selectList value="{!currentSourceObjectSelected}" size="1" onchange="updateOTMappingsTable('0')"  rendered="{!showOT}">
+                            <apex:selectOptions value="{!sourceObjectComboList}"/>
+                        </apex:selectList>
+                        <apex:selectList value="{!currentSourceObjectSelected}" size="1" onchange="updatePositionHierarchyMappingsTable('0')" rendered="{!showPosition}">
+                           <apex:selectOptions value="{!sourceObjectComboList}"/>
+                        </apex:selectList>
+                        <apex:selectList value="{!currentSourceObjectSelected}" size="1" onchange="updateParticipantMappingsTable('0')" rendered="{!showParticipant}">
+                           <apex:selectOptions value="{!sourceObjectComboList}"/>
+                        </apex:selectList>
+                    </apex:panelGrid>
+<!--                     <apex:selectList value="{!currentSourceObjectSelected}" size="1" onchange="updateCustomersMappingsTable('0')" rendered="{!showCustomers}">
+                       <apex:selectOptions value="{!sourceObjectComboList}"/>
+                    </apex:selectList> -->
+                    
+                </apex:panelGrid>
+                <br/>
+                <apex:pageBlock id="mappingID" title="{!selectedMappingTitle}">
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandButton id="mappingSaveID" value="Save" action="{!saveMappings}" rerender="msg"/>
+                    </apex:pageBlockButtons>
+                    
+                    <apex:pageBlockTable value="{!orderTransactionTable}" var="o" id="OrderTransactionTableID" rendered="{!showOT}">
+                        <apex:column headerValue="Target">
+                            <apex:outputText value="{!o.target}"/>
+                        </apex:column>
+                        <apex:column headerValue="Object">
+                            <apex:selectList value="{!o.selectedSObject}" size="1" onchange="updateOTMappingsTable({!o.count})">
+                                <apex:selectOptions value="{!o.SourceSObjectList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Attribute">
+                            <apex:selectList value="{!o.selectedSObjectAttribute}" size="1" onchange="updateOTMappingsTableBasedOnAttribute({!o.count})">
+                                <apex:selectOptions value="{!o.SObjectAttributeList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Mapping">
+                            <apex:inputText value="{!o.mappingValue}" rendered="{!IF(o.target = 'Transaction.Data Source', true, false)}"/>
+                            <apex:outputText value="{!o.mappingValue}" rendered="{!IF(o.target != 'Transaction.Data Source', true, false)}"/>
+                        </apex:column>
+                        <apex:column headerValue="Override Value">
+                            <apex:inputText value="{!o.defaultValue}" rendered="{!IF(o.target != 'Transaction.Data Source', true, false)}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                
+                    
+<!--                     <apex:pageBlockTable value="{!customersTable}" var="o" id="customersTableID" rendered="{!showCustomers}">
+                        <apex:column headerValue="Target">
+                            <apex:outputText value="{!o.target}"/>
+                        </apex:column>
+                        <apex:column headerValue="Source Object">
+                            <apex:selectList value="{!o.selectedSObject}" size="1" onchange="updateCustomersMappingsTable({!o.count})">
+                                <apex:selectOptions value="{!o.SourceSObjectList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Source Attribute">
+                            <apex:selectList value="{!o.selectedSObjectAttribute}" size="1" onchange="updateCustomersMappingsTableBasedOnAttribute({!o.count})">
+                                <apex:selectOptions value="{!o.SObjectAttributeList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Mapping">
+                            <apex:outputText value="{!o.mappingValue}"/>
+                        </apex:column>
+                        <apex:column headerValue="Default">
+                            <apex:inputText value="{!o.defaultValue}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+
+                    <apex:pageBlockTable value="{!productTable}" var="o" id="ProductTableID" rendered="{!showProduct}">
+                        <apex:column headerValue="Target">
+                            <apex:outputText value="{!o.target}"/>
+                        </apex:column>
+                        <apex:column headerValue="Source Object">
+                            <apex:selectList value="{!o.selectedSObject}" size="1" onchange="updateProductMappingsTable({!o.count})">
+                                <apex:selectOptions value="{!o.SourceSObjectList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Source Attribute">
+                            <apex:selectList value="{!o.selectedSObjectAttribute}" size="1" onchange="updateProductMappingsTableBasedOnAttribute({!o.count})">
+                                <apex:selectOptions value="{!o.SObjectAttributeList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Mapping">
+                            <apex:outputText value="{!o.mappingValue}"/>
+                        </apex:column>
+                        <apex:column headerValue="Default">
+                            <apex:inputText value="{!o.defaultValue}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+-->                    
+                    <apex:pageBlockTable value="{!positionTable}" var="o" id="PositionTableID" rendered="{!showPosition}">
+                        <apex:column headerValue="Target">
+                            <apex:outputText value="{!o.target}"/>
+                        </apex:column>
+                        <apex:column headerValue="Source Object">
+                            <apex:selectList value="{!o.selectedSObject}" size="1" onchange="updatePositionHierarchyMappingsTable({!o.count})">
+                                <apex:selectOptions value="{!o.SourceSObjectList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Source Attribute">
+                            <apex:selectList value="{!o.selectedSObjectAttribute}" size="1" onchange="updatePositionHierarchyMappingsTableBasedOnAttribute({!o.count})">
+                                <apex:selectOptions value="{!o.SObjectAttributeList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Mapping">
+                            <apex:outputText value="{!o.mappingValue}"/>
+                        </apex:column>
+                        <apex:column headerValue="Default">
+                            <apex:inputText value="{!o.defaultValue}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+
+                    <apex:pageBlockTable value="{!participantTable}" var="o" id="ParticipantTableID" rendered="{!showParticipant}">
+                        <apex:column headerValue="Target">
+                            <apex:outputText value="{!o.target}"/>
+                        </apex:column>
+                        <apex:column headerValue="Source Object">
+                            <apex:selectList value="{!o.selectedSObject}" size="1" onchange="updateParticipantMappingsTable({!o.count})">
+                                <apex:selectOptions value="{!o.SourceSObjectList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Source Attribute">
+                            <apex:selectList value="{!o.selectedSObjectAttribute}" size="1" onchange="updateParticipantMappingsTableBasedOnAttribute({!o.count})">
+                                <apex:selectOptions value="{!o.SObjectAttributeList}"/>
+                            </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Mapping">
+                            <apex:outputText value="{!o.mappingValue}"/>
+                        </apex:column>
+                        <apex:column headerValue="Default">
+                            <apex:inputText value="{!o.defaultValue}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:tab>
+        </apex:tabPanel> 
+    </apex:form>
+    <apex:outputPanel id="naDiv">
+        <apex:relatedList id="na" subject="{!conObj}" list="NotesAndAttachments"/>
+    </apex:outputPanel> 
+
+	<!-- This is the content of the modal dialog -->
+	<div id="addFiltersPanel" style="display: none" >
+	  	<div class="hd">
+	    	<apex:outputText value="Add Filters" />
+	  	</div> 
+		<div class="bd">
+	    	<apex:form id="dataFiltersID">
+		        <apex:actionStatus startText="Processing..." id="filterStatusID"/>
+	    	
+	        	<apex:pageBlock title="Add Filters">
+	        		<apex:pageBlockButtons location="top">
+		          		<apex:commandButton value="Add" action="{!addFilters}" rerender="dataFiltersID" status="filterStatusID"/>
+		          		<apex:commandButton value="Save" action="{!saveFilters}" oncomplete="YAHOO.spmconnect.makeInvisible();" status="filterStatusID" rerender="filtersID,msg"/>
+		          		<apex:commandButton value="Cancel" immediate="true" oncomplete="YAHOO.spmconnect.makeInvisible();"/>
+	        		</apex:pageBlockButtons>
+	        		
+          			<apex:pageBlockTable value="{!listWrapper}" var="lw">
+                        <apex:column headerValue="Field">
+		                	<apex:selectList value="{!lw.sObjectAttribute}" size="1" onchange="updateDataFilters({!lw.count}, this.value);" >
+		                    	<apex:selectOptions value="{!lw.sObjectAttributeList}"/>
+		               		</apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Operator">
+		                	<apex:selectList value="{!lw.operator}" size="1">
+		                    	<apex:selectOptions value="{!lw.operatorList}"/>
+		               		</apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Value">
+		                	<apex:inputField value="{!lw.sObjectName[lw.sObjectAttribute]}" rendered="{!NOT(lw.isText)}"/>
+		                	<apex:inputText value="{!lw.nonUpdateableAttribute}" rendered="{!lw.isText}"/>
+                        </apex:column>
+                        <apex:column headerValue="Filter Logic">
+		                	<apex:selectList value="{!lw.filterOperator}" size="1">
+		                    	<apex:selectOptions value="{!lw.filterOperatorList}"/>
+		               		</apex:selectList>
+                        </apex:column>
+                        <apex:column >
+							<apex:commandLink value="Remove" onclick="removeDataFilters({!lw.count}, this.value);" rerender="dummy"/>                        
+						</apex:column>
+			   		</apex:pageBlockTable>
+			   	<!-- 	<apex:outputLabel value="Filter Logic"/>&nbsp;
+			   		<apex:inputText value="{!filterLogic}"/>-->
+	        	</apex:pageBlock>
+	   		</apex:form>
+	  	</div>
+	</div>
+	
+
+	<!-- This is the content of the modal dialog -->
+	<div id="processingModal" style="display: none" >
+		<div class="bd">
+	    	<apex:form >
+				<apex:actionStatus id="processStatusID2">
+					<apex:facet name="start">
+					    <apex:outputPanel >
+					        <apex:image value="/img/loading32.gif" style="height: 15px;"/>
+					        <apex:outputLabel value="Processing..."/>
+					    </apex:outputPanel>
+					</apex:facet>        
+				</apex:actionStatus>
+				
+	   		</apex:form>
+	  	</div>
+	</div>
+	
+</apex:page>

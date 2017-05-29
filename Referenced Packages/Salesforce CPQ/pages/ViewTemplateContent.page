@@ -1,0 +1,43 @@
+<apex:page standardController="SBQQ__TemplateContent__c">
+    <style>
+    .cke_top { display: none; }
+	</style>
+    <script type="text/javascript" src="{!URLFOR($Resource.CKEditor, '/ckeditor/ckeditor.js')}"></script>
+    <script type="text/javascript" src="{!$Resource.WebUI}"></script>
+    <script type="text/javascript" src="{!$Resource.jQuery}"></script>
+
+    <apex:sectionHeader title="Template Content View" subtitle="{!IF(ISBLANK(SBQQ__TemplateContent__c.Id),'New Template Content',SBQQ__TemplateContent__c.Name)}"/>
+
+    <apex:form >
+        <apex:pageBlock title="Template Content Detail">
+            <apex:pageBlockSection columns="2" collapsible="false">
+                <apex:outputField value="{!SBQQ__TemplateContent__c.Name}" id="name"/>
+                <apex:outputField value="{!SBQQ__TemplateContent__c.SBQQ__Type__c}" id="type"/>
+                <apex:outputField value="{!SBQQ__TemplateContent__c.SBQQ__FontFamily__c}" id="fontFamily"/>
+                <apex:outputField value="{!SBQQ__TemplateContent__c.SBQQ__FontSize__c}" id="fontSize"/>
+                <apex:outputField value="{!SBQQ__TemplateContent__c.SBQQ__TextColor__c}" id="textColor"/>
+                <apex:outputField value="{!SBQQ__TemplateContent__c.SBQQ__CustomSource__c}" id="customSource" rendered="{!(SBQQ__TemplateContent__c.SBQQ__Type__c == 'Custom')}"/>
+                <apex:outputField value="{!SBQQ__TemplateContent__c.SBQQ__TableStyle__c}" id="tableStyle" rendered="{!SBQQ__TemplateContent__c.SBQQ__Type__c == 'Line Items'}"/>
+            </apex:pageBlockSection>
+           	<apex:pageBlockSection columns="1" rendered="{!(SBQQ__TemplateContent__c.SBQQ__Type__c == 'HTML')}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Markup" for="markup"/>
+                    <apex:inputTextArea rows="25" value="{!SBQQ__TemplateContent__c.SBQQ__RawMarkup__c}" id="markup" styleClass="markupSize"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Edit" action="{!edit}"/>
+                <apex:commandButton value="Delete" action="{!delete}"/>
+                <apex:commandButton value="Clone" action="{!URLFOR($Action.TemplateContent__c.Clone,TemplateContent__c.Id)}"/>
+            </apex:pageBlockButtons>
+
+        </apex:pageBlock>
+    </apex:form>
+
+    <script language="javascript" type="text/javascript">
+    var ta = document.querySelector( 'textarea' );
+    if( ta )
+      CKEDITOR.replace( ta, $.extend( { height: 600, readOnly: true }, SB.ckeditorConfig ) );
+	</script>
+
+</apex:page>

@@ -1,0 +1,19 @@
+<apex:page standardController="DecsOnD__Policy__c" extensions="DecsOnD.PolicyControllerExtension">
+    <apex:form >
+        <apex:outputPanel rendered="{!NOT(canUpdatePolicy)}">
+            <h1>Warning</h1>
+            <p>You do not have sufficient access rights to complete this action. Please contact your administrator.</p>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!isPolicyAdmin}">
+            <h1>Warning</h1>
+            <p>This standard action is not supported</p>
+            <p>To create a new policy please see the <a href="{!$Page.DecsOnD__PolicyBrowser}">Business Policies</a> tab</p>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!AND(canUpdatePolicy,NOT(isPolicyAdmin))}">
+            <h1>Warning</h1>
+            <p>This standard action is not supported</p>
+            <p>To view available policies please see the <a href="{!$Page.DecsOnD__PolicyBrowser}">Business Policies</a> tab</p>
+            <p>To create a new policy please contact your administrator</p>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

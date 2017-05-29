@@ -1,0 +1,32 @@
+<apex:page standardController="DecsOnD__Policy__c" id="pagePolicyLockedWarn" sidebar="false">
+    <head>
+        <style>
+        .button{
+            width : 50px;
+            padding-left : 10px;
+        }
+        .buttonLocation{
+            position : relative;
+            left : 20px;
+        }
+        </style>
+    </head>
+    
+    <apex:form id="theform" >
+        <apex:outputPanel >
+            <apex:variable var="fullName" value="{!DecsOnD__Policy__c.DecsOnD__Applies_to__c}.{!DecsOnD__Policy__c.Name}" />
+            <apex:variable var="lastModifiedBy" value="{!DecsOnD__Policy__c.LastModifiedBy.Name}" />
+            <apex:variable var="lockedBy" value="{!DecsOnD__Policy__c.LockedBy__r.Name}" />
+            <apex:sectionHeader title="Business Policy" subtitle="Policy Locked Warning"/>
+            <apex:outputPanel id="pnModifiedMsg" rendered="{!JSINHTMLENCODE($CurrentPage.parameters.updated) == 'true'}">
+                <apex:pageMessage summary="Unable to edit policy <b>{!fullName}</b>. It has been modified by <b>{!lastModifiedBy}</b>" severity="warning" strength="2" escape="false" rendered="{!JSINHTMLENCODE($CurrentPage.parameters.idle) != 'true'}"/>
+                <apex:pageMessage summary="Unable to edit or configure policy <b>{!fullName}</b>. User <b>{!lastModifiedBy}</b> modified this policy while you were inactive." severity="warning" strength="2" escape="false" rendered="{!JSINHTMLENCODE($CurrentPage.parameters.idle) == 'true'}"/>
+            </apex:outputPanel>
+            <apex:outputPanel id="pnLockedMsg" rendered="{!JSINHTMLENCODE($CurrentPage.parameters.updated) != 'true'}">
+                <apex:pageMessage summary="Unable to edit policy <b>{!fullName}</b>. It is currently locked by <b>{!lockedBy}</b> " severity="warning" strength="2" escape="false" rendered="{!JSINHTMLENCODE($CurrentPage.parameters.idle) != 'true'}"/>
+                <apex:pageMessage summary="Unable to edit or configure policy <b>{!fullName}</b>. User <b>{!lockedBy}</b> acquired a lock on this policy while you were inactive." severity="warning" strength="2" escape="false" rendered="{!JSINHTMLENCODE($CurrentPage.parameters.idle) == 'true'}"/>
+            </apex:outputPanel>
+            <apex:commandButton action="{!cancel}"  value="Close" id="btnClose" styleClass="buttonLocation"/ >
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

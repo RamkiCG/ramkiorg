@@ -1,0 +1,115 @@
+<apex:page standardController="COMMISSION_PLAN__c" recordSetVar="ramki__COMMISSION_PLAN__c" extensions="CommissionPlanController,testext" tabstyle="Account">
+    <apex:messages />
+     <apex:pagemessages />
+    <apex:form >
+    <apex:outputLabel value="{!$Label.CustomName}"/>
+      <!--New Commission Plan Creation------------------------------------------------------------------>
+         <apex:pageBlock title="Commission Plan Creation">
+    
+                Enter No of Order <apex:inputText id="nooforders" value="{!addOrderCount}"/>
+                Enter Plan Name   <apex:inputText id="planname" value="{!PlanName}"/>
+    
+                <apex:commandButton value="Ok" action="{!addRows}"  />
+         </apex:pageBlock>
+     <!-----------------------------------------------------------------------------------------------------> 
+        
+    <!--New Commission Plan Details------------------------------------------------------------------------->
+         
+                   
+        <apex:pageBlock title="New Commission Plan Details">
+    
+            <apex:pageBlockTable value="{!CommissionPlanWrapperList}" var="wrapper" id="wtable">
+                
+                <apex:column headerValue="Name">
+                    <apex:outputField value="{!wrapper.NewCommissionPlan.Name}"/>
+                </apex:column>
+                
+                <apex:column headerValue="OrderId">
+                    <apex:outputField value="{!wrapper.NewCommissionPlan.ORDER_ID__c}"/>
+                </apex:column>
+                <apex:column headerValue="LowerRange">
+                    <apex:inputField value="{!wrapper.NewCommissionPlan.LOWER_RANGE__c}"/>
+                </apex:column>
+                <apex:column headerValue="UpperRange">
+                    <apex:inputField value="{!wrapper.NewCommissionPlan.UPPER_RANGE__c}"/>
+                </apex:column>   
+                <apex:column headerValue="Commission Percentage">
+                    <apex:inputField value="{!wrapper.NewCommissionPlan.COMMISSION_PERCENTAGE__c}"/>
+                </apex:column>   
+            </apex:pageBlockTable>
+         
+         <apex:commandButton value="Save" action="{!save}"/>
+           <apex:commandButton value="Display" action="{!Display123}"/>
+                                   
+      </apex:pageBlock>
+   <!-----------------------------------------------------------------------------------------------------> 
+      
+   <!--Existing Commission Plan Details------------------------------------------------------------------------->
+      
+     <apex:pageBlock title="Existing Commission Plans">          
+          <apex:pageBlockSection >
+                  <apex:pageblocktable id="pb" value="{!CommissionPlanPagination}" var="existingPlans" width="100%"> 
+                     <apex:column value="{!existingPlans.Name}"/>
+                     <apex:column value="{!existingPlans.ORDER_ID__c}"/>
+                     <apex:column value="{!existingPlans.LOWER_RANGE__c}"/>
+                     <apex:column value="{!existingPlans.UPPER_RANGE__c}"/>
+                     <apex:column value="{!existingPlans.COMMISSION_PERCENTAGE__c}"/>
+                      <apex:column headerValue="Action">
+                          <apex:commandLink value="Edit" action="{!EditCommissionPlan}"> 
+                              <apex:param name="cid" value="{!existingPlans.id}" assignTo="{!EditCommissionPlanId}"/>
+                          </apex:commandlink> 
+
+                          &nbsp;&nbsp;/&nbsp;&nbsp; 
+                          <apex:commandLink value="Delete" action="{!DeleteCommissionPlan}">
+                              <apex:param name="cid" value="{!existingPlans.id}" assignTo="{!DeleteCommissionPlanId}"/>
+                          </apex:commandLink>
+                          
+                          &nbsp;&nbsp;/&nbsp;&nbsp; 
+                           <apex:commandLink value="StdEdit" action="{!URLFOR($Action.COMMISSION_PLAN__c.Edit, existingPlans.id)}" />
+                           <apex:commandLink value="TestList"   action="{!URLFOR($Action.COMMISSION_PLAN__c.List, $ObjectType.COMMISSION_PLAN__c)}" />
+
+                             &nbsp;&nbsp;/&nbsp;&nbsp; 
+                            <apex:commandLink value="StdDelete" action="{!URLFOR($Action.COMMISSION_PLAN__c.Delete, existingPlans.id)}" />
+                               &nbsp;&nbsp;/&nbsp;&nbsp; 
+                            <apex:commandLink value="StdDelete" action="{!URLFOR($Action.COMMISSION_PLAN__c.Delete, existingPlans.id)}" />
+                               &nbsp;&nbsp;/&nbsp;&nbsp; 
+                            <apex:outputLink value="{!URLFOR($Action.COMMISSION_PLAN__c.Delete, existingPlans.id)}" onclick="return window.confirm('Are you sure?');">Delete</apex:outputLink> 
+<br/>
+                  <apex:outputLink value="{!URLFOR($Action.COMMISSION_PLAN__c.View, existingPlans.id)}">View</apex:outputLink> 
+                  <apex:outputLink value="{!URLFOR($Action.COMMISSION_PLAN__c.New)}">New</apex:outputLink>
+                   <apex:outputLink value="{!URLFOR($Action.COMMISSION_PLAN__c.Clone, existingPlans.id)}">Clone</apex:outputLink>
+                   <br/>
+                   
+                
+<br/>
+<br/>
+                          
+                      </apex:column>                    
+                  </apex:pageblocktable> 
+                                
+            </apex:pageBlockSection>
+            
+              
+            <apex:panelGrid columns="5"> 
+              <apex:commandLink action="{!first}"> first </apex:commandLink>            
+                <apex:commandLink action="{!previous}"> previous </apex:commandLink>
+                <apex:commandLink action="{!next}">  next  </apex:commandLink>
+                 <apex:commandLink action="{!last}"> last </apex:commandLink>
+                 
+            <!--    <apex:commandButton status="fetchStatus" reRender="pb" value="|<" action="{!first}" disabled="{!!hasPrevious}" title="First Page"/>
+                <apex:commandButton status="fetchStatus" reRender="pb" value="<" action="{!previous}" disabled="{!!hasPrevious}" title="Previous Page"/>
+                <apex:commandButton status="fetchStatus" reRender="pb" value=">" action="{!next}" disabled="{!!hasNext}" title="Next Page"/>
+                <apex:commandButton status="fetchStatus" reRender="pb" value=">|" action="{!last}" disabled="{!!hasNext}" title="Last Page"/>
+                -->
+                 
+                 <apex:outputText >{!(planRecords.pageNumber * size)+1-size}-
+                 {!IF((planRecords.pageNumber * size)>noOfRecords, noOfRecords,(planRecords.pageNumber * size))}
+                  of {!noOfRecords}</apex:outputText>
+            </apex:panelGrid>  
+                 
+        </apex:pageBlock> 
+      <!-----------------------------------------------------------------------------------------------------> 
+     
+
+</apex:form>
+</apex:page>

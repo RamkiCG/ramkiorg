@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <comment>Overrides standard Clone action to clone related objects such as Template Sections, Line columns and Related Content.</comment>
+        <content>CloneQuoteTemplate</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>QuoteTemplateHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Template that controls formatting of generated PDF documents.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>AllPackageProductsShown__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that determines whether all package products are printed on quote documents or only ones that are non-zero.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if all package products should be printed on quote documents; otherwise, only ones that are non-zero are printed.</inlineHelpText>
+        <label>Show All Package Product</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BillToTitle__c</fullName>
+        <defaultValue>&apos;Bill To&apos;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Title used for Bill To section. Default value is &quot;Bill To&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title used for Bill To section. Default value is &quot;Bill To&quot;.</inlineHelpText>
+        <label>Bill To Title</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BorderColor__c</fullName>
+        <defaultValue>&quot;000000&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Color of table borders expressed as a hexadecimal value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Color of table borders expressed as a hexadecimal value.</inlineHelpText>
+        <label>Border Color</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BottomMargin__c</fullName>
+        <defaultValue>0.5</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Bottom margin on the page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Bottom margin on the page.</inlineHelpText>
+        <label>Bottom Margin</label>
+        <precision>6</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BundledProductsShown__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Determines if quote line items with the Bundled checkbox selected are displayed on quote documents generated from this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines if quote line items with the Bundled checkbox selected are displayed on quote documents generated from this template.</inlineHelpText>
+        <label>Show Bundled Products</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CompanyCity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>City portion of company address displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>City portion of company address displayed on quote documents.</inlineHelpText>
+        <label>Company City</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyCountry__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Country portion of company address displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Country portion of company address displayed on quote documents.</inlineHelpText>
+        <label>Company Country</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyEmail__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Company email displayed on quote documents. Eg: sales@mycompany.com</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Company email displayed on quote documents. Eg: sales@mycompany.com</inlineHelpText>
+        <label>Company Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyFax__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Company FAX displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Company FAX displayed on quote documents.</inlineHelpText>
+        <label>Company Fax</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>CompanyName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the company as displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the company as displayed on quote documents.</inlineHelpText>
+        <label>Company Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyPhone__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Company phone displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Company phone displayed on quote documents.</inlineHelpText>
+        <label>Company Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>CompanyPostalCode__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Postal code portion of company address displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Postal code portion of company address displayed on quote documents.</inlineHelpText>
+        <label>Company Postal Code</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanySlogan__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Company slogan displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Company slogan displayed on quote documents.</inlineHelpText>
+        <label>Company Slogan</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyState__c</fullName>
+        <deprecated>false</deprecated>
+        <description>State portion of company address displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>State portion of company address displayed on quote documents.</inlineHelpText>
+        <label>Company State</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompanyStreet__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Street portion of company address displayed on quote documents.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Street portion of company address displayed on quote documents.</inlineHelpText>
+        <label>Company Street</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ComponentProductsHidden__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that determines whether component products are printed on quote documents, as indicated by the Component checkbox on the product</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if component products with the Component checkbox selected should not be printed on quote documents.</inlineHelpText>
+        <label>Hide Component Products</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CustomerDiscountField__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field on the quote object that computes customer discount.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field on the quote object that computes customer discount.</inlineHelpText>
+        <label>Customer Discount Field</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Total Discount (Amt)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CustomerDiscountLabel__c</fullName>
+        <defaultValue>&quot;DISCOUNT&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Label for customer discount</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Label used for customer discount in subtotals and totals sections.</inlineHelpText>
+        <label>Customer Discount Label</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerDiscountShown__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Determines if quote-level customer discount is displayed in the quote totals.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if you want quote-level customer discount displayed in the quote totals.</inlineHelpText>
+        <label>Show Customer Discount</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Default__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Checkbox that marks the template as default, when selected.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checkbox that marks the template as default, when selected.</inlineHelpText>
+        <label>Default</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DeploymentStatus__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Deployment status of this template. &quot;In Development&quot; templates are only visible to users with Customize Application permission.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Deployment status of this template. Change to &quot;Deployed&quot; to make this template visible to non-admin users.</inlineHelpText>
+        <label>Deployment Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>In Development</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Deployed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>FontFamily__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Family of the font that should be applied to text in this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Family of the font that should be applied to text in this template.</inlineHelpText>
+        <label>Font Family</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Helvetica</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Times</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Courier</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>FontSize__c</fullName>
+        <defaultValue>9</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Default font size for text in this quote document.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Default font size for text in this quote document.</inlineHelpText>
+        <label>Font Size</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FooterContent__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Template content that should be rendered in the footer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Template content that should be rendered in the footer.</inlineHelpText>
+        <label>Footer Content</label>
+        <referenceTo>TemplateContent__c</referenceTo>
+        <relationshipLabel>Quote Templates (Footer)</relationshipLabel>
+        <relationshipName>QuoteTemplatesFooter</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>FooterHeight__c</fullName>
+        <defaultValue>15</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Height of the footer on documents generated from this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Height of the footer on documents generated from this template.</inlineHelpText>
+        <label>Footer Height</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GeneratorName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the Visualforce page that should be used by this template to generate XSL FO tree.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the Visualforce page that should be used by this template to generate XSL FO tree.</inlineHelpText>
+        <label>Generator Name</label>
+        <length>150</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GrandTotalPrefix__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Prefix for subtotal and total labels in grand totals.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Prefix for subtotal and total labels in grand totals.</inlineHelpText>
+        <label>Grand Total Prefix</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GroupField__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the field that has the values you want to use when grouping and subtotaling line items.</inlineHelpText>
+        <label>Group Field</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Product Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>GroupGap__c</fullName>
+        <defaultValue>15</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Gap between groups in pixels.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Gap between groups in pixels.</inlineHelpText>
+        <label>Group Gap (px)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GroupShadingColor__c</fullName>
+        <defaultValue>&apos;FFFFFF&apos;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Color of the shading for table cells that contain group title and description.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Color of the shading for table cells that contain group title and description.</inlineHelpText>
+        <label>Group Shading Color</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GroupTextColor__c</fullName>
+        <defaultValue>&apos;000000&apos;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Color for the group title and description text.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Color for the group title and description text.</inlineHelpText>
+        <label>Group Text Color</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HeaderContent__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>References template content that should be rendered in the header.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>References template content that should be rendered in the header.</inlineHelpText>
+        <label>Header Content</label>
+        <referenceTo>TemplateContent__c</referenceTo>
+        <relationshipLabel>Quote Templates (Header)</relationshipLabel>
+        <relationshipName>QuoteTemplatesHeader</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>HeaderHeight__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Height of the header on documents generated from this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Height of the header on documents generated from this template.</inlineHelpText>
+        <label>Header Height</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HideGroupSubtotals__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Hides group subtotals on documents generated from this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if you want to hide group subtotals on documents generated from this template.</inlineHelpText>
+        <label>Hide Group Subtotals</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IntroductionTitle__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Title of the section that display Introduction field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the section that display Introduction field. To display no title leave this field blank.</inlineHelpText>
+        <label>Introduction Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeftMargin__c</fullName>
+        <defaultValue>0.5</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Left margin on the page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Left margin setting on the page.</inlineHelpText>
+        <label>Left Margin</label>
+        <precision>6</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LineNumbering__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Specifies how line items are numbered on generated document.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify how to number line items on generated documents. &quot;Start at quote&quot; numbers all lines sequentially across groups (if any). &quot;Start at group&quot; resets numbers within each group.</inlineHelpText>
+        <label>Line Numbering</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Start at quote</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Start at group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>LineSortField__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field on Quote Line used to sort line items on document generated by this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify the field used in sorting line items on the document.</inlineHelpText>
+        <label>Line Sort Field</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Number</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>LogoDocumentId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>ID of the Document which conatins logo image for use in quote PDF.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Salesforce ID for the document containing the logo image used in the quote PDF.</inlineHelpText>
+        <label>Logo Document Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NotesTitle__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Title of the section that displays Notes field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the section that display Notes field. To display no title, leave this field blank.</inlineHelpText>
+        <label>Notes Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PageHeight__c</fullName>
+        <defaultValue>11</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Page height in inches.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Page height in inches.</inlineHelpText>
+        <label>Page Height</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PageOrientation__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Page orientation of PDF documents generated with this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Page orientation of PDF documents generated with this template.</inlineHelpText>
+        <label>Page Orientation</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Portrait</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Landscape</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PageWidth__c</fullName>
+        <defaultValue>8.5</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Page width in inches.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Page width in inches.</inlineHelpText>
+        <label>Page Width</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PartnerDiscountLabel__c</fullName>
+        <defaultValue>&quot;PARTNER DISCOUNT&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Partner discount label.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Label used for partner discount in subtotals and totals sections.</inlineHelpText>
+        <label>Partner Discount Label</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PartnerDiscountShown__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Determines if the quote-level partner discount is displayed in the quote totals.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if you want quote-level partner discount displayed in the quote totals.</inlineHelpText>
+        <label>Show Partner Discount</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RenewedProductsShown__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Determines if renewed products are shown on Renewal quotes generated from this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if renewed products should be shown on Renewal quotes generated from this template.</inlineHelpText>
+        <label>Show Renewed Products</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RightMargin__c</fullName>
+        <defaultValue>0.5</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Right margin on the page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Right margin setting on the page.</inlineHelpText>
+        <label>Right Margin</label>
+        <precision>6</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RollUpField__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field on quote line object that&apos;s used to rollup lines.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Quote line field used for roll-up. All lines where this field returns the same value will be rolled up into the first line where the value occurs.</inlineHelpText>
+        <label>Roll-Up Field</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ShadingColor__c</fullName>
+        <defaultValue>&quot;FFFFFF&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Color of shading in column headers expressed as a hexadecimal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Color of shading in column headers expressed as a hexadecimal.</inlineHelpText>
+        <label>Shading Color</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ShipToTitle__c</fullName>
+        <defaultValue>&apos;Ship To&apos;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Label used for &quot;Ship To&quot; section. Default value is &quot;Ship To&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Label used for &quot;Ship To&quot; section. Default value is &quot;Ship To&quot;.</inlineHelpText>
+        <label>Ship To Title</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubGroupField__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the field to sub group by,</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field used to sub group line items.</inlineHelpText>
+        <label>Sub Group Field</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Product Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubtotalField__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field to sum and display as group/quote subtotal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select a Field to sum and display as group/quote subtotal.</inlineHelpText>
+        <label>Subtotal Field</label>
+        <picklist>
+            <picklistValues>
+                <fullName>List Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Net Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Regular Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubtotalLabel__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Label for subtotal field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter a label for the subtotal field.</inlineHelpText>
+        <label>Subtotal Label</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TermBodyIndent__c</fullName>
+        <defaultValue>15</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indent in pixels of quote term body relative to the term number.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indent in pixels of quote term body relative to the term number.</inlineHelpText>
+        <label>Term Body Indent (px)</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TermsConditionsTitle__c</fullName>
+        <defaultValue>&quot;Terms &amp; Conditions&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Title of the section that displays Terms &amp; Conditions.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the section that displays Terms &amp; Conditions.</inlineHelpText>
+        <label>Terms &amp; Conditions Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TermsConditions__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Terms &amp; Conditions printed on every document generated with this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Terms &amp; Conditions printed on every document generated with this template.</inlineHelpText>
+        <label>Terms &amp; Conditions</label>
+        <length>32000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>TermsNumbered__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Determines whether quote terms rendered by this template are numbered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if quote terms rendered by this template should be numbered.</inlineHelpText>
+        <label>Number Terms</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TextColor__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Color (in HEX) applied to text in this template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Default color (in HEX) applied to text in this template.</inlineHelpText>
+        <label>Text Color</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TopMargin__c</fullName>
+        <defaultValue>0.5</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Top margin on the page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Top margin on the page.</inlineHelpText>
+        <label>Top Margin</label>
+        <precision>6</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalField__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field to sum and display as group/quote total.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the Field to sum and display as group/quote total.</inlineHelpText>
+        <label>Total Field</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Net Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>List Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TotalLabel__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Label for total field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the label for the field set in Total Field.</inlineHelpText>
+        <label>Total Label</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalsHidden__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that indicates whether quote totals should be printed on the quote document.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to hide quote totals.</inlineHelpText>
+        <label>Hide Totals</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WatermarkId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Salesforce ID for the document containing the watermark image used in the quote PDF.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Salesforce ID for the document containing the watermark image used in the quote PDF.</inlineHelpText>
+        <label>Watermark ID</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Quote Template</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Default__c</columns>
+        <columns>PageOrientation__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Template Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Quote Templates</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Default__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PageOrientation__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATEDBY_USER</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UPDATEDBY_USER</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATEDBY_USER</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>UPDATEDBY_USER</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PageOrientation__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Default__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchResultsAdditionalFields>Default__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PageOrientation__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATEDBY_USER</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UPDATEDBY_USER</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Preview</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Preview</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>alert(&apos;Coming soon&apos;);</url>
+    </webLinks>
+</CustomObject>

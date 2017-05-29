@@ -1,0 +1,112 @@
+<apex:page standardController="SBQQ__Quote__c" extensions="SBQQ.QuoteDocumentController" docType="html-5.0" showHeader="{!formFactor == 'desktop'}" standardStylesheets="false">
+	<apex:variable var="stylesheet" value="{!IF(formFactor == 'desktop', 'sb', 'MobileCSS')}" />
+	<apex:stylesheet value="{!$Resource[stylesheet]}"/>
+
+	<script src="/soap/ajax/28.0/connection.js" type="text/javascript"></script>
+	<script type="text/javascript" src="{!$Resource.jQuery}"></script>
+	<script type="text/javascript" src="{!$Resource.jQueryUI}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.AngularJS,'angular.min.js')}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.AngularJS,'angular-sanitize.min.js')}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.AngularJS,'/i18n/angular-locale_en-us.js')}"></script>
+	<script type="text/javascript" src="{!$Resource.AngularDnD}"></script>
+	<script type="text/javascript" src="{!$Resource.Directives}"></script>
+	<script type="text/javascript" src="{!$Resource.UI}"></script>
+	<script type="text/javascript" src="{!$Resource.WebUI}"></script>
+	<script type="text/javascript" src="{!$Resource.RemotingServiceProxies}"></script>
+	<script type="text/javascript" src="{!$Resource.DocumentGeneratorUI}"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		var quoteName = '{!$ObjectType.Quote__c.name}';
+    		var namespace = (quoteName.toLowerCase().substring(0,4) == 'sbqq') ? 'SBQQ' : '';
+    		qqBootstrapWeb({namespace:namespace,sessionId:'{!$API.Session_ID}'});
+    		document.getElementById('qq').style.display = 'block';
+    	});
+    </script>
+
+    <div id="qq" style="display: none" class="sb">
+		<div id="sbDocGenPreview" ng-controller="QuoteDocumentGeneratorCtrl" ng-init="onLoad('{!Quote__c.Id}', 'generate')">
+			<c:pageHeader title="{!$Label.sbqq__lbl_generate_document}" subtitle="{!SBQQ__Quote__c.Name}" formFactor="{!formFactor}" customTheme="18">
+        <apex:outputPanel layout="none" rendered="{!formfactor == 'desktop'}">
+          <div class="sbButtons">
+            <button ng-click="onPreview()" class="sbBtn">{!$Label.lbl_preview}</button>
+            <button ng-click="onSaveAndSendESignature()" ng-disabled="!documentModel.esignatureButtonEnabled" ng-show="documentModel.esignatureEnabled" class="sbBtn">{{documentModel.esignatureButtonLabel}}</button>
+            <button ng-click="onSaveAndEmail()" class="sbBtn">{!$Label.lbl_save_and_email}</button>
+            <button ng-click="onSave()" class="sbBtn">{!$Label.lbl_save}</button>
+            <button ng-click="onCancel()" class="sbBtn">{!$Label.lbl_cancel}</button>
+          </div>
+        </apex:outputPanel>
+      </c:pageHeader>
+
+			<c:messages messagesExpr="messages" formFactor="{!formFactor}"/>
+		   	<c:status displayExpr="blockingOperationInProgress" formFactor="{!formFactor}"/>
+
+			<div ng-show="documentModel != null && !mobilePreview">
+				<div class="sbPageBlock">
+		            <c:pageBlockHeader formFactor="{!formFactor}">
+		            	<apex:outputPanel layout="none" rendered="{!formfactor == 'tablet'}">
+			            	<button ng-click="onPreview()" class="btn">
+			            		<span>{!$Label.lbl_preview}</span>
+			            	</button>
+			            	<button ng-click="onSaveAndSendESignature()" class="btn" ng-show="documentModel.esignatureEnabled" ng-disabled="!documentModel.esignatureButtonEnabled">
+			            		<span>{{documentModel.esignatureButtonLabel}}</span>
+			            	</button>
+			            	<button ng-click="onSave()" class="btn">
+			            		<span>{!$Label.lbl_save}</span>
+			            	</button>
+			            	<button ng-click="onCancel()" class="btn">
+			            		<span>{!$Label.lbl_cancel}</span>
+			            	</button>
+		            	</apex:outputPanel>
+		            	<apex:outputPanel layout="none" rendered="{!formfactor == 'phone'}">
+			            	<button ng-click="onPreview()" class="btn">
+			            		<span>{!$Label.lbl_preview}</span>
+			            	</button>
+			            	<button ng-click="documentActionsShown = true" class="btn phone" title="">
+					    		<span class="icon-utility-down"></span>
+					  		</button>
+					  		<c:modalDialog showExpr="documentActionsShown" closeExpr="documentActionsShown = false">
+				            	<button ng-click="onSaveAndSendESignature()" class="btn" ng-show="documentModel.esignatureEnabled" ng-disabled="!documentModel.esignatureButtonEnabled">
+				            		<span>{{documentModel.esignatureButtonLabel}}</span>
+				            	</button>
+				            	<button ng-click="onSave()" class="btn">
+				            		<span>{!$Label.lbl_save}</span>
+				            	</button>
+				            	<button ng-click="onCancel()" class="btn">
+				            		<span>{!$Label.lbl_cancel}</span>
+				            	</button>
+			            	</c:modalDialog>
+		            	</apex:outputPanel>
+		            </c:pageBlockHeader>
+
+	            	<div class="sbBody">
+			        	<c:quoteDocumentOptions formFactor="{!formFactor}" isPreview="false"/>
+			          <c:quoteDocumentContentSelector formFactor="{!formFactor}" rendered="{!formFactor == 'desktop'}"/>
+			        </div>
+
+				</div>
+			</div>
+
+			<div ng-show="mobilePreview">
+				<div class="buttonContainer">
+		        	<button ng-click="mobilePreview = false" class="btn single">
+			    		<span>{!$Label.lbl_close}</span>
+			  		</button>
+		  		</div>
+				<div class="documentPreviewContainer">
+					<iframe frameborder="0" id="mobilePreviewFrame" class="documentPreviewFrame"/>
+				</div>
+			</div>
+		</div>
+    </div>
+    <script>
+        /* Salesforce-prescribed workaround for platform defect where scrolling on ios 8 causes blank screen */
+        (function () {
+            try {
+                var a = navigator.userAgent;
+                if ((a.indexOf('Salesforce') != -1) && (a.indexOf('iPhone') != -1 || a.indexOf('iPad') != -1) && (a.indexOf('OS/8') != -1 || a.indexOf('OS 8') != -1) && (a.indexOf('Safari') == -1)) {
+                    var s = document.createElement('style');
+                    s.innerHTML = 'html,html body{overflow: auto;-webkit-overflow-scrolling:touch;}body{position:absolute;left:0;right:0;top:0;bottom:0;}';
+                    document.getElementsByTagName('head')[0].appendChild(s);
+                }} catch (e) {}})();
+    </script>
+</apex:page>

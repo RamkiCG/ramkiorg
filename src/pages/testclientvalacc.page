@@ -1,0 +1,77 @@
+<apex:page standardcontroller="Account" showHeader="false" standardStylesheets="false">
+     
+    <!--<apex:includeScript value="{!$Resource.jquery}"/>-->
+    <apex:includeScript value="http://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js"/>
+     
+    <script type="text/javascript"> 
+        $(document).ready(function() {
+              
+            $('[id$=commentForm]').validate();             
+              
+            $('[id$=name]').rules("add",{
+                required: true,
+                minlength: 5
+            });     
+             
+            $('[id$=email]').rules("add",{
+                required: true,
+                email: true
+            });      
+             
+            $('[id$=url]').rules("add",{
+                url: true
+            });
+             
+            $('[id$=comment]').rules("add",{
+                required: true
+            });
+             
+            $('[id$=pwd]').rules("add",{
+                required: true,
+                minlength: 5
+            });
+             
+            $('[id$=cpwd]').rules("add",{
+                required: true,
+                minlength: 5,
+                equalTo: '[id$=pwd]'
+            });      
+             
+            /* Customised the messages */
+            jQuery.validator.messages.required = "You better have entered a value.. or else!"; 
+            jQuery.validator.messages.equalTo = "No silly, you're supposed to type the same set of characters AGAIN.";                                                
+        });
+         
+    </script>   
+     
+    
+            <apex:outputPanel layout="block" style="text-align:center; font-size:12px;padding: 4px">
+                <apex:form id="commentForm" > 
+ 
+                        <apex:outputlabel for="name">Name <span class="star">*</span></apex:outputlabel> 
+                        <apex:inputtext id="name" value="{!account.name}"/>
+                        <br/>
+                        <apex:outputlabel for="email">E-Mail <span class="star">*</span></apex:outputlabel> 
+                        <apex:inputtext id="email"  value="{!account.name}"/> 
+                        <br/>
+                        <apex:outputlabel for="url">URL (optional)</apex:outputlabel> 
+                        <apex:inputtext id="url"  value="{!account.name}" /> 
+                        <br/>
+                        <apex:outputlabel for="comment">Your comment <span class="star">*</span></apex:outputlabel> 
+                        <apex:inputtextarea id="comment" value="{!account.name}" style="width: 30%"/>
+                        <br/>
+                        <apex:outputLabel for="pwd">Password <span class="star">*</span></apex:outputLabel>
+                        <apex:inputSecret id="pwd" value="{!account.name}"/>
+                        <br/>
+                        <apex:outputLabel for="cpwd">Confirm Password <span class="star">*</span></apex:outputLabel>
+                        <apex:inputSecret id="cpwd" value="{!account.name}"/>                        
+                        <br/>
+                        <input type="submit" />
+             
+                </apex:form>
+             
+            </apex:outputPanel>
+             
+       
+      
+</apex:page>

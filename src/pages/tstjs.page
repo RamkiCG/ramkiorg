@@ -1,0 +1,29 @@
+<apex:page controller="testctrlforjs">
+  <apex:form >
+        <apex:pageBlock >
+           Name: <apex:inputText id="inptID"/>
+                       <apex:commandButton onclick="ValidateText('{!$Component.inptID}')" value="Validate"/>
+        </apex:pageBlock>
+  </apex:form>
+ 
+  <!-- Java script starts Here -->
+  <script>
+   function ValidateText(ReceiveInputID){
+  
+    var inputValue = document.getElementById(ReceiveInputID).value;
+         if(inputValue == ''){
+            alert('Please Enter Name');
+         }
+         else
+            alert(' You entered :: '+inputValue);
+   }
+   function func()
+
+  {
+
+  alert('function calling');
+
+  }
+  </script>
+   <apex:outputText value="{!callfunc}" escape="false"></apex:outputText>
+</apex:page>

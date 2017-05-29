@@ -1,0 +1,47 @@
+<apex:page standardController="DecsOnD__Policy__c" extensions="DecsOnD.PolicyLifecycleStatusController" Id="Thepage" action="{!checkRight}">
+	<head>
+		<style>
+		.button{
+			width : 50px;
+			padding-left : 10px;
+		}
+		.buttonLocation{
+			position : relative;
+			left : 20px;
+		}
+		</style>
+	</head>
+	
+	<apex:form id="theform">
+		<apex:variable var="applied" value="{!DecsOnD__Policy__c.DecsOnD__Applies_to__c}"/>
+		<apex:variable var="status" value="{!DecsOnD__Policy__c.DecsOnD__Status__c}"/>
+		<apex:outputPanel id="changeSection" rendered="{!NOT(isShowDelSection)}">
+			<apex:sectionHeader title="Change Status" subtitle="{!DecsOnD__Policy__c.Name}"/>
+		 	<apex:pageMessages showDetail="true" escape="false" id="errChangeMsg" rendered="{!isError}"/>  
+			<apex:commandLink action="{!doCancel}"  value="Back to Previous Screen" reRender="theform"/>
+			<apex:pageMessage summary="You do not have the right to change policy lifecycle status!" severity="error" strength="2" escape="false" rendered="{!AND(NOT(isError), NOT(canUpdatePolicy))}">
+			</apex:pageMessage>
+		 	<apex:outputPanel rendered="{!AND(canUpdatePolicy, NOT(isError))}">  
+				<apex:pageMessage summary=" Policy <b>{!DecsOnD__Policy__c.Name}</b> is currently in <b>{!DecsOnD__Policy__c.DecsOnD__Status__c}</b> state. Click below to {!ActionText} this policy." severity="confirm" strength="2" escape="false" rendered="{!NOT(isError)}"/>
+				<apex:outputPanel styleClass="buttonLocation">
+					<apex:commandButton action="{!doCancel}"  value="{!$Label.decsond__Policy_cancel}" id="btnCancel" reRender="theform"/ >
+					&nbsp;&nbsp;
+					<apex:commandButton action="{!requestActivatePolicy}"  value="Activate" id="btnActive" reRender="theform" rendered="{!(ActionText == 'activate') && NOT(isError)}"/ > 
+					<apex:commandButton action="{!requestRestorePolicy}"  value="Restore" id="btnRestore" reRender="theform" rendered="{!(ActionText == 'restore') && NOT(isError)}"/ > 
+					<apex:commandButton action="{!requestArchivePolicy}"  value="Archive" id="btnArchive"  reRender="theform" rendered="{!(ActionText == 'archive') && NOT(isError)}"/ >
+				</apex:outputPanel>
+			</apex:outputPanel>  
+		</apex:outputPanel>
+		
+		<apex:outputPanel id="delSection" rendered="{!isShowDelSection}">
+			<apex:sectionHeader title="Delete Policy" subtitle="{!DecsOnD__Policy__c.Name}"/>
+				<apex:pageMessages showDetail="true" escape="false" id="errDelMsg" rendered="{!isError}"/>
+				<apex:pageMessage summary="Are you sure you want to delete policy {!DecsOnD__Policy__c.Name}? This will remove the policy from the server, and all execution records will be permanently lost." severity="confirm" strength="2" rendered="{!NOT(isError)}"/>
+				<apex:outputPanel styleClass="buttonLocation">
+					<apex:commandButton action="{!doCancel}"  value="{!IF(isError,'Cancel','No')}" id="btnCancel2" reRender="theform" styleClass="button"/ >
+					&nbsp;&nbsp;
+					<apex:commandButton action="{!requestDeletePolicy}"  value="Yes" id="btnDelete" reRender="theform" styleClass="button" rendered="{!NOT(isError)}"/  > 
+				</apex:outputPanel>
+		</apex:outputPanel>
+	</apex:form>
+</apex:page>

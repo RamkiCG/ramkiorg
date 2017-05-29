@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Smart Sales Caller</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <description>Location custom fields for lead, contact, task, event, log a call, connected app</description>
+    <namespacePrefix>SmartSaleCaller</namespacePrefix>
+    <types>
+        <members>Activity.Location_Map__c</members>
+        <members>Activity.Map_Location__c</members>
+        <members>Contact.Location_Map__c</members>
+        <members>Contact.Location_of_the_contact__c</members>
+        <members>Lead.Location_of_the_lead__c</members>
+        <members>Lead.Map_Url__c</members>
+        <name>CustomField</name>
+    </types>
+    <version>36.0</version>
+</Package>

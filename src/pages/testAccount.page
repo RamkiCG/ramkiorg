@@ -1,0 +1,20 @@
+<apex:page standardController="account" recordSetVar="accounts" sidebar="false" showHeader="false">
+   
+  
+           <apex:pageBlock >
+               <apex:pageBlockTable value="{!accounts}" var="a">
+                   <apex:column headerValue="Name" >
+                       <apex:outputField value="{!a.name}" />
+                           
+                   </apex:column>
+                   <apex:column headerValue="contact name" >
+                         <apex:pageBlockTable value="{!a.contacts}" var="c">
+                          <apex:column headerValue="Name" >
+                          <apex:outputField value="{!c.name}" />
+                           </apex:column>
+                           </apex:pageBlockTable>
+                   </apex:column>
+               </apex:pageBlockTable>
+           </apex:pageBlock>
+  
+</apex:page>

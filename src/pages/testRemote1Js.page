@@ -1,0 +1,134 @@
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0" 
+    title="Contacts—RemoteObjects Style" controller="RemoteObjectContactOverride">
+
+    <!-- Include in some mobile web libraries -->
+    <apex:stylesheet value="//netdna.bootstrapcdn.com/bootswatch/3.1.1/superhero/bootstrap.min.css"/>
+    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"/>
+    <apex:includeScript value="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"/>
+
+    <!-- Set up Remote Objects, with an override for create() method -->
+    <apex:remoteObjects jsNamespace="$M">
+        <apex:remoteObjectModel name="Contact" fields="FirstName,LastName,Phone" 
+            create="{!$RemoteAction.RemoteObjectContactOverride.create}"/>
+    </apex:remoteObjects>
+
+    <!-- Page markup -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table id="myTable" 
+                    class="table table-bordered table-striped table-condensed">
+                    <colgroup>
+                        <col class="col-md-3" />
+                        <col class="col-md-3" />
+                        <col class="col-md-3" />
+                    </colgroup>
+                    <caption>
+                        Contact Data Order ([ {LastName: 'ASC'}, {FirstName: 'DESC'} ]) 
+                        <button id="bRefresh" class="btn btn-success btn-sm" 
+                            type="button">Refresh</button>
+                    </caption>
+                    <caption id="msgBox" class="alert alert-danger hidden"></caption>
+                    <thead>
+                        <tr><td>FirstName</td><td>LastName</td><td>Phone</td></tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                        <td><input type="text" name="FirstName" id="iFirstName" 
+                            placeholder="John" class="form-control" /></td>
+                        <td><input type="text" name="LastName" id="iLastName" 
+                            placeholder="Doe" class="form-control" /></td>
+                        <td>
+                            <div class="input-group">
+                              <input type="text" name="Phone" id="iPhone" 
+                                placeholder="(123) 456-7890" class="form-control" />
+                              <span class="input-group-btn">
+                                <button id="bAdd" class="btn btn-primary" 
+                                    type="button">Save</button>
+                              </span>
+                            </div>
+                        </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="panel panel-default">
+                  <div class="panel-heading">Log</div>
+                  <div class="panel-body" id="log">
+                  </div>
+                </div>            
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+    <!-- Results template (table rows of Contacts) -->
+    <script id="tmpl" type="x-tmpl-mustache">
+        <tr><td>{{FirstName}}</td><td>{{LastName}}</td><td>{{Phone}}</td></tr>
+    </script>
+
+    <!-- Page functionality -->
+    <script>
+        var table = $('#myTable tbody');
+        var template = $('#tmpl').html();
+        Mustache.parse(template);
+
+        // Retrieve all contacts and add to results table on page
+        var fetchContacts = function() {
+            (new $M.Contact()).retrieve({
+                orderby: [ {LastName: 'ASC'}, {FirstName: 'DESC'} ],
+            }, function(err, records) {
+                if (!err) {
+                    // Add some status messages to the log panel
+                    $('#log')
+                    .append('<p>Fetched contact records.</p>')
+                    .append('<p>Records Size: '+ records.length + '!</p>');
+
+                    // Update the table of contacts with fresh results
+                    table.empty();
+                    records.forEach(function(rec) {
+                        table.append(Mustache.render(template, rec._props));                    
+                    });                
+                } else {
+                    $('#msgBox').text(err.message).removeClass('hidden');            
+                }
+            });
+        };
+        
+        var addContact = function() {
+            // Create a new Remote Object from form values
+            (new $M.Contact({
+                FirstName: $('#iFirstName').val(),
+                LastName: $('#iLastName').val(),
+                Phone: $('#iPhone').val()
+            })).create(function(err, record, event) {
+                // New record created...
+                if (!err) {
+                    // Reset the New Record form fields, for the next create
+                    $('input').each(function() {
+                        $(this).val('');
+                    });
+                    
+                    // Add some status messages to the log panel
+                    $('#log')
+                    .append('<p>Contact created!</p>')
+                    // Custom data added to event.result by override function
+                    .append('<p>Got custom data: ' + event.result.custom + '</p>'); 
+
+                    // Redraw the results list with current contacts
+                    fetchContacts();
+                } else {
+                    $('#msgBox').text(err.message).removeClass('hidden');            
+                }
+            });
+        };
+
+        // Bind application functions to UI events
+        $('#bRefresh').click(fetchContacts);
+        $('#bAdd').click(addContact);
+        
+        // Initial load of the contacts list
+        fetchContacts();
+    </script>
+</apex:page>

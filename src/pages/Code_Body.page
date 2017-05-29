@@ -1,0 +1,46 @@
+<apex:page sidebar="false" showheader="false" docType="html-5.0" standardStylesheets="false"> 
+    <style type="text/css">
+        
+        p {
+            margin:0.5em 0 0;
+            padding:0 0 0.5em;
+            font-size:1.3em;
+            line-height:1.6em;
+        }
+        div.highlight ul.tabs li {
+            font-size: 20px;
+        }
+        .covered{
+            /* pale green */
+            background-color:#98fb98 !important;
+        }
+        .uncovered{
+            /* pale red */
+            background-color:#FFE0E0 !important;
+        }
+  </style>
+    <apex:stylesheet value="{!URLFOR($Resource.jquerycolorbox,'/jquery.highlight.css')}" />
+    <script data-require="angular.js@*" data-semver="1.2.0-rc3-nonmin" src="{!URLFOR($Resource.jquerycolorbox,'/angular.js')}"></script>
+    <!-- Here showing the class body -->
+    <div ng-app="codeBodyApp" ng-controller="CodeBody">
+        <pre class="code" lang="java"> {{unitbody}} </pre>
+    </div>
+    <script src="{!URLFOR($Resource.jquerycolorbox,'/JqueryMinJs.js')}" />
+    <script src="{!URLFOR($Resource.jquerycolorbox,'/jquery.highlight.js')}" />
+    <script src="{!URLFOR($Resource.appjs)}"></script>
+    <script>
+        $(document).ready(function(){
+            $('pre.code').highlight({source:1, zebra:0, indent:'space', list:'ol'});
+            /* here we add class for color which is covered and which is not */
+            $('pre.code>ol>li').each(function( index ) {
+                console.log($.inArray(index+1 ,coveredLines));
+                if($.inArray(index+1 ,coveredLines) != -1){
+                    $(this).addClass('covered');
+                }
+                else if($.inArray(index+1 ,uncoveredLines) != -1){
+                    $(this).addClass('uncovered');
+                }
+            });
+        });
+    </script>
+</apex:page>

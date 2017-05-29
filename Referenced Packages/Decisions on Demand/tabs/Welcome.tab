@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Provides an overview of the Decisions on Demand functionality, as well as links to the documentation.</description>
+    <label>Welcome</label>
+    <mobileReady>true</mobileReady>
+    <motif>Custom11: Star</motif>
+    <page>Welcome</page>
+</CustomTab>

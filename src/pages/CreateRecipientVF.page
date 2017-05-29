@@ -1,0 +1,43 @@
+<apex:page controller="CreateRecipientController" >
+<apex:pageMessages />
+    <apex:form >
+     <apex:pageBlock title="CreateRecipient">
+      <apex:pageBlockSection >
+      
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Email" />
+              <apex:inputText value="{!CreateRecipient.email}"/>
+          </apex:pageBlockSectionItem>
+          
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Sms" />
+              <apex:inputText value="{!CreateRecipient.sms}"/>
+           </apex:pageBlockSectionItem>
+           
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Props" />
+          <apex:inputText value="{!CreateRecipient.props}"/>
+        </apex:pageBlockSectionItem>
+        
+         <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Autoconfirm" />
+          <apex:inputText value="{!CreateRecipient.autoconfirm}"/>
+       </apex:pageBlockSectionItem>
+       
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Reason" />
+          <apex:inputText value="{!CreateRecipient.reason}"/>
+       </apex:pageBlockSectionItem>
+       
+            <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Origin" />
+          <apex:inputText value="{!CreateRecipient.origin}"/>
+           </apex:pageBlockSectionItem>
+       </apex:pageBlockSection>
+          <apex:pageBlockButtons location="bottom">
+                 <apex:commandButton value="CreateRecipient" action="{!CreateNewRecipient}"/>
+            </apex:pageBlockButtons>
+    
+     </apex:pageBlock>
+  </apex:form>
+</apex:page>

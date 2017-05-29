@@ -1,0 +1,10 @@
+<apex:page sidebar="false" showheader="false">
+   <apex:inputFile value="" id="inputfilescr"/>
+   <apex:variable var="inputfilescr" value=""/>
+   <Script>
+ var fileVal=document.getElementById("inputfilescr");
+alert(fileVal.value);
+</Script>
+  <apex:flash src="fileVal.value"
+height="300" width="100%" />
+</apex:page>

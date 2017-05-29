@@ -1,0 +1,16 @@
+<apex:page standardController="DecsOnD__Policy__c" id="thePage" extensions="DecsOnD.PolicyLifecycleStatusController" action="{!checkRight}">
+    <apex:form id="theform" >
+		<apex:sectionHeader title="Edit Description" subtitle="{!DecsOnD__Policy__c.Name}" />
+		<apex:variable var="status" value="{!DecsOnD__Policy__c.DecsOnD__Status__c}"/>
+		<apex:pageBlock id="theDescriptionEditingBlock" mode="edit">
+			<apex:pageBlockButtons id="theBtnBlock" location="bottom">
+				<apex:commandButton action="{!Save}" value="Save" style="width: 50px;" id="btnSave" /> &nbsp;
+				<apex:commandButton action="{!Cancel}" value="{!$Label.decsond__Policy_cancel}" id="btnCancel" style="width: 50px;" />
+			</apex:pageBlockButtons>
+			<apex:pageBlockSection ></apex:pageBlockSection>
+			<apex:pageBlockSection id="thePbs" columns="1" title="Editing policy description">
+				<apex:inputTextarea value="{!DecsOnD__Policy__c.DecsOnD__Description__c}" cols="185" rows="7" />
+			</apex:pageBlockSection>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

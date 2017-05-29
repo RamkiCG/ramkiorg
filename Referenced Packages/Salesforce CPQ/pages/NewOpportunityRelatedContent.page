@@ -1,0 +1,36 @@
+<apex:page standardController="Opportunity" extensions="SBQQ.UploadRelatedContentController" docType="html-5.0" standardStylesheets="false">
+    <apex:stylesheet value="{!IF(formfactor == 'desktop', $Resource['sb'], $Resource['MobileCSS'])}"/>
+
+	<div id="sbNewRelatedContent" class="sb">
+    <apex:form id="form">
+	    <c:pageHeader title="Opportunity {!$Label.sbqq__lbl_related_content} Edit" subtitle="New {!$Label.sbqq__lbl_related_content} for Opportunity {!Opportunity.Name} ">
+        <div class="sbButtons">
+          <apex:commandButton styleClass="sbBtn" value="Save" action="{!onSave}"/>
+          <apex:commandButton styleClass="sbBtn" value="Cancel" action="{!cancel}"/>
+        </div>
+      </c:pageHeader>
+
+	    <apex:pageMessages id="messages"/>
+	    	<div class="sbBody">
+                <div class="sbPageBlockSection">
+                    <c:pageBlockSection title="Additional Document Edit">
+                    	<div id="sbNewRelatedContentOptions">
+					        <!-- <apex:pageBlockSectionItem helpText="{!$Label.msg_quote_related_content_upload}"> -->
+					        <fieldset>
+					            <apex:outputLabel value="{!$Label.sbqq__lbl_opportunity_additional_document_upload}"/>
+					            <apex:inputFile value="{!UploadFile.Body}" contentType="{!UploadFile.ContentType}" fileName="{!UploadFile.Name}" fileSize="{!UploadFile.BodyLength}" accept="application/pdf" id="UploadFile"/>
+					        <!-- </apex:pageBlockSectionItem> -->
+					        <!-- <apex:pageBlockSectionItem helpText="{!$Label.msg_quote_related_content_display_order}"> -->
+					        </fieldset>
+					        <fieldset>
+					        	<apex:outputLabel value="Display Order"/>
+					        	<apex:inputText value="{!displayOrder}"  id="displayOrder"/>
+				        	</fieldset>
+					        <!-- </apex:pageBlockSectionItem> -->
+				        </div>
+			        </c:pageBlockSection>
+				</div>
+			</div>
+		</apex:form>
+	</div>
+</apex:page>

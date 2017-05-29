@@ -1,0 +1,3 @@
+<apex:page controller="SBQQ.DocumentGeneratorController" contentType="text/xml" showHeader="false" sidebar="false">
+	<c:quoteTerms quote="{!quote2}" template="{!template}" bodyIndent="{!IF(ISBLANK(template.SBQQ__TermBodyIndent__c),15,template.SBQQ__TermBodyIndent__c)}"/>
+</apex:page>

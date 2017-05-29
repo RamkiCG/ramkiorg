@@ -1,0 +1,14 @@
+<apex:page docType="html-5.0" Controller="MyCustom1Exception">
+  <!-- Begin Default Content REMOVE THIS -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+
+
+  <apex:pagemessages />
+  <h1>Congratulations</h1>
+  This is your new Page
+  <apex:form >
+   <apex:commandButton value="test" action="{!doSomething}"/>
+  </apex:form>
+ 
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

@@ -1,0 +1,15 @@
+<apex:page Controller="testactionfunction">
+  <script>
+  function testclick()
+  {
+      hhh();
+  }
+  </script>
+  <apex:form >
+  <apex:actionFunction action="{!testkk}" name="hhh" reRender="ssds"/>
+  <apex:inputCheckbox onclick="testclick()"/>
+  <apex:outputPanel id="ssds">
+  <apex:outputText id="text" value="{!vall}"></apex:outputText>
+  </apex:outputPanel>
+  </apex:form>
+</apex:page>

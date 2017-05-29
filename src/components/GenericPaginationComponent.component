@@ -1,0 +1,42 @@
+<!--
+    Description
+     *===========
+     * VF Component for the Generic Pagination.
+     * It accepts three parameters -
+           1. Records (List of records belongs to any object)
+           2. Fields (List of fields of a sobject to display in the table)
+           3. Title (Title of the section)
+     * Author:
+     * =======
+     * www.srinusfdc.com     
+-->
+<apex:component controller="GenericPaginationComponentContrl">
+  
+  <!-- Attributes to accept the parameters -->
+  <apex:attribute name="Records" Type="Sobject[]" assignTo="{!sObjLst}" required="true" description="Accepts list of records of any object and assign to a variable in controller class"/>
+  <apex:attribute name="Fields" Type="String[]" required="true" description="Accepts list of field API names of a sobject in string format"/>
+  <apex:attribute name="Title" Type="String" required="true" description="Accepts the title of the section"/>
+  
+  <!-- Table which displays records along with pagination -->
+  <apex:form >
+      <apex:pageBlock >
+          <apex:pageBlockSection columns="1" title="{!Title}" id="pbSec">
+              <apex:pageBlockTable value="{!SobjRecords}" var="sObj">
+                  <!-- Dispalys the multiple columns based on the user input -->
+                  <apex:repeat value="{!Fields}" var="fld">
+                      <apex:column value="{!sObj[fld]}"/>
+                  </apex:repeat>
+              </apex:pageBlockTable>
+              
+              <!-- Dispalys pagination buttons -->
+              <apex:panelGrid columns="5">
+                  <apex:commandButton value="First" action="{!con.first}" disabled="{!!con.hasPrevious}" status="pagStatus" reRender="pbSec"/>
+                  <apex:commandButton value="Previous" action="{!con.previous}" disabled="{!!con.hasPrevious}" status="pagStatus" reRender="pbSec"/>
+                  <apex:commandButton value="Next" action="{!con.next}" disabled="{!!con.hasNext}" status="pagStatus" reRender="pbSec"/>
+                  <apex:commandButton value="Last" action="{!con.last}" disabled="{!!con.hasNext}" status="pagStatus" reRender="pbSec"/>
+                  <apex:actionStatus startText="Fetching..." id="pagStatus"/>
+              </apex:panelGrid>
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:component>

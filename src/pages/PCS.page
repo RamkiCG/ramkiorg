@@ -1,0 +1,35 @@
+<apex:page standardController="COMMISSION_PAYMENT_SCHEDULE__c" recordSetVar="COMMISSION_PAYMENT_SCHEDULE__c">
+
+ <apex:form >
+        
+         <apex:pageBlock title="Details">          
+         <apex:pageblocksection >
+                <apex:pageblocktable value="{!COMMISSION_PAYMENT_SCHEDULE__c}" var="CPS">                
+                    <apex:column headervalue="Schedule Name" value="{!CPS.Name}"/>
+                    <apex:column headervalue="Payment" value="{!CPS.PAYMENT__c}"/>
+                    <apex:column headervalue="Payment Period" value="{!CPS.PAYMENT_PERIOD__c}"/>        
+                </apex:pageblocktable>
+                </apex:pageblocksection>         
+        </apex:pageBlock>
+     
+        <apex:pageBlock >
+         <apex:pageblocksection >
+                        <apex:inputField value="{!COMMISSION_PAYMENT_SCHEDULE__c.Name}"/>  
+                        <apex:inputField value="{!COMMISSION_PAYMENT_SCHEDULE__c.PAYMENT__c}"/>     
+                         
+
+                </apex:pageblocksection>   
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{!save}" value="Save">
+              </apex:commandButton>
+            <apex:commandButton action="{!cancel}" value="Cancel">
+              </apex:commandButton>
+               <apex:commandButton action="{!delete" value="Delete">
+              </apex:commandButton>
+        </apex:pageBlockButtons>
+        
+        </apex:pageBlock>
+       
+   </apex:form>
+</apex:page>

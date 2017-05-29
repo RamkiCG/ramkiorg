@@ -1,0 +1,239 @@
+<apex:page id="page" controller="SBQQ.SettingsEditorController" setup="true">
+  <apex:stylesheet value="{!$Resource['sb']}"/>
+
+  <div id="qq" class="sb">
+    <apex:form id="form">
+      <c:pageHeader title="SteelBrick CPQ Settings">
+        <div class="sbButtons">
+          <apex:commandButton action="{!onSave}" value="Save" styleClass="sbBtn"/>
+          <apex:commandButton action="{!onCancel}" value="Cancel" styleClass="sbBtn"/>
+        </div>
+      </c:pageHeader>
+
+      <div id="sbCpqSettings">
+          <apex:pageBlock mode="edit">
+              <apex:tabPanel styleClass="sbTabs" switchType="client" value="{!selectedTabName}">
+              <!-- Document Settings Tab -->
+              <apex:tab name="documentSettingsTab" label="{!$Label.sbqq__lbl_document_settings}">
+                  <apex:pageBlockSection collapsible="false" columns="2">
+                      <!-- Document Folder -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__DocumentFolderId__c.inLineHelpText}">
+                          <apex:outputLabel value="{!$Label.sbqq__lbl_document_folder}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__DocumentFolderId__c}" size="1">
+                              <apex:selectOption itemValue="" itemLabel="User Personal Documents"/>
+                              <apex:selectOptions value="{!documentFolderOptions}"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                      <!-- Unit Price Scale -->
+                      <apex:inputField value="{!generalSettings.SBQQ__UnitPriceScale__c}"/>
+                      <!-- Attachment Target -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__AttachmentTargetObject__c.inlineHelpText}">
+                          <apex:outputLabel value="{!$Label.sbqq__lbl_attachment_target}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__AttachmentTargetObject__c}" size="1">
+                              <apex:selectOption itemValue="" itemLabel="Document only"/>
+                              <apex:selectOption itemValue="Quote" itemLabel="Quote"/>
+                              <apex:selectOption itemValue="Opportunity" itemLabel="Opportunity"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                      <!-- Quantity Scale -->
+                      <apex:inputField value="{!generalSettings.SBQQ__QuantityScale__c}"/>
+                      <!-- Post to Feed? -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__DocumentAttachmentPosted__c.inlineHelpText}">
+                          <apex:outputLabel value="{!$Label.sbqq__lbl_post_to_feed}"/>
+                          <apex:inputCheckbox value="{!generalSettings.SBQQ__DocumentAttachmentPosted__c}"/>
+                      </apex:pageBlockSectionItem>
+                      <!-- Hide Document Name -->
+                      <apex:inputField value="{!generalSettings.SBQQ__DocumentNameHidden__c}"/>
+                      <!-- Full Page Preview -->
+                      <apex:inputField value="{!generalSettings.SBQQ__FullPagePreview__c}"/>
+                  </apex:pageBlockSection>
+                  <apex:pageBlockSection columns="1">
+                      <apex:pageBlockSectionItem >
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__MassDocumentUserName__c.label}"/>
+                          <apex:outputPanel >
+                              <apex:outputText value="{!generalSettings.SBQQ__MassDocumentUserName__c}"/>
+                              <apex:commandButton styleClass="sbBtn" action="{!onRequestAuthorization}" value="{!$Label.sbqq__lbl_request_authorization}"/>
+                          </apex:outputPanel>
+                      </apex:pageBlockSectionItem>
+                      <apex:pageBlockSectionItem >
+                          <apex:outputLabel value=""/>
+                          <apex:outputPanel >{!$Label.sbqq__msg_mass_document_authorization_instructions}</apex:outputPanel>
+                      </apex:pageBlockSectionItem>
+                  </apex:pageBlockSection>
+              </apex:tab>
+              <!-- Group Settings Tab -->
+              <apex:tab name="groupSettingsTab" label="{!$Label.sbqq__lbl_group_settings}">
+                  <apex:pageBlockSection id="groupSettings" collapsible="false" columns="2">
+                      <!-- SolutionGroups enabled -->
+                      <apex:inputField value="{!generalSettings.SBQQ__SolutionGroupsEnabled__c}">
+                          <apex:actionSupport event="onclick" action="{!onChangeGroupEnabled}" rerender="groupSettings"/>
+                      </apex:inputField>
+                      <!-- Group Name Required -->
+                      <apex:inputField value="{!generalSettings.SBQQ__GroupNameRequired__c}"/>
+                      <!-- Group Object Name -->
+                      <apex:pageBlockSectionItem rendered="{!generalSettings.SBQQ__SolutionGroupsEnabled__c}"
+                      helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__GroupObjectName__c.inlineHelpText}">
+                          <apex:outputLabel value="{!$Label.sbqq__lbl_object}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__GroupObjectName__c}" size="1">
+                              <apex:actionSupport event="onchange" action="{!onChangeGroupObject}" rerender="groupSettings"/>
+                              <apex:selectOption itemValue="" itemLabel="--None--"/>
+                              <apex:selectOptions value="{!groupObjectOptions}"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                      <!-- Empty sectionItem to make columns display vertically -->
+                      <apex:pageBlockSectionItem rendered="{!generalSettings.SBQQ__SolutionGroupsEnabled__c}">
+                      </apex:pageBlockSectionItem>
+                      <!-- Group Object Name Field -->
+                      <apex:pageBlockSectionItem rendered="{!generalSettings.SBQQ__SolutionGroupsEnabled__c}"
+                      helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__GroupNameField__c.inlineHelpText}">
+                          <apex:outputLabel value="{!$Label.sbqq__lbl_name_field}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__GroupNameField__c}" size="1">
+                              <apex:selectOption itemValue="" itemLabel="--None--"/>
+                              <apex:selectOptions value="{!groupFieldOptions}"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                      <!-- Empty sectionItem to make columns display vertically -->
+                      <apex:pageBlockSectionItem rendered="{!generalSettings.SBQQ__SolutionGroupsEnabled__c}">
+                      </apex:pageBlockSectionItem>
+                      <!-- Group Object Description Field -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__GroupDescriptionField__c.inlineHelpText}" rendered="{!generalSettings.SBQQ__SolutionGroupsEnabled__c}">
+                          <apex:outputLabel value="{!$Label.sbqq__lbl_description_field}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__GroupDescriptionField__c}" size="1">
+                              <apex:selectOption itemValue="" itemLabel="--None--"/>
+                              <apex:selectOptions value="{!groupFieldOptions}"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                  </apex:pageBlockSection>
+              </apex:tab>
+              <!-- Line Editor Settings Tab -->
+              <apex:tab name="lineEditorSettingsTab" label="{!$Label.sbqq__lbl_line_editor_settings}">
+                  <apex:pageBlockSection columns="2">
+                      <!-- Renewed Assets Hidden When Editing -->
+                      <apex:pageBlockSectionItem dataStyle="width:10%" labelStyle="width:23%"
+                      helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__RenewedAssetsHiddenWhenEditing__c.inlineHelpText}">
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__RenewedAssetsHiddenWhenEditing__c.label}" />
+                          <apex:inputField value="{!generalSettings.SBQQ__RenewedAssetsHiddenWhenEditing__c}"/>
+                      </apex:pageBlockSectionItem>
+                      <!-- Action Column Placement -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__ActionsColumnPlacement__c.inlineHelpText}" dataStyle="width:10%" labelStyle="width:23%">
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__ActionsColumnPlacement__c.label}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__ActionsColumnPlacement__c}" size="1" style="width:80px">
+                              <apex:selectOption itemValue="" itemLabel="Right"/>
+                              <apex:selectOption itemValue="Left" itemLabel="Left"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                      <!-- Visualize Product Hierarchy -->
+                      <apex:inputField value="{!generalSettings.SBQQ__ProductHierarchyVisualized__c}"/>
+                      <!-- Multi-Line Delete Enabled -->
+                      <apex:inputField value="{!generalSettings.SBQQ__MultiLineDeleteEnabled__c}"/>
+                      <!-- Pagination Enabled -->
+                      <apex:inputField value="{!generalSettings.SBQQ__PaginationEnabled__c}"/>
+                      <!-- Preserve Bundle Upon Renewals -->
+                      <apex:inputField value="{!generalSettings.SBQQ__PreserveBundleUponRenewals__c}"/>
+                      <!-- Page Size -->
+                      <apex:inputField value="{!generalSettings.SBQQ__PageSize__c}"/>
+                      <!-- Product Configuration Initializer -->
+                      <apex:inputField value="{!generalSettings.SBQQ__ProductConfigurationInitializer__c}"/>
+                      <!-- Keep Bundles Together -->
+                      <apex:inputField value="{!generalSettings.SBQQ__BundleKeptTogether__c}"/>
+                  </apex:pageBlockSection>
+              </apex:tab>
+              <!-- Pricing and Calculations Settings Tab -->
+              <apex:tab name="pricingAndCalcSettingsTab" label="{!$Label.sbqq__lbl_pricing_calc_settings}">
+                  <apex:pageBlockSection columns="2">
+                      <!-- Currency Symbol -->
+                      <apex:inputField value="{!generalSettings.SBQQ__CurrencySymbol__c}"/>
+                      <!-- Use Inactive Prices -->
+                      <apex:inputField value="{!generalSettings.SBQQ__InactivePricesUsed__c}"/>
+                      <!-- Calculate Immediately -->
+                      <apex:inputField value="{!generalSettings.SBQQ__CalculateImmediately__c}"/>
+                      <!-- Enable Quick Calculate -->
+                      <apex:inputField value="{!generalSettings.SBQQ__QuickCalculateEnabled__c}"/>
+                  </apex:pageBlockSection>
+              </apex:tab>
+              <!-- Subscription and Renewal Settings Tab -->
+              <apex:tab name="subscriptionAndRenewalSettingsTab" label="{!$Label.sbqq__lbl_sub_renewal_settings}">
+                  <apex:pageBlockSection columns="2">
+                      <!-- Disable Add Subscriptions -->
+                      <apex:inputField value="{!generalSettings.SBQQ__AddSubscriptionsDisabled__c}"/>
+                      <!-- Allow Renewal Quotes Without Assets -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__RenewalQuotesWithoutAssetsAllowed__c.inlineHelpText}" dataStyle="width:10%" labelStyle="width:23%">
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__RenewalQuotesWithoutAssetsAllowed__c.label}" />
+                          <apex:inputField value="{!generalSettings.SBQQ__RenewalQuotesWithoutAssetsAllowed__c}"/>
+                      </apex:pageBlockSectionItem>
+                      <!-- Subscription Term Unit -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__SubscriptionTermUnit__c.inlineHelpText}">
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__SubscriptionTermUnit__c.label}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__SubscriptionTermUnit__c}" size="1">
+                              <apex:selectOption itemValue="month" itemLabel="Month"/>
+                              <apex:selectOption itemValue="day" itemLabel="Day"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                      <!-- Subscription Prorate Precision -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__SubscriptionProratePrecision__c.inlineHelpText}">
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__SubscriptionProratePrecision__c.label}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__SubscriptionProratePrecision__c}" size="1">
+                              <apex:selectOption itemValue="day" itemLabel="Day"/>
+                              <apex:selectOption itemValue="month" itemLabel="Month"/>
+                              <apex:selectOption itemValue="month+day" itemLabel="Monthly + Daily"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                  </apex:pageBlockSection>
+              </apex:tab>
+              <!-- Plugins Tab -->
+              <apex:tab name="pluginsTab" label="{!$Label.sbqq__lbl_plugins}">
+                  <apex:pageBlockSection columns="2">
+                      <!-- Page Security Plugin -->
+                      <apex:inputField value="{!generalSettings.SBQQ__PageSecurityPlugin__c}"/>
+                      <!-- Electronic Signature Plugin -->
+                      <apex:inputField value="{!generalSettings.SBQQ__ElectronicSignaturePlugin__c}"/>
+                      <!-- Billing Plugin -->
+                      <apex:inputField value="{!generalSettings.SBQQ__BillingPlugin__c}"/>
+                      <!-- Product Search Plugin -->
+                      <apex:inputField value="{!generalSettings.SBQQ__ProductSearchPlugin__c}"/>
+                      <!-- Quote Calculator Plugin -->
+                      <apex:inputField value="{!generalSettings.SBQQ__QuoteCalculatorPlugin__c}"/>
+                  </apex:pageBlockSection>
+              </apex:tab>
+              <!-- Additional Settings Tab -->
+              <apex:tab name="additionalSettingsTab" label="{!$Label.sbqq__lbl_additional_settings}">
+                  <apex:pageBlockSection collapsible="false" columns="2">
+                      <!-- Triggers Disabled -->
+                      <apex:inputField value="{!generalSettings.SBQQ__TriggersDisabled__c}"/>
+                      <!-- Document Services Endpoint -->
+                      <apex:inputField value="{!generalSettings.SBQQ__DocumentServiceEndpoint__c}"/>
+                      <!-- Disable Initial Quote Sync -->
+                      <apex:inputField value="{!generalSettings.SBQQ__InitialQuoteSyncDisabled__c}"/>
+                      <!-- Disable Quote Address Defaulting -->
+                      <apex:inputField value="{!generalSettings.SBQQ__QuoteAddressDefaultingDisabled__c}"/>
+                      <!-- Disable Quote Contact Defaulting -->
+                      <apex:inputField value="{!generalSettings.SBQQ__QuoteContactDefaultingDisabled__c}"/>
+                      <!-- Primary Quote Keeps Opportunity Products -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__PrimaryQuoteKeepsOpportunityProducts__c.inlineHelpText}" dataStyle="width:10%" labelStyle="width:23%">
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__PrimaryQuoteKeepsOpportunityProducts__c.label}" />
+                          <apex:inputField value="{!generalSettings.SBQQ__PrimaryQuoteKeepsOpportunityProducts__c}"/>
+                      </apex:pageBlockSectionItem>
+                      <!-- Allow Option Deletion -->
+                      <apex:inputField value="{!generalSettings.SBQQ__OptionDeletionAllowed__c}"/>
+                      <!-- Product Results Group Field Name -->
+                      <apex:inputField value="{!generalSettings.SBQQ__ProductResultsGroupFieldName__c}"/>
+                      <!-- Asset Upgrades Enabled -->
+                      <apex:inputField value="{!generalSettings.SBQQ__AssetUpgradesEnabled__c}"/>
+                      <!-- Default Quote Validity -->
+                      <apex:inputField value="{!generalSettings.SBQQ__DefaultQuoteValidity__c}"/>
+                      <!-- Product Description Field -->
+                      <apex:pageBlockSectionItem helpText="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__ProductDescriptionField__c.inlineHelpText}" dataStyle="width:10%" labelStyle="width:23%">
+                          <apex:outputLabel value="{!$ObjectType.SBQQ__GeneralSettings__c.fields.SBQQ__ProductDescriptionField__c.label}"/>
+                          <apex:selectList value="{!generalSettings.SBQQ__ProductDescriptionField__c}" size="1">
+                              <apex:selectOptions value="{!productDescriptionFieldOptions}"/>
+                          </apex:selectList>
+                      </apex:pageBlockSectionItem>
+                      </apex:pageBlockSection>
+              </apex:tab>
+            </apex:tabPanel>
+
+          </apex:pageBlock>
+        </div>
+      </apex:form>
+    </div>
+</apex:page>

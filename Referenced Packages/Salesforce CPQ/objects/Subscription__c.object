@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>SubscriptionHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Subscription to a product or service currently or previously owned by a customer.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fieldSets>
+        <fullName>SubscriptionSearchFilters</fullName>
+        <availableFields>
+            <field>ContractNumber__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>CreatedDate</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Product__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields used as filters in Subscription Lookup page.</description>
+        <displayedFields>
+            <field>Contract__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>EndDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Subscription Search Filters</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>SubscriptionSearchResults</fullName>
+        <availableFields>
+            <field>Contract__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Product__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>RenewalProductId__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>RenewalUpliftRate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields displayed in search results in Subscription Lookup page.</description>
+        <displayedFields>
+            <field>ContractNumber__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ProductName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>RenewalQuantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>StartDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>EndDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Subscription Search Results</label>
+    </fieldSets>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Account that owns this subscription. This relationship is used for volume discount calculations.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account that owns this subscription. This relationship is used for volume discount calculations.</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Subscriptions</relationshipLabel>
+        <relationshipName>Subscriptions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AdditionalDiscountAmount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Additional Discount for this Subscription, if expressed as an amount</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Additional Discount for this Subscription, if expressed as an amount</inlineHelpText>
+        <label>Additional Disc. (Amt)</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ContractNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Number of associated contract.</description>
+        <externalId>false</externalId>
+        <formula>Contract__r.ContractNumber</formula>
+        <inlineHelpText>Number of associated contract.</inlineHelpText>
+        <label>Contract #</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contract__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Contract which parents this subscription</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Contract that governs this subscription.</inlineHelpText>
+        <label>Contract</label>
+        <referenceTo>Contract</referenceTo>
+        <relationshipLabel>Subscriptions</relationshipLabel>
+        <relationshipName>Subscriptions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CreditProductId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>ID of upgrade credit product for this subscription.</description>
+        <externalId>false</externalId>
+        <formula>Product__r.UpgradeCredit__c</formula>
+        <label>Credit Product Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Price the end user paid for this subscription.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Price paid for this subscription.</inlineHelpText>
+        <label>Customer Price</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Additional Discount for this Subscription, if expressed as a percentage</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Additional Discount for this Subscription, if expressed as a percentage</inlineHelpText>
+        <label>Additional Disc. (%)</label>
+        <precision>11</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>DistributorDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Distributor Discount</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Contract__r.EndDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The last date this contract is valid.</inlineHelpText>
+        <label>End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ListPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price for this subscription product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>List price for this subscription product.</inlineHelpText>
+        <label>List Price</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NetPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Net price for this subscription.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Net price for this subscription.</inlineHelpText>
+        <label>Net Price</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PartnerDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Partner Discount</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ProductId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Convenience field to support integration with Service Cloud</description>
+        <externalId>false</externalId>
+        <formula>Product__c</formula>
+        <label>Product Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Pulls in Product Name</description>
+        <externalId>false</externalId>
+        <formula>Product__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Product Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Product used to sell this subscription.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Product used to sell this subscription.</inlineHelpText>
+        <label>Product</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Subscriptions</relationshipLabel>
+        <relationshipName>Subscriptions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProrateMultiplier__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Calculated ratio used to compute prorated price.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Calculated ratio used to compute prorated price.</inlineHelpText>
+        <label>Prorate Multiplier</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Quantity of this subscription product purchased by the customer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Quantity of this subscription product purchased by the customer.</inlineHelpText>
+        <label>Quantity</label>
+        <precision>12</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuoteLine__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Quote line that generated this subscription.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Quote line that generated this subscription.</inlineHelpText>
+        <label>Quote Line</label>
+        <referenceTo>QuoteLine__c</referenceTo>
+        <relationshipLabel>Subscriptions</relationshipLabel>
+        <relationshipName>Subscriptions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RenewalPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Renewal price for this subscription. Overrides default renewal price computation based on account&apos;s Renewal Pricing field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter renewal price to override default calculation.</inlineHelpText>
+        <label>Renewal Price</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RenewalProductId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Exists for convenience of not having to run relationship queries.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Product__r.RenewalProduct__c),Product__c,Product__r.RenewalProduct__c)</formula>
+        <inlineHelpText>Product ID for the renewal subscription.</inlineHelpText>
+        <label>Renewal Product Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RenewalQuantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Quantity of this subscription product that will be renewed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Quantity of this subscription product that will be renewed.</inlineHelpText>
+        <label>Renewal Quantity</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RenewalUpliftRate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Rate of renewal price increases.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Rate of renewal price increased</inlineHelpText>
+        <label>Renewal Uplift (%)</label>
+        <precision>11</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>RenewedDate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Date this subscription was renewed as determined by date the renewal opportunity was contracted.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date this subscription was renewed. Blank means it has not been renewed.</inlineHelpText>
+        <label>Renewed Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>RequiredById__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Required By Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RevisedSubscription__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Revised Subscription</label>
+        <referenceTo>Subscription__c</referenceTo>
+        <relationshipLabel>Subscriptions</relationshipLabel>
+        <relationshipName>Revisions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SpecialPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Special Price for this Subscription</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Special Price for this Subscription</inlineHelpText>
+        <label>Special Price</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>if ( ISBLANK (SubscriptionStartDate__c), Contract__r.StartDate, SubscriptionStartDate__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The first date this subscription is in effect.</inlineHelpText>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SubscriptionStartDate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Matches the quote line start date by default. If blank, it will match the contract start date.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Matches the quote line start date by default. If blank, it will match the contract start date.</inlineHelpText>
+        <label>Subscription Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TerminatedDate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Date on which this subscription terminated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the subscription terminated. Automatically populated when covered asset is upgraded.</inlineHelpText>
+        <label>Terminated Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Subscription</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ContractNumber__c</columns>
+        <columns>QuoteLine__c</columns>
+        <columns>Product__c</columns>
+        <columns>SubscriptionStartDate__c</columns>
+        <columns>StartDate__c</columns>
+        <columns>EndDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SUB-{0000000}</displayFormat>
+        <label>Subscription #</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Subscriptions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Renewal_Quantity_cannot_be_editable</fullName>
+        <active>true</active>
+        <description>Renewal Quantity cannot be editable.</description>
+        <errorConditionFormula>if ( (Contract__r.PreserveBundleStructureUponRenewals__c == true &amp;&amp; RenewalQuantity__c != Quantity__c &amp;&amp; ISCHANGED(RenewalQuantity__c)), true, false)</errorConditionFormula>
+        <errorMessage>Preserve Bundle Structure is checked on Contract, Renewal Quantity cannot be different from Quantity.</errorMessage>
+    </validationRules>
+</CustomObject>

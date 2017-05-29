@@ -1,0 +1,25 @@
+<apex:page sidebar="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+    </head>
+  <apex:image id="theImage" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="400 px"/>
+  <br/>
+    <h1 class="help">Installing additional business policies</h1>
+    <p class="help">Users with policy administrator permissions can also use this page to install new policies</p> 
+    <apex:panelGrid columns="2" rules="rows" columnClasses="width40, width60">
+        <apex:outputPanel styleClass="help">
+            Each template in the Decisions on Demand library contains a ready-to-use set of decision tables for a common CRM decision point. 
+            Consult the documentation for specific information on each template, and click <b>Install</b> to create a copy in your org.
+            <br/><br/>This creates an empty policy and adds it to the list of available policies.
+        </apex:outputPanel>
+        <apex:image styleClass="float-left" style="min-width:75%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_AvailableTemplates_s.png')}"/>
+        <!-- 
+        <apex:outputPanel styleClass="help">
+            This creates an empty policy and adds it to the list of available policies.
+        </apex:outputPanel>
+        <apex:image styleClass="float-left" style="min-width:75%;max-width:100%;" url="{!URLFOR($Resource.Doc_images, 'Help_InstalledTemplate.png')}"/>
+        <apex:outputPanel styleClass="help" style="min-width:100%;" >If a template you don't see a template you are expecting </apex:outputPanel>
+ -->
+  </apex:panelGrid>
+  
+</apex:page>

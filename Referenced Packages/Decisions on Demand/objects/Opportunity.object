@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <webLinks>
+        <fullName>Discounts</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Discounts</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>{!URLFOR(&quot;../apex/DecsOnD__ApplyPolicy&quot;,&quot;&quot;)}
+?id={!Opportunity.Id}
+&amp;policy=Discounts
+&amp;mode=review</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Discounts_List</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Discounts</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>var objectName = &apos;Opportunity&apos;; 
+var policyName = &apos;Discounts&apos;; 
+var idArray = {!GETRECORDIDS($ObjectType.Lead)}; 
+
+var extraFields; // = &apos;&lt;extra fields&gt;&apos;; 
+var detailRelation = &apos;OpportunityLineItems&apos;; 
+var detailRelationExtraFields = &apos;PricebookEntry.ProductCode&apos;; 
+
+var applyPolicyURL=&apos;/apex/DecsOnD__ApplyPolicyToList?object=&apos; + objectName + &apos;&amp;policy=&apos; + policyName + &apos;&amp;ids=&apos; + encodeURIComponent(idArray) + &apos;&amp;redirect=&apos; + encodeURIComponent(document.URL); 
+
+//applyPolicyURL += &apos;&amp;log=false&apos;; 
+
+applyPolicyURL += &apos;&amp;mode=review&apos;;
+
+window.location.href=applyPolicyURL;</url>
+    </webLinks>
+</CustomObject>

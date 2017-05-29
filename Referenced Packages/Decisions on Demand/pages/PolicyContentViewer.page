@@ -1,0 +1,730 @@
+<!-- 
+ Copyright 2012-2014, Decisions on Demand, Inc.
+ All Rights Reserved.
+ -->
+<apex:page standardController="DecsOnD__Policy__c" id="thePage" sidebar="false" showHeader="false" extensions="DecsOnD.PolicyContentViewerController"  action="{!saveConfigsOnFirstLoad}"> 
+    <!-- Patch 1.8.27 Include standard script to support onLookup -->
+    <!-- TODO Find a way that doesn't hard-code the 1412790252000. Something like: -->
+    <!--   <script type="text/javascript" src="/sfdc/main.js"></script>     -->
+
+    <apex:includeScript value="/jslibrary/1412790252000/sfdc/main.js"/>    
+    <head> 
+        <script src="/soap/ajax/15.0/connection.js"></script>
+        <script src="/soap/ajax/15.0/apex.js"></script>
+
+        <!-- Include JQuery Libraries from static resource-->       
+       
+        <!--
+        <link rel="stylesheet" href="{!URLFOR($Resource.JS_JQuery, 'jquery-ui.css')}" type="text/css" media="screen"/>
+        <script src="{!URLFOR($Resource.JS_JQuery, 'jquery-1.9.1.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_JQuery, 'jquery-ui.js')}"></script>
+         --> 
+
+        <!-- Include JQuery Libraries from CDN -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" type="text/css" media="screen"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
+
+        <!-- include javascript files for NumberFormat library -->
+        <script src="{!URLFOR($Resource.JS_Globalize, 'globalize.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_Globalize, 'cultures/globalize.cultures.js')}"></script>
+        
+        <!-- @Sothea 141030 Include JQuery plugin for showing loading spinner -->
+        <script src="{!URLFOR($Resource.JS_LoadingSpinner, 'loading-overlay.min.js')}" type="text/javascript"></script>
+		<link type="text/css" href="{!URLFOR($Resource.JS_LoadingSpinner, 'css/loadingoverlay_decsond.css')}" rel="stylesheet"></link>
+        
+        <!-- include javascript and css files for the EditableGrid library -->
+        <script src="{!URLFOR($Resource.JS_EditableGrid, 'editablegrid.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_EditableGrid, 'editablegrid_renderers.js')}" ></script>
+        <script src="{!URLFOR($Resource.JS_EditableGrid, 'editablegrid_editors.js')}" ></script>
+        <script src="{!URLFOR($Resource.JS_EditableGrid, 'editablegrid_validators.js')}" ></script>
+        <script src="{!URLFOR($Resource.JS_EditableGrid, 'editablegrid_utils.js')}" ></script>
+        <link rel="stylesheet" href="{!URLFOR($Resource.JS_EditableGrid, 'editablegrid.css')}" type="text/css" media="screen"/> 
+        
+        <!-- include javascript and css files for multiselect -->
+        <!-- 
+        <script src="{!URLFOR($Resource.JS_EditableGrid, 'extensions/multiselect/jquery.multiselect.min.js')}" ></script>
+        -->
+        
+        <!-- include jQuery extensions -->
+        <link rel="stylesheet" media="all" type="text/css" href="{!URLFOR($Resource.JS_DateTimePicker, 'jquery-ui-timepicker-addon.css')}" />
+        <script type="text/javascript" src="{!URLFOR($Resource.JS_DateTimePicker, 'jquery-ui-timepicker-addon.js')}"></script>
+        <script type="text/javascript" src="{!URLFOR($Resource.JS_DateTimePicker, 'jquery-ui-sliderAccess.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_JQueryCSV, 'jquery.csv-0.71.min.js')}" ></script>
+        
+        <!-- Include EditableGrid extensions -->
+        <script src="{!URLFOR($Resource.JS_EditableGrid, 'extensions/multiselect/multiselect.js')}" ></script>
+        <link rel="stylesheet" href="{!URLFOR($Resource.JS_EditableGrid, 'extensions/multiselect/ui.dropdownchecklist.themeroller.css')}" type="text/css" media="screen"/>        
+
+        <link href="{!URLFOR($Resource.JS_Dynatree, 'skin/ui.dynatree.css')}" rel="stylesheet" type="text/css" id="skinSheet"></link>
+        <script src="{!URLFOR($Resource.JS_Dynatree, 'jquery.dynatree.js')}" type="text/javascript"></script>
+        <script src="{!URLFOR($Resource.JS_JQueryContextMenu, 'jquery.contextMenu.js')}" type="text/javascript"></script>
+        <script src="{!URLFOR($Resource.JS_JQueryContextMenu, 'jquery.ui.position.js')}" type="text/javascript"></script>
+        <link href="{!URLFOR($Resource.JS_JQueryContextMenu, 'jquery.contextMenu.css')}" rel="stylesheet" type="text/css" />
+		
+		<!--@Sothea #412, #423 Include SemanticUI -- Popup for showing message as tooltip -->
+		<script src="{!URLFOR($Resource.JS_SemanticUI_Popup, 'popup.js')}" type="text/javascript"></script>
+		<link type="text/css" href="{!URLFOR($Resource.JS_SemanticUI_Popup, 'css/popup.css')}" rel="stylesheet"></link>
+		
+        <!-- include Core Decisions on Demand scripts and styles -->
+        <script src="{!URLFOR($Resource.JS_DecsOnD, 'core.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_DecsOnD, 'PolicyManagement.js')}" ></script>
+        <link rel="stylesheet" href="{!URLFOR($Resource.JS_DecsOnD, 'css/decsond.css')}" type="text/css" media="screen"/>
+        
+        <!-- include JS libraries for customizing decision table configuration -->
+        <script src="{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'DataTypeMapper.js')}" ></script>
+        <script src="{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'MatchOperatorManager.js')}" ></script>
+        <script src="{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'DesTableConfigWidget.js')}" ></script>
+        <script src="{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'DesTableConfigWidget_editor.js')}" ></script>
+        <script src="{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'DesTableConfigWidget_renderer.js')}" ></script>
+        <link rel="stylesheet" href="{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'css/dt-config-widget.css')}" media="screen"/>
+        
+        <!-- Include PolicyEditorWidget scripts and styles -->
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'DatePeriodManager.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'PolicyTable.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'PolicyEditorWidget.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'PolicyEditorWidget_renderer.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'PolicyEditorWidget_editor.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'custom.ui.dropdownchecklist-1.4-min.js')}"></script>        
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'EditableGridExtensions.js')}"></script>
+        <script src="{!URLFOR($Resource.JS_PolicyEditorWidget, 'MultiSelectExtensions.js')}"></script>
+        <link rel="stylesheet" href="{!URLFOR($Resource.JS_PolicyEditorWidget, 'css/editablegrid-decsond.css')}" type="text/css" media="screen"/>
+
+        <!-- Custom SFDC style overrides styles -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.JS_PolicyEditorWidget, 'css/decsond-sfdc.css')}" type="text/css" media="screen"/>
+        
+    </head>
+    
+    <body style="background-color:#F8F8F9;">
+    	
+        <apex:form id="Theform">
+            <apex:outputPanel id="divThePageMsg" layout="block" style="display:none;">
+                <apex:pageMessages id="theMsg" showDetail="true"/>
+            </apex:outputPanel>
+            
+            <!-- div for showing the script errors -->
+            <div id="divScriptErrMsg" style="display:none;">
+                <div class="message errorM3">
+                    <table cellspacing="0" cellpadding="0" border="0" style="padding:0px;margin:0px;" class="messageTable">
+                        <tbody>
+                            <tr valign="top">
+                                <td><img title="error" src="/s.gif" class="msgIcon" alt="error"/></td>
+                                <td class="messageCell" >
+                                    <div class="messageText" id="scriptErrMsgText"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="tableWidget"></div>     
+            
+        </apex:form>
+      
+        <!--  Override default styles to achieve proper fit -->
+        <style type="text/css" id="testStyle">
+            /* Main grid */
+            
+            #decsond-tabs div.innertab {
+                /*max-height: 365px;*/
+                overflow : hidden;
+            }
+            table.editablegrid{ 
+                font-family: Arial,Helvetica,sans-serif;
+                font-size: 12px;
+            }
+            /* DT config dialog */
+           /* td.edit-col-label {
+                height : 12px;
+            }
+            
+            input.edit-col-input {
+                height : 14px;
+            }*/
+            
+            /*div.config-OrganizeColumns {
+                padding-bottom : 10em; 
+            } */
+            
+            /*div.config-ColumnDetails {
+                bottom : .5em; 
+            }*/
+            
+           /* div.config-section-body {
+                margin-top : 3px;
+                height: 88%;
+            }*/
+           /* div.config-select-main {
+                position : relative;
+            }
+            div.config-select-buttons {
+                position : absolute;
+                top : 0px;
+                right : -5px;
+                padding-bottom : 4px; 
+            }*/
+       </style>
+<script> 
+    
+            <!-- These expressions will force the fields below to be loaded by the standard controller, so they are accessible for use in the code  -->
+            <apex:variable var="name" value="{!JSENCODE(DecsOnD__Policy__c.Name)}" />
+            <apex:variable var="applies" value="{!JSENCODE(DecsOnD__Policy__c.DecsOnD__Applies_to__c)}" />
+            <apex:variable var="polStatus" value="{!JSENCODE(DecsOnD__Policy__c.DecsOnD__Status__c)}" />
+            <apex:variable var="revisionVar" value="{!DecsOnD__Policy__c.DecsOnD__Revision__c}" />
+            <apex:variable var="lockedByVar" value="{!JSENCODE(DecsOnD__Policy__c.DecsOnD__LockedBy__c)}" />
+            <apex:variable var="lockExpiresVar" value="{!DecsOnD__Policy__c.DecsOnD__LockExpires__c}" /> 
+<!--            <div style="display:none"><apex:inputfield value="{!Policy__c.OwnerId}"/></div>-->
+            
+    //need to declare global due to it is called from function "getAllCSVContents" and this function is invoked from other page
+    var policyEditor = null;
+    var editMode = ('{!isEditable}'=='true');
+    var firstLookup = true;
+    
+    //window.jq = jQuery; // FIXME Remove when gadget code works as expected
+//      jq = DecsOnD.initJQ();
+    
+    /**
+     * Function for getting all CSV Content as JSON map
+     * @Added - 03 July 2013
+     */
+    function getAllCSVContents(modifiedTablesOnly){
+        try {
+            var editedContents = policyEditor.getAllContents(modifiedTablesOnly);
+            console.log(editedContents); 
+            //clearing grid content update state
+            policyEditor.clearContentsUpdated();
+            return editedContents;
+        } catch(exception){
+        	// JVG FIXME Show message cleanly
+            alert("Exception while saving policy " + this.policy + " contents: " + exception);
+        }   
+    }
+    
+        
+     function getElementErrWarnMsg(isEditable){
+        if (isEditable) //for editor wizard page
+            return window.parent.document.getElementById('thePage:formPolicyContentEditor:theMainBlock:pbsPolicyContentViewer:divViewPolErrWarnMsg');
+        else //for detail page
+            return window.parent.document.getElementById('thePage:PolicyDisplayForm:PolicyContentViewerBlock:pbsPolicyContentViewer:divViewPolErrWarnMsg');
+     }
+    
+     /**
+      * Function for showing the error or/and warning message(invalid policy configuration such as invalid lookup type warning message) 
+      * on PolicyEditor page
+      */
+     function showMessages(){
+          var divParentErrWarnMsg = getElementErrWarnMsg(editMode);
+          //the pageMessages on PolicyContentViewer page
+          var thePageMsg = document.getElementById('thePage:Theform:divThePageMsg');
+          if (thePageMsg && divParentErrWarnMsg){
+              divParentErrWarnMsg.innerHTML += thePageMsg.innerHTML;
+//              divParentErrWarnMsg.appendChild(thePageMsg);
+//              thePageMsg.style.display = "block";
+              divParentErrWarnMsg.style.display = "block";
+          } 
+     }
+     
+     /**
+      * Function for showing the script error on PolicyEditor page
+      */
+     function showScriptErrorMsg(errMsg, isHideSpinner, isReAcquireLock){
+        if(!errMsg) return;
+        var divParentErrWarnMsg = getElementErrWarnMsg(editMode);
+        //div of showing script error message
+        var divScriptErrMsg = document.getElementById('divScriptErrMsg');
+        //the error message text
+        var txtScriptErrMsg = document.getElementById('scriptErrMsgText');
+        if (divScriptErrMsg && txtScriptErrMsg){
+            txtScriptErrMsg.innerHTML = "Script error, please see your administrator [Details: " + errMsg + "]";
+            if (divParentErrWarnMsg){
+                divParentErrWarnMsg.innerHTML += divScriptErrMsg.innerHTML;
+                divParentErrWarnMsg.style.display = (errMsg) ? "block" : "none";
+            }
+            // TODO Send email to Decisions on Demand support
+        }
+        //@Sothea 141028 Re-acquire lock
+        if (isReAcquireLock) acquireLockCB();
+        //Hide loading spinner
+        if (isHideSpinner) hideSpinner(true);        
+     }
+     
+     /**
+      * Function for initialize the spinner
+      */
+     function initSpinner(message){
+        if (message && parent.getElementSpinnerMessage){
+            var spinnerMessage = parent.getElementSpinnerMessage();
+            spinnerMessage.innerHTML = message; 
+        }   
+        hideSpinner(false);
+     }
+     
+     /**
+      * Function for hiding the spinner
+      */
+     function hideSpinner(isHide){
+        if (parent.hideLoadingSpinner) parent.hideLoadingSpinner(isHide);
+     }
+     
+    $(function() {
+//    	console.log("iframe onLoad called: " + Date.now());
+        var dpConfig, dtConfig, version,
+            userLocale = '{!userLocale}',
+            userId = '{!$User.Id}',
+            isError = ('{!isError}'=='true'), 
+            policyId = '{!Policy__c.id}',
+            //@Sothea 140329
+            isConfigEditable = ('{!canUpdatePolicy}'=='true' && '{!isActivePolicy}'=='true'), 
+            configIconHidden = ('{!configIconHidden}'=='true'),
+            dpConfigJson = '{!JSENCODE(dpConfigJson)}',
+            dtConfigJson = '{!JSENCODE(dtConfigJson)}',
+            versionJson = '{!JSENCODE(versionJson)}',
+            //@Sothea 141028: create a javascript object to catch policy lockedBy, lockExpires, 
+            //and revision. It is used in remote action to acquire lock because they are not preserved between RemoteAction calls
+			policy = {  Id:'{!Policy__c.id}',
+				      	DecsOnD__LockedBy__c:'{!lockedByVar}',
+				      	DecsOnD__LockExpires__c:('{!lockExpiresVar}') ? Date.parse('{!lockExpiresVar}') : 0,
+					  	DecsOnD__Revision__c:Number('{!revisionVar}') 
+					 };            
+            
+//        console.log("variables initialized: " + Date.now());
+        try {  
+            sforce.sessionId = '{!GETSESSIONID()}';
+            sforce.connection.sessionId=sforce.sessionId;
+            
+            version = (!versionJson?null:$.parseJSON(versionJson)); 
+            dpConfig = (!dpConfigJson?null:$.parseJSON(dpConfigJson));
+            dtConfig = (!dtConfigJson?null:$.parseJSON(dtConfigJson));
+//            console.log("JSON parsed: " + Date.now());
+            
+            PolicyEditorWidget.imageBasePath = "{!URLFOR($Resource.JS_PolicyEditorWidget, 'images')}";
+            DesTableConfigWidget.imageBasePath = "{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'images')}"
+            //if error exist when viewing policy content(via controller), disable "Edit Policy" button on PolicyEditor page
+            if (isError && !editMode){
+                if (parent.disableBtnEditPolicy) parent.disableBtnEditPolicy();               
+            } else if (!isError) {
+                createPolicyEditor("tableWidget", version, editMode);
+            } 
+//            console.log("editor initialized: " + Date.now());
+            
+            //show the error or/and warning message on PolicyEditor page if one exist
+            showMessages();
+            //hide loading spinner
+            hideSpinner(true);
+        } catch(ex){
+            DecsOnD.logException(ex, "Error running script");
+            if (parent.disableBtnEditPolicy) parent.disableBtnEditPolicy(); 
+            showScriptErrorMsg(ex.toString(), true); // show the error and hide loading spinner
+        }
+        
+       function getPicklistValuesCB(editorWidget, table, source, callback) {
+            // TODO Implement this -- newly added columns need this callback to retrieve their picklist values
+            // Could be more efficient to use it for regular columns too -- similar to the way lookups can be validated asynchronously  
+       }
+
+       function getLookupValueCB(editorWidget, table, columnName, lookupInfo, targetCell, callback) { 
+            // TODO This functionality relies on a specific structure of the lookup cell. That structure should be constructed here, rather than in the generic gadget
+            // show salesforce standard lookup dialog
+            if (DecsOnD.isNull(lookupInfo)) return;
+            if (typeof lookupInfo.lookupfor!=="string") return;
+            // FIXME Make the code below work
+/*            var territory2Prefix = 'Territory2:';
+            if (lookupInfo.lookupfor.indexOf(territory2Prefix)==0) {
+                var url = '/ui/setup/territory2/ParentTerritory2PickerPage?lkfm=thePage%3ATheform&nfn=' + targetCell.id;
+                var modelId = lookupInfo.lookupfor.substr(territory2Prefix.length);
+                if (modelId.length==0) {
+                    console.log("WARNING No model ID for territory lookup");
+                    return;
+                }
+                url = url + '&territoryModelId=' + modelId;                
+                openPopupFocus(window.location.hostname + "/../.." + url, 'meWindow', 600, 450, 'width=600,height=450,resizable=yes,toolbar=no,status=no,scrollbars=yes,menubar=no,directories=no,location=no,dependant=yes', false, true);
+//                openPopupFocus(url, 'meWindow', 600, 450, 'width=600,height=450,resizable=yes,toolbar=no,status=no,scrollbars=yes,menubar=no,directories=no,location=no,dependant=yes', false, true);
+            } else {
+*/
+                openLookup('/_ui/common/data/LookupPage?lkfm=thePage%3ATheform&lknm=' + targetCell.id + '&lktp=' + lookupInfo.lookupfor + '&lksrch=' + targetCell.value, 600,400);
+//            }
+            // The lookup will write the selected value straight back to the cell in the table
+       }
+       
+       /**
+        * Invoke apex remote method to validate lookup values
+        * @param    objectName
+        * @param    valueFieldName
+        * @param    labelFieldName
+        * @param    qualifier
+        * @param    namesValuesOrLabels
+        * @param    callback
+        * @created @Sothea 140903
+        */
+       function remoteValidateAndCompleteLookups(tableName, columnName, objectName, valueFieldName, labelFieldName, qualifier, namesValuesOrLabels, callback) {
+            try {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.PolicyContentViewerController.validateAndCompleteLookupValues}',
+                    objectName, valueFieldName, labelFieldName, qualifier, namesValuesOrLabels,
+                    function(result, event){
+                        if (event.status) {
+//                            console.log("[Table " + tableName + ", column " + columnName + "] Remote validation call returned with status " + event.status);
+//                            console.log("Successfully validated lookups for column " + columnName + ". Object " + objectName + 
+//                              ". Value field: " + valueFieldName + ". Label field: " + labelFieldName + ". Qualifier: " + qualifier);
+                        } else if (event.type === 'exception') {
+                            console.log("[Table " + tableName + ", column " + columnName + "] Failed to validate lookup: " + event.message+"--"+event.where);
+                        } else {
+                            console.log("[Table " + tableName + ", column " + columnName + "] Failed to validate lookup: " + event.message);
+                        }
+                        callback(columnName, result, event);
+                    },
+                    {buffer: true, escape : false} // Should we set a timeout?
+                ); 
+                return null;
+            }
+            catch (exc) {
+                DecsOnD.logException(exc, "Error invoking remote action");
+                return exc.toString();
+            }
+       }
+       
+       /**
+        * Validate values in lookup columns
+        */
+       // JVG New approach allows call in bulk, and synchronous response
+       function validateAndCompleteLookupsCB(editorWidget, tableName, lookupsToValidate, callback, isOnLoad) {
+            var validValuesMap = {},
+                validValues = {},
+                SOURCE_SEPARATOR = ".", 
+                VAL_SEPARATOR = ";",
+                numRemoteCallsMade = 0, numRemoteCallsReturned = 0;
+            if (lookupsToValidate) {
+                console.log("[Table " + tableName + "] Validating " + Object.keys(lookupsToValidate).length + " lookups");
+                // TODO Consolidate calls for the same field from multiple columns
+                for (var columnName in lookupsToValidate) {
+                    var lookup = lookupsToValidate[columnName],
+                        source = lookup.source, 
+                        labelFieldName = lookup.labelSource || null,
+                        sourceParts = (typeof source==="string")?source.split(SOURCE_SEPARATOR, 2):[],
+                        qualifier = lookup.qualifier || null, // Cannot be undefined, but null is OK
+                        errorDetermineValidLookupsBase = "WARNING Unable to determine valid lookup values",
+                        errorDetermineValidLookups = "[Table " + tableName + ", column " + columnName + "]" + errorDetermineValidLookupsBase;
+                    validValuesMap[columnName] = []; // Default to no valid values 
+                    if (sourceParts.length!=2) {
+                         console.log(errorDetermineValidLookups + ": empty or invalid source: " + source);
+                    } else if (DecsOnD.arrayLength(lookup.values)<=0) {
+                         console.log(errorDetermineValidLookups + ": empty or missing value array");
+                    } else {
+                        var remoteErr = remoteValidateAndCompleteLookups(tableName, columnName, sourceParts[0], sourceParts[1], labelFieldName, qualifier, lookup.values, function (columnName, validVals, event) {
+                            numRemoteCallsReturned++;
+                            console.log("[Table " + tableName + ", column " + columnName + "] Lookup validation is complete. " + numRemoteCallsReturned + " out of " + numRemoteCallsMade + " lookups validated");
+                            if (DecsOnD.isArray(validVals)) {
+                                validValuesMap[columnName] = validVals;
+                            } else { 
+                                // Can't use errorDetermineValidLookups because column name is different in callback
+                                console.log("[Table " + tableName + ", column " + columnName + "] " + errorDetermineValidLookupsBase + ": values not returned as an array");
+                            }
+                            // TODO Add a timeout to make sure we don't get stuck here indefinitely if there is some unexpected error
+                            if (numRemoteCallsReturned>=numRemoteCallsMade) {
+                                console.log("[Table " + tableName + "] All lookups validated successfully. Updating table");
+                                callback(validValuesMap); 
+                            }
+                        });
+                        if (remoteErr) {
+                            console.log(errorDetermineValidLookups + ": " + remoteErr);
+                        } else {
+                            numRemoteCallsMade++;
+                        }
+                        // JVG Cannot return null here -- there could be multiple callbacks
+                        // So we try to delete the field for this column,
+                        // then later we'll see if any lookups were synchronously validated
+                        // TODO find more robust way
+                        delete validValuesMap[columnName];
+                    }
+                }
+            }
+            // JVG Return null if none of the callbacks returned synchronously
+            if (!DecsOnD.isObject(validValuesMap) || (Object.keys(validValuesMap).length==0)) {
+                return null;
+            } else {
+                return validValuesMap;
+            }            
+        }        
+
+       /**
+        * Invoking apex remote method to update decision table configuration and non-structural configuration
+        * @param    policyId
+        * @param    tableName
+        * @param    editedDtConfig
+        * @param    versionDescriptor
+        * @param    editedNonStructuralValues
+        * @param    isSaveToServer
+        * @param    callback
+        * @created @Sothea 140905
+        */
+        function remoteUpdateTableConfiguration(policyId, tableName, editedDtConfig, versionDescriptor, editedNonStructuralValues, isSaveToServer, callback){
+            try {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.PolicyContentViewerController.updateTableConfiguration}', 
+                    policyId, tableName, editedDtConfig, versionDescriptor, editedNonStructuralValues, isSaveToServer,
+                    function(result, event){
+                        if (event.status) {
+                            console.log("Successfully update table configuration for " + tableName);
+                            callback(result);
+                        } else {
+                            var errorMsg = "Failed to update table configuration for [" + tableName +"] -- "+ event.message;
+                            console.log(errorMsg);
+                            callback(errorMsg);
+                        }
+                    },
+                    {escape : false, timeout:120000} //@Sothea : need to set timeout due to the request to server can be take over 30 seconds
+                ); 
+                return null;
+            }
+            catch (exc) {
+                DecsOnD.logException(exc, "Error invoking remote action");
+                return exc.toString();
+            }
+       }
+       
+       //@Sothea 140910
+       function remoteGetTableContents(policyId, version, callback){
+            try {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.PolicyContentViewerController.getAllTableContents}', 
+                    policyId, version,
+                    function(result, event){
+                        if (event.status) {
+                            console.log("Successfully retrieved table contents for policy with id [" + policyId+"]");
+                            callback(result);
+                        }else {
+                            var errorMsg = "Failed to retrieved table contents for policy with id [" + policyId+"] -- "+ event.message;
+                            console.log(errorMsg);
+                            callback(errorMsg);
+                        }
+                    },
+                    // JvG: Content must not be escaped -- that messes up the CSV
+                    {buffer: false, escape : false}
+                ); 
+                return null;
+            }
+            catch (exc) {
+                DecsOnD.logException(exc, "Error invoking remote action");
+                return exc.toString();
+            }
+       }
+       
+       //@Sothea 140910
+       function getTableContentsCB(callback) {
+            var remoteErr = remoteGetTableContents(policyId, version, callback);
+            if (remoteErr) {
+                console.log("Faied to get content: " + remoteErr);
+            }
+       }
+       
+       
+        function getAvailableColumnsCB(widget, names, callback) {  
+            // Delay for 2 seconds to give other callbacks more time to complete  
+            // TODO Call this on demand when editor widget is opened          
+            setTimeout(function(){
+                try {
+                    console.log("Retrieving available columns");
+	                Visualforce.remoting.Manager.invokeAction(
+	                    '{!$RemoteAction.PolicyContentViewerController.getAvailableColumns}', 
+                        dpConfig,
+                        dtConfig,
+	                    false,
+	                    function(result, event) {
+		                    if (result && callback) {
+                                console.log("Found available columns for " + Object.keys(result).length + " tables");
+		                        callback(result);
+		                    } else {
+		                        console.log("Unable to load available columns");
+		                    }
+                        }
+                    );
+                } catch(ex){
+                    DecsOnD.logException(ex, "Error getting available columns");
+                    // show the error and hide loading spinner
+                    showScriptErrorMsg(ex.toString(), true); 
+               }
+           }, 2000);            
+        }
+        /**
+         * Callback for updating DecisionTableConfiguration
+         * @Created - 17 July 2013
+         */
+         // JVG FIXME Callback should be called with JSON, not strings
+        function tableConfigUpdatedCB(editorWidget, tablename, editedNonStructuralValues, editedDtConfig, versionDescriptor, isSaveToServer, callback) {
+             var errMsg = null;
+             try {
+                //show loading spinner
+                initSpinner("Saving configuration...");
+                console.log("Decision table configuration of " + tablename + " : " + JSON.stringify(editedDtConfig));  
+//                console.log("Edited nonstructural values : "+ JSON.stringify(editedNonStructuralValues));  
+		       		
+                // JVG 140905 Disabled timeout -- probably not needed now we have async remote call 
+//              setTimeout(function(){
+                    //@Sothea 140905: use @RemoteAction instead of webservice
+                    //update table configuration on PMS server & Salesforce
+                    //also, update non-structural configuration setting
+                    errMsg = remoteUpdateTableConfiguration(policyId, tablename, editedDtConfig, versionDescriptor, editedNonStructuralValues, isSaveToServer, function(remoteErrMsg){
+                        if (!remoteErrMsg){ 
+                            //@Sothea 141028 Update current revision
+                            policy.DecsOnD__Revision__c = policy.DecsOnD__Revision__c + 1;
+                            //refresh grid
+                            dtConfig[tablename] = editedDtConfig;
+                            $("#tableWidget").empty();
+                            createPolicyEditor("tableWidget", versionDescriptor, editMode, tablename);//@Vichet 141001 : add new @param tablename for set active tab
+                            //@Sothea 141028 Pass result back to caller
+                            // JVG Add check -- callback is sometimes null  
+                            if (typeof callback==="function") callback(true);
+                            //hide loading spinner
+                            hideSpinner(true);
+                            if (parent.refreshPage && isSaveToServer)  parent.refreshPage();
+                            //@Sothea 141028 Release lock only if parent widget in view mode
+                            //if(!editMode) releaseLockCB();
+                        } else {
+                       		//@Sothea 141028 Pass result back to caller  
+                            if (typeof callback==="function") callback(false); 
+                        	// show the error, hide loading spinner, and re-acquire lock
+                            showScriptErrorMsg(remoteErrMsg, true, false);
+                            
+                        }
+                    });
+                    if (errMsg) {
+                    	//@Sothea 141028 Pass result back to caller  
+                        callback(false); 
+                        // show the error, hide loading spinner, and re-acquire lock
+                        showScriptErrorMsg("Failed to call remote method: " + errMsg, true, false); 
+                    }
+//             }, 2000); 
+           } catch(ex) {
+                DecsOnD.logException(ex, "Error running script");
+                //@Sothea 141028 Pass result back to caller  
+                callback(false); 
+                // show the error, hide loading spinner, and re-acquire lock
+                showScriptErrorMsg(ex.toString(), true, false); 
+           }
+        }
+        
+        /**
+         * @Added - 02 July 2013
+         */
+        function contentsUpdatedCB(editorWidget, tableName, action, rowIndex, columnIndex, oldValue, newValue, row, isAcquiredLock){ 
+            console.log("Contents updated for table " + tableName);
+            if (parent.enablePageBlockButton){
+                 parent.enablePageBlockButton('saveDraft',isAcquiredLock);
+                 parent.enablePageBlockButton('theNext',isAcquiredLock);
+            }
+            if (parent.setIsSaved) parent.setIsSaved(true);
+        }
+        
+        /**
+         * Callback for acquiring lock
+         * @param	updateDB	indicate whether should be updated to server	
+         * @param	callback    passing result back to the caller
+         * @Created @Sothea 141028
+         */
+        function acquireLockCB(action, updateDB, callback){
+        	 try {
+        	 	var message = "";
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.PolicyContentViewerController.acquireLock}', 
+                    policy, updateDB,
+                    function(result, event){
+                        if (event.status && result) {
+                            console.log("Successfully acquired lock for policy with id [" + policy.Id+"]");
+                            //update policy with the new lockExpires, lockedBy if acquire lock succeed
+                            //Otherwise show warning
+                            if (result.isAcquired){
+                            	 policy = result.policy;
+                            }else if (action != "openConfigEditor") {//show warning
+                           		window.top.location.href='/apex/PolicyLockedWarningMessage?id='+policy.Id+'&idle='+result.isIdle+'&updated='+result.isModifiedByOther;
+                            }
+                            //pass result back to caller
+                            if (callback) callback(result.isAcquired, result.message);
+                        }else {
+                        	console.log("Failed to acquire lock for policy with id [" + policy.Id+"] -- "+ event.message); 
+                            if (callback) callback(false);
+                        }
+                        //@Sothea 141110 Refresh policy locked warning message on PolicyEditor page
+                        if (parent.refreshPolicyLockedWarnMsg) parent.refreshPolicyLockedWarnMsg();
+                    },
+                    {buffer: false}
+                ); 
+            }
+            catch (ex) {
+                DecsOnD.logException(ex, "Error invoking remote action to acquire lock");
+                console.log(ex.toString()); 
+                if (callback) callback(false);
+            }
+        }
+        
+        /**
+         * Callback to release a previously acquired lock on the policy
+         * @Created @Sothea 141028
+         */
+        function releaseLockCB(){
+        	 try {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.PolicyContentViewerController.releaseLock}', 
+                    policy.Id,
+                    function(result, event){
+                        if (event.status) {
+                            console.log("Successfully released lock for policy with id [" + policy.Id+"]");
+                        }else {
+                        	console.log("Failed to release lock for policy with id [" + policy.Id +"] -- "+ event.message); 
+                        }
+                    },
+                    {buffer: false}
+                ); 
+            }
+            catch (ex) {
+                DecsOnD.logException(ex, "Error invoking remote action to release lock");
+                console.log(ex.toString()); 
+            }
+        }
+        
+        /**
+         * Function for initailizing the editor widget
+         * @param   parentID    the id of the table widget div
+         * @param   editable    specify whether the grid is in editable mode
+         */
+        //@Sothea #458 we should also passing the updated version when re-draw the policy editor widget
+        function createPolicyEditor(parentID, versionDescriptor, editable, activeTableName) {
+            if (versionDescriptor==null) {
+                versionDescriptor = new VersionDescriptor(-100, 'latest');
+            }
+//            console.log("creating editor: " + Date.now());
+            policyEditor = new PolicyEditorWidget({
+                dpConfiguration : dpConfig,
+                tableConfigurations : dtConfig,
+                version : versionDescriptor, //@Added 26 Feb 2014
+                policy : "SFDC/{!JSENCODE(DecsOnD__Policy__c.DecsOnD__Applies_to__c)}/{!JSENCODE(DecsOnD__Policy__c.Name)}",
+                getPicklistValuesCB : getPicklistValuesCB,
+                getLookupValueCB : getLookupValueCB,
+                getAvailableColumnsCB : getAvailableColumnsCB,
+                validateAndCompleteLookupsCB : validateAndCompleteLookupsCB,
+                contentsUpdatedCB : contentsUpdatedCB,
+                tableConfigUpdatedCB : tableConfigUpdatedCB,
+                getTableContentsCB : getTableContentsCB, //@Sothea 140910 
+                //@Sothea 141028 pass callback to acquire and release lock
+                acquireLockCB : acquireLockCB,
+                releaseLockCB : releaseLockCB,
+                isEditable : editable,
+                locale : userLocale, //@Added 03 July 2013
+                isConfigEditable : isConfigEditable,
+                configIconHidden : configIconHidden,
+                activeTableName : activeTableName, //@Vichet 141001 : set active tab after reload page
+                jq : jQuery
+            });
+//            console.log("editor created: " + Date.now());
+            // FIXME This duplicates same statement in onload function
+            DesTableConfigWidget.imageBasePath = "{!URLFOR($Resource.JS_DecisionTableConfigWidget, 'images')}"
+            policyEditor.render(parentID);
+//            console.log("editor rendered: " + Date.now());
+        };      
+     });
+     
+</script>
+
+    </body>
+
+</apex:page>

@@ -1,0 +1,18 @@
+<apex:page standardController="SBQQ__TemplateContent__c" extensions="SBQQ.TemplateContentExtController">
+    <apex:sectionHeader title="{!$ObjectType.SBQQ__TemplateContent__c.label} {!$Label.sbqq__lbl_edit}" subtitle="Type Selection"/>
+
+    <apex:form >
+    <apex:pageBlock >
+    	<apex:pageBlockButtons >
+    		<apex:commandButton action="{!onSelectType}" value="Continue"/>
+    		<apex:commandButton action="{!cancel}" value="Cancel"/>
+    	</apex:pageBlockButtons>
+    	<apex:outputPanel layout="block" style="margin-bottom: 5px">
+    		<apex:outputText value="{!$ObjectType.SBQQ__TemplateContent__c.fields.SBQQ__Type__c.inlineHelpText}"/>
+    	</apex:outputPanel>
+    	<apex:selectRadio value="{!selectedDocumentId}" layout="pageDirection">
+    		<apex:selectOptions value="{!standardTypes}"/>
+    	</apex:selectRadio>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

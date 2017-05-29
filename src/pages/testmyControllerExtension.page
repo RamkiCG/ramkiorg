@@ -1,0 +1,10 @@
+<apex:page standardController="Account" extensions="myControllerExtension">
+    {!greeting} <p/>
+    <apex:form >
+        <apex:inputField value="{!account.name}"/> <p/>
+        <apex:commandButton value="Save" action="{!save}"/>
+        <apex:outputLink value="{!$Page.CommissionPlanPage}">
+    This is a link to another page.
+  </apex:outputLink>
+    </apex:form>
+</apex:page>

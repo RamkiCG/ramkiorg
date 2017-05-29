@@ -1,0 +1,45 @@
+<apex:component controller="quickTableHandler">
+    <apex:attribute name="cContainerId"  type="String" required="true"  description="Id of the container which will hold & display the table"   />
+    <apex:attribute name="soql"  type="String" description="SOQL query to execute and populate records." />
+    <apex:attribute name="columnFields"  type="String" description="Comma-separated list of fields to display." />
+    <apex:attribute name="columnTitles"  type="String" description="Comma-separated list of column titles." />
+ 
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.0/css/jquery.dataTables.css"/>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+     
+    <script type="text/javascript">
+            $(document).ready( function() {
+                $('#{!cContainerId}').dataTable();
+            } );
+    </script>        
+ 
+    <div class="full_width">
+                 
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="{!cContainerId}" style="width:980px">
+            <thead>
+                <apex:outputPanel layout="none">
+                    <tr>
+                        <apex:repeat value="{!columnTitlesList}" var="t">
+                            <th>
+                                <apex:outputText value="{!t}" />
+                            </th>                   
+                        </apex:repeat>
+                    </tr>
+                </apex:outputPanel>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!records}" var="r">
+                    <tr>
+                        <apex:repeat value="{!columnFieldsList}" var="f">
+                            <td>
+                                <apex:outputField value="{!r[f]}" />
+                            </td>
+                        </apex:repeat>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </div>    
+ 
+</apex:component>

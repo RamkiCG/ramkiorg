@@ -1,0 +1,10 @@
+<apex:page Controller="OtherSalesforce">
+
+ <apex:form >
+ <apex:outputText value="UserName"></apex:outputText>
+ <apex:inputText value="{!userName}"/>
+ <apex:outputText value="Password"></apex:outputText>
+ <apex:inputSecret value="{!pwd}"/>
+ <apex:commandButton value="Fetch" action="{!fetch}"/>
+ </apex:form>
+</apex:page>

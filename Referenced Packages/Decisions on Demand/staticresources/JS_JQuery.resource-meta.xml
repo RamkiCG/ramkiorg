@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>application/zip</contentType>
+    <description>License: https://jquery.org/license
+(c) 2005, 2013 jQuery Foundation, Inc.
+
+Source: ajax.googleapis.com/ajax/libs
+- jquery/1.9.1/jquery.min.js
+- jqueryui/1.10.3/jquery-ui.js
+- jqueryui/1.10.3/themes/smoothness/jquery-ui.css</description>
+</StaticResource>

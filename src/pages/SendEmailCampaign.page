@@ -1,0 +1,38 @@
+<apex:page standardController="Campaign" extensions="SendMailCampaignExtensions">
+  <apex:pageMessages ></apex:pageMessages>
+  <apex:form >
+  <apex:pageBlock title="Product Campaign">
+  <apex:pageBlockSection columns="1">
+  <apex:pageBlockSectionItem >
+  <apex:outputLabel value="Subject"></apex:outputLabel>
+  <apex:inputtext value="{!Subject}"/>
+  </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+  <apex:outputLabel value="Description "></apex:outputLabel>
+  <apex:inputtextarea value="{!Description }"/>
+  </apex:pageBlockSectionItem>
+  </apex:pageBlockSection>
+  <apex:pageBlockSection columns="1">
+     <apex:pageBlockTable value="{!CampaignProducts}" var="CampaignProd" rendered="{!CampaignProducts.size > 0}">           
+           <apex:column value="{!CampaignProd.ramki__Product__r.Name}"/>    
+     </apex:pageBlockTable>
+     </apex:pageBlockSection>
+  <apex:pageBlockSection columns="1">
+     <apex:pageBlockTable value="{!CampaignMemberHelpers}" var="campMem" rendered="{!CampaignMemberHelpers.size > 0}">
+           <apex:column headerValue="SendMail">
+           <apex:inputCheckbox value="{!campMem.IsSendMail}"/>
+           </apex:column>
+           <apex:column value="{!campMem.CampaignMember.Name}"/>
+           <apex:column value="{!campMem.CampaignMember.Status}"/>
+           <apex:column value="{!campMem.CampaignMember.contact.email}"/>   
+          
+    
+     </apex:pageBlockTable>
+      </apex:pageBlockSection>
+    <apex:pageBlockButtons >
+     <apex:commandButton action="{!sendmail}" value="SendMail"/>
+     </apex:pageBlockButtons>
+  </apex:pageBlock>
+  </apex:form>
+  
+</apex:page>

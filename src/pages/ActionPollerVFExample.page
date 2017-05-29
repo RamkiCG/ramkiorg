@@ -1,0 +1,7 @@
+<apex:page controller="ActionPollerExample">
+
+ <apex:form >
+ <apex:outputText value="count:{!count}" id="testcounter"></apex:outputText>
+ <apex:actionPoller reRender="testcounter" action="{!Counter}" interval="15"/> 
+ </apex:form>
+ </apex:page>

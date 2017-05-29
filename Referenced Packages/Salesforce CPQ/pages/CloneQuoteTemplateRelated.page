@@ -1,0 +1,5 @@
+<apex:page standardController="SBQQ__QuoteTemplate__c" extensions="SBQQ.QuoteTemplateExtController" action="{!onCloneRelated}">
+    <apex:sectionHeader title="Clone Related" subtitle="{!SBQQ__QuoteTemplate__c.Name}"/>
+
+    <apex:pageMessages />   
+</apex:page>

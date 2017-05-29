@@ -1,0 +1,13 @@
+<apex:component >
+<apex:attribute name="firstText"
+description="The first text string
+that is not italic"
+type="String" required="false"/>
+<apex:attribute name="firstItalicText"
+description="The first italic text string."
+type="String"
+required="false"/>
+
+<p/>
+{!firstText} <i> {!firstItalicText}</i>
+</apex:component>

@@ -1,0 +1,7 @@
+<apex:page standardController="Account">
+  <!-- Begin Default Content REMOVE THIS -->
+ 
+  <!-- End Default Content REMOVE THIS -->
+  <apex:form ></apex:form>
+ 
+</apex:page>

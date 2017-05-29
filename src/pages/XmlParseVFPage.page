@@ -1,0 +1,31 @@
+<apex:page Controller="Xmlparsar">
+<script>
+function colorPageBlock(pageblock, color)
+{
+if (pageblock != null) pageblock.firstChild.style.cssText = "background-color:" + color + ";";
+
+}
+</script>
+<apex:Pagemessages ></apex:Pagemessages>
+<apex:form >
+        <apex:pageBlock >
+        
+
+                <apex:pageBlockSection id="redSection"  title="ParseXML" columns="3">      
+                     
+                            <apex:outputLabel value="Select Xml File" for="file"/>
+                            <apex:inputFile fileName="{!fileName}" value="{!body}"/>     
+                            <apex:commandButton value="ParseXML File" action="{!Parsexmlfile}" />                           
+                            <apex:outputLabel value="Write Xml File" for="file"/>
+
+                            <apex:inputTextArea value="{!xmlstring}" style="width:336px;height:260px;"/>                         
+                            <apex:commandButton value="Parse Xml" action="{!Parsexml}" /> 
+                         
+                            <apex:outputLabel value="ParsedFile" for="file"/>
+                            <apex:inputTextArea value="{!outxmlstring}" style="width:336px;height:260px;" id="response"/>       &nbsp;      
+                       <script>colorPageBlock(document.getElementById("{!$Component.redSection}"), "red");</script>                              
+                  </apex:pageBlockSection>
+                         </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

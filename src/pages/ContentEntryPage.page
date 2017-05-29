@@ -1,0 +1,6 @@
+<apex:page standardController="COMMISSION_PLAN__c" extensions="ContentNewController" action="{!pageredir}" tabStyle="COMMISSION_PLAN__c">
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Congratulations</h1>
+  This is your new Page
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

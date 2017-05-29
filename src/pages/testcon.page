@@ -1,0 +1,16 @@
+<apex:page controller="wrapper3">
+<apex:form >
+  <apex:pageBlock >
+  <apex:pageBlockTable value="{!lstwrap}" var="wrapper">
+  <apex:column >
+                    <apex:inputCheckbox value="{!wrapper.Ischeck}"/>
+                </apex:column>   
+                <apex:column headerValue="Contact">
+                    <apex:inputField value="{!wrapper.con.Name}"/>
+                </apex:column>   
+  </apex:pageBlockTable>
+  
+  </apex:pageBlock>
+  <apex:commandButton value="delete" action="{!deleteSelected}"/>
+  </apex:form>
+</apex:page>

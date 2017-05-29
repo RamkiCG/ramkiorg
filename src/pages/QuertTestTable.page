@@ -1,0 +1,7 @@
+<apex:page docType="html-4.01-strict">
+    <c:quickTableComp cContainerId="testtable"
+        columnFields="Id, Name, AccountNumber"
+        columnTitles="Record ID, Account Name, Account Number"
+        soql="select Id, Name, AccountNumber from Account"   
+    />
+</apex:page>

@@ -1,0 +1,5 @@
+<apex:page standardController="Product2" extensions="SBQQ.ProductExtController" action="{!onOverrideClone}">
+    <apex:sectionHeader title="Clone Product" subtitle="{!Product2.Name}"/>
+
+    <apex:pageMessages />   
+</apex:page>

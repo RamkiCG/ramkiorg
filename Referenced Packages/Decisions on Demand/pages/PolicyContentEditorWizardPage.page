@@ -1,0 +1,383 @@
+<apex:page standardController="DecsOnD__Policy__c" id="thePage" extensions="DecsOnD.PolicyContentEditorWizardController" sidebar="false" showHeader="{!currentPage!=2}" action="{!acquireLock}">
+<!--    <apex:sectionHeader title="Business policy" subtitle="Editor Wizard" />-->
+    <head>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script> 
+        <style type="text/css" title="currentStyle">
+            .buttonLocation {
+                text-align: right;
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+            .mbutton {
+                width: 70px;
+            }
+            .colGridLeft {
+                text-align:left;
+            }
+            .colGridRight {
+                text-align:right;
+            }
+            .secHeader{
+                margin-top:-30px; 
+                padding-right:5px;
+                text-align:right;
+                color:black;
+                font-weight:bold;
+                font-size:13px;
+            }
+            .s2TopButton{
+                margin-bottom:-45px;
+                padding-right:15px
+            }
+            .s2BottomButton{
+                z-index:10000;
+                position:absolute;
+                bottom:30px;
+                right:25px
+            }
+            .downLocation{
+                color:#0B7EF0;
+                right:35px;
+                position:absolute;
+                top:180px;
+            }
+            
+            .colorbox{
+                padding: 2px 4px;
+                font-weight: bold;
+                position: absolute;
+                bottom: 330px;
+                left: 550px;
+                z-index:100000;
+            }
+            .inactiveP1UI{
+                position:absolute; 
+                left:1px; 
+                top:1px; 
+                width:100%; 
+                height:100%; 
+                text-align:center; 
+                background-color:#FFFFFF; 
+                opacity:0.1;
+                filter:alpha(opacity=10); 
+                z-index:99999;
+                display:none;
+            }
+            
+            .iframe{
+            	overflow-y: auto;  
+            }  
+            
+            .versionGridCol1{
+            	color: #333 !important;
+			    font-size: 91%;
+			    font-weight: bold;
+			    text-align: right;
+			    width: 100px;
+			    padding: 0px 10px 6px 6px;
+			    
+            }
+             .versionGridCol2{
+            	text-align:left;
+            	width:100%;
+            }
+                 
+        </style>
+    </head>
+    <apex:form id="formDownload">
+		<apex:sectionHeader title="Business policy" subtitle="Editor Wizard" help="{!$Page.DecsOnD__Policy_Editor_Edit_Page_Help}" rendered="{!currentPage==1}" id="header1"/>
+		<apex:sectionHeader title="Business policy" subtitle="Editor Wizard" help="{!$Page.DecsOnD__Policy_Editor_Test_Page_Help}" rendered="{!currentPage==2}" id="header2"/>
+		<apex:sectionHeader title="Business policy" subtitle="Editor Wizard" help="{!$Page.DecsOnD__Policy_Editor_Update_Page_Help}" rendered="{!currentPage==3}" id="header3"/>
+        <apex:commandLink rendered="{!currentPage ==1}" action="{!downloadPolicy}" value="Download the most recent Excel" id="cmdDownload" immediate="false" reRender="formDownload" styleClass="downLocation">
+               <apex:param name="TheVerNmu" value="{!curLatestVers.sequenceNum}" assignTo="{!versionNum}"/>
+        </apex:commandLink>
+        <apex:actionFunction name="reRenderPolicyContent" rerender="pbsPolicyContentViewer"/>
+        <!-- Action for Save Draft button in step 1 and 3 -->
+        <apex:actionFunction name="saveDraft" action="{!saveDraft}" rerender="pnActions1,pbs1,pbsUploadExcel,pbsStep3" status="btnSaveDraftStatus"><!-- oncomplete="refreshPolicyContent({!isSuccess});">   -->
+            <apex:param name="firstParam" assignTo="{!jsonMapCSVContents}" value="" />
+        </apex:actionFunction>
+        <!-- Action for Next button in step 1 -->
+        <apex:actionFunction name="nextPage" action="{!nextPage}" rerender="header1, header2, header3, formDownload,pnActions1,pbs1,pbsUploadExcel,pbsStep3,formP2Button,oup" status="btnNextStatus"> 
+            <apex:param name="firstParam" assignTo="{!jsonMapCSVContents}" value="" />
+            <apex:param name="secondParam" assignTo="{!isSaveRequested}" value="" />
+        </apex:actionFunction>
+        <!-- Action for Previous button -->
+        <apex:actionFunction name="prevPage" action="{!previousPage}" rerender="header1, header2, header3, formDownload,formPolicyContentEditor,formP2Button,oup,pbs1" status="btnPrevStatus" />
+       
+    </apex:form> 
+    <apex:form id="formPolicyContentEditor"> 
+       <apex:variable value="{!DecsOnD__Policy__c.DecsOnD__Log_level__c}" var="logLevel"/>
+       <apex:actionFunction name="uploadSpreadsheet" action="{!doUpload}"/>
+        <apex:pageBlock mode="edit" id="theMainBlock" rendered="{!currentPage!=2}"> 
+            <apex:pageBlockButtons id="pnActions1" styleClass="buttonLocation"> 
+                <apex:commandButton value="Previous" onclick="doPrevious();return false;" rendered="{!AND(callFrom =='wizard', (currentPage==2 || currentPage==3))}" styleClass="mbutton" />&nbsp;&nbsp;
+                <apex:commandButton id="saveDraft" value="Save Draft" onclick="doUploadTable();return false;" rendered="{!currentPage==1}" />
+                <apex:commandButton id="p3SaveDraft" value="Save as Draft" action="{!saveDraft}" rendered="{!AND(currentPage==3, callFrom =='wizard')}" disabled="{!LEN(jsonMapCSVContents) == 0 && ISBLANK(source.fileContent)}"/>
+                
+                <apex:commandButton id="theNext" value="Next" onclick="doNext();return false;" rendered="{!currentPage!=3}" styleClass="mbutton" disabled="{!isDisableNext}"/>&nbsp;&nbsp;
+                <apex:commandButton value="Commit" action="{!commitVersion}"  rendered="{!currentPage==3}" />&nbsp;&nbsp;
+                <apex:commandButton value="Commit and activate" action="{!commitAndActivate}" rendered="{!currentPage==3}" />&nbsp;&nbsp;
+                <apex:commandLink value="Cancel" action="{!cancel}" /> 
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbs1"></apex:pageBlockSection>
+            <!-- Step 1 -->
+            <apex:pageBlockSection id="pbsUploadExcel" columns="1" rendered="{!currentPage==1}" title="Step 1: Edit business policy" collapsible="false">
+                <div class="secHeader">Step 1 of 3</div>
+                <br/><br/><br/>
+                <apex:pageMessages showDetail="true" id="theMsg1" rendered="{!NOT(isBuildFailed)}"/>
+                <!-- Build Failed Message Table -->
+                <apex:outputPanel id="panelBuilFailed" rendered="{!isBuildFailed && (currentPage==1 || currentPage==3)}">
+                     <apex:outputText value="Build Errors and Warnings" style="color:#D74C3B;;font-size:13px;font-weight:bold;"/><br/><br/>
+                     <apex:pageMessage summary="Policy failed to build. Please fix the errors below and try saving again." severity="error" strength="2" escape="false" />
+                     <apex:pageBlockTable value="{!listBuildMsg}" var="bm" id="buildFailedTable" rows="10" border="1" style="border-style:solid;border-color:red;" cellpadding="3" width="100%">
+                          <apex:column >
+                                <apex:facet name="header">Item Type</apex:facet>
+                                <apex:outputText value="{!bm.itemType}"/>  
+                           </apex:column>
+                           <apex:column > 
+                                <apex:facet name="header">Worksheet</apex:facet> 
+                                <apex:outputText value="{!bm.worksheet}"/>
+                           </apex:column> 
+                           <apex:column >
+                                <apex:facet name="header">Row</apex:facet>
+                                <apex:outputText value="{!bm.rowNumberForDisplay}"/>
+                           </apex:column>
+                           <apex:column >
+                                <apex:facet name="header">Column</apex:facet>
+                                <apex:outputText value="{!bm.columnLabel}"/>
+                           </apex:column>
+                           <apex:column >
+                                <apex:facet name="header">Message</apex:facet>
+                                <img title="{!If( bm.severity=='WARNING' ,'warning' ,'error')}" src="/s.gif" class="{!If( bm.severity=='WARNING' ,'warningSmall' ,'errorSmall')}" alt="{!If( bm.severity=='WARNING' ,'warning' ,'error')}"/>&nbsp;
+                                <apex:outputText value="{!bm.message}"/>
+                           </apex:column>
+                     </apex:pageBlockTable>
+                     <br/><br/>
+                 </apex:outputPanel> 
+                 <input type="hidden" id="theIsSaveRequested" value="{!isSaveRequested}"/>
+                 <apex:outputPanel id="panelShowVerNum">
+                        <apex:outputLabel value="Editing Version"/>&nbsp;&nbsp;&nbsp;
+                        <apex:outputLabel value="{!newVersNum} (draft)" />
+                 </apex:outputPanel>
+                 <apex:outputPanel >
+                        <apex:outputLabel value="Upload from Excel" for="uploadFromExcel" />&nbsp;&nbsp;&nbsp;
+                        <apex:inputFile id="uploadFromExcel" value="{!source.fileContent}" filename="{!source.fileName}" />
+                        <apex:commandButton onclick="doUploadSpreadSheet();return false;"  oncomplete="showUploadStatus(false)" value="Upload" id="uploadButton" styleClass="buttonLocation, mbutton"/>
+                 </apex:outputPanel> 
+                 
+                 <br /> 
+            <script> 
+                if ('{!isSaveRequested}' === "true")
+                    setSaveDraftEnabled(false);
+            </script>
+            </apex:pageBlockSection>
+            
+            <!-- Section for showing the policy content table -->
+            <apex:pageBlockSection id="pbsPolicyContentViewer" columns="1" rendered="{!currentPage==1}" title="" collapsible="false" showHeader="false">
+                <!-- Div for showing loading spinnesr -->
+                <apex:outputPanel id="divLoading" layout="block" style="height:437px">
+                      <div style="width:100%; height:401px;text-align:center; background-color: #FFFFFF; opacity:0.6;filter:alpha(opacity=60);z-index:99999;"></div>
+                      <apex:panelGrid id="pngTextLoading" columns="2" styleclass="colorbox">
+                          <apex:image value="/img/loading.gif" title="Refreshing"/>
+                          <apex:outputtext id="spinnerMessage" value="Loading..." escape="false" style="color:red;font-size:13px;"/>
+                      </apex:panelGrid>
+                </apex:outputPanel> 
+                <!-- Showing business policy content as table -->
+                <apex:outputPanel id="divPolContent" layout="block" style="display:none;" >
+                   <!-- Display error or/and warn message(invalid policy configuration such as invalid lookup type warning message) -->
+               		<apex:outputPanel id="divViewPolErrWarnMsg" layout="block" style="display:none;"></apex:outputPanel>
+                    <apex:iframe id="thePolContentViewer" src="/apex/PolicyContentViewer?id={!DecsOnD__Policy__c.Id}&version={!curLatestVers.sequenceNum}&isEditable=true" height="557px" scrolling="false"/>
+                </apex:outputPanel> 
+            </apex:pageBlockSection>
+            
+            <!-- step 3 -->
+            <apex:pageBlockSection id="pbsStep3" columns="1" rendered="{!currentPage==3}" title="{!IF(callFrom=='wizard','Step 3:','' )} Version details" collapsible="false">
+            	<!-- Patch 1.8.23 Make sure fields on page 3 align -->
+                <div class="secHeader" style="{!IF(callFrom=='wizard', '', 'display : none')}">Step 3 of 3</div>
+                <apex:pageMessages showDetail="true" id="theMsg3"/>
+                <apex:panelGrid columns="2" id="theGrid" width="100%" columnClasses="versionGridCol1,versionGridCol2">
+                	<apex:outputLabel value="Version" />
+                    <apex:outputText value="{!newVersNum}" />
+                	
+                	<apex:outputLabel value="Label" style="width:100px;"/>
+                    <apex:inputText value="{!source.versionLabel}" style="width:100%;"/>
+                    
+                    <apex:outputLabel value="Notes" />
+                    <apex:inputTextarea id="note" value="{!source.notes}" rows="6" style="width:99.78%;"/>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:actionStatus id="btnSaveDraftStatus" >
+            <apex:facet name="start"><c:Load BackColor="#FFFFFF;" borderColor="#efefef" height="30px" width="100px" Message="Saving..." imageUrl="/img/loading.gif" /> </apex:facet>
+         </apex:actionStatus>
+         <apex:actionStatus id="btnNextStatus" >
+            <apex:facet name="start"><c:Load BackColor="#FFFFFF;" borderColor="#efefef" height="30px" width="100px" Message="Saving..." imageUrl="/img/loading.gif" /> </apex:facet>
+         </apex:actionStatus>
+         <apex:actionStatus id="btnPrevStatus" >
+            <apex:facet name="start"><c:Load BackColor="#FFFFFF;" borderColor="#efefef" height="30px" width="100px" Message="Loading..." imageUrl="/img/loading.gif" /> </apex:facet>
+         </apex:actionStatus> 
+         
+         <!-- div for inactive the page 1 UI while Excel spreadsheet is uploading  -->
+         <div id="inactiveP1UI" class="inactiveP1UI"></div>
+    </apex:form>
+    
+    <!-- Step 2 -->
+    <apex:form id="formP2Button"> 
+        <apex:actionFunction name="gotoPage3" action="{!nextPage}" rerender="formDownload,formPolicyContentEditor,formP2Button,oup,pbs1" status="btnPrevStatus"/>
+        <apex:outputPanel id="p2btntop" layout="block" styleClass="buttonLocation s2TopButton" rendered="{!currentPage==2}" >
+            <apex:commandButton value="Previous" onclick="doPrevious();return false;" styleClass="mbutton" />&nbsp;&nbsp;
+            <apex:commandButton value="Next" onclick="gotoPage3();return false;" styleClass="mbutton" />&nbsp;&nbsp;
+            <apex:commandLink value="Cancel" action="{!cancel}" />
+        </apex:outputPanel>
+        <apex:outputPanel id="p2btnbottom" layout="block" styleClass="buttonLocation s2BottomButton" rendered="{!currentPage==2}"> 
+            <apex:commandButton value="Previous" onclick="doPrevious();return false;" styleClass="mbutton" />&nbsp;&nbsp; 
+            <apex:commandButton value="Next" onclick="gotoPage3();return false;"  styleClass="mbutton" />&nbsp;&nbsp;
+            <apex:commandLink value="Cancel" action="{!cancel}" />
+        </apex:outputPanel>
+        <script>
+            //Hide the main block in step 2
+            var mainBlock = document.getElementById('thePage:formPolicyContentEditor:theMainBlock');
+            mainBlock.style.display = "block";
+            if ('{!currentPage}' == "2")
+                mainBlock.style.display = "none";
+        </script>
+    </apex:form>
+    <apex:outputPanel id="oup" layout="block" style="{!IF(currentPage==2,'','display:none;')}"> <!--  TODO Something like rendered="{!currentPage==2}" -->
+        <apex:include id="theTestPolicy" pageName="{!testPolicyRef}" /> 
+    </apex:outputPanel>
+    <script>
+        var jsonMapCSVContents = '';
+        
+        function refreshPolicyContent(isSuccess){
+        	if (!isSuccess)return;
+        	return reRenderPolicyContent();
+        }
+        
+        function getPolicyContentsFromEditor() {
+            var csvContentsMap = document.getElementById('thePolContentViewer').contentWindow.getAllCSVContents(true);
+            if (typeof csvContentsMap==="string") {
+                return csvContentsMap;
+            } else {
+            	//@Sothea 140925: convert to json only if the return content is not null,
+            	//otherwise will produce error when saving to server -- send "null" string content
+                return (csvContentsMap) ? JSON.stringify(csvContentsMap) : "";
+            }
+        
+        }
+        /**
+         * Function for uploading the table content
+         */
+        function doUploadTable(){
+            jsonMapCSVContents = getPolicyContentsFromEditor();
+            saveDraft(jsonMapCSVContents);
+        }
+        
+        /**
+         * Function for going to next page and save the table content if it has not been saved yet
+         */
+        function doNext(){
+            var isSaveRequested = document.getElementById('theIsSaveRequested');
+            if (isSaveRequested != null) {
+                if (isSaveRequested.value === "false"){
+                    jsonMapCSVContents = getPolicyContentsFromEditor();
+                }
+                nextPage(jsonMapCSVContents,isSaveRequested.value);
+            } else{
+                nextPage(jsonMapCSVContents,false);
+            } 
+        }
+        
+        /**
+         * Function for going back to previous page 
+         */
+        function doPrevious(){
+            prevPage();
+        }
+        
+        /**
+         * Function for uploading spreadSheet 
+         */
+        function doUploadSpreadSheet(){
+            showUploadStatus(true);
+            uploadSpreadsheet();
+        }
+        
+        /**
+         * Function for rest the content save state  
+         */
+        function setIsSaved(isChanged){
+            var theIsSaveRequested = document.getElementById('theIsSaveRequested');
+            if (isChanged)
+                theIsSaveRequested.value = false; 
+        }
+        
+        
+        /**
+         * Function for enabling the page block button
+         * @Created 04 July 2013
+         */
+        function enablePageBlockButton(id,isEnabled){
+            var parentId = 'thePage:formPolicyContentEditor:theMainBlock:pnActions1:';
+            var btnTop =  document.getElementById(parentId + id);
+            if(btnTop){
+                enableButton(btnTop, isEnabled);
+            }
+            var btnBottom = document.getElementById(parentId+'bottom:'+id);
+            if(btnBottom){
+               enableButton(btnBottom, isEnabled);
+            }
+        }
+        
+        /**
+         * Function for enabling button
+         * @Created 04 July 2013
+         */
+        function enableButton(ele, isEnabled){
+            ele.disabled = !isEnabled;
+            ele.className = isEnabled ? 'btn mbutton' : 'btnDisabled';
+        }
+        
+        /**
+         * Function for hidding duplicate footer caused by apex:include
+         */
+        function hideDuplicateFooter(){
+            document.getElementsByClassName('bPageFooter noTableFooter')[0].style.display = "none";
+        }
+        
+        /**
+         * Function for showing the uploading status and inactive the other actions
+         */
+        function showUploadStatus(isShow){
+            var divUploadStatus =  document.getElementById('inactiveP1UI');
+            divUploadStatus.style.display = (isShow) ? "block" : "none";
+            //set Upload button status
+            var btnUpload = document.getElementById('thePage:formPolicyContentEditor:theMainBlock:pbsUploadExcel:uploadButton');
+            btnUpload.value = (isShow) ? "Uploading..." : "Upload";
+            enableButton(btnUpload, !isShow);
+        }
+        
+        function getElementSpinnerMessage(){
+       	 	return document.getElementById(getPolicyContentViewerElementId()+':spinnerMessage');
+       	}
+       	function getPolicyContentViewerElementId(){
+       		return "thePage:formPolicyContentEditor:theMainBlock:pbsPolicyContentViewer";
+       	}
+        
+        /**
+	     * Function for hiding loading spinner
+	     */
+	    function hideLoadingSpinner(isHide){
+     		var divLoading = document.getElementById(getPolicyContentViewerElementId()+':divLoading');
+         	var divPolContent = document.getElementById(getPolicyContentViewerElementId()+':divPolContent');
+			if (divLoading) divLoading.style.display = (isHide) ? "none" : "block";
+			if (divPolContent) divPolContent.style.display = (isHide) ? "block" : "none";
+	    }
+        
+        //disable Save Draft button by default  
+        enablePageBlockButton('saveDraft', false)
+        //hide duplicate footer caused by apex include
+        hideDuplicateFooter();
+        
+    </script>
+    
+</apex:page>

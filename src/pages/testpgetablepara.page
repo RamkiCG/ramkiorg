@@ -1,0 +1,39 @@
+<apex:page controller="opportunityStageController">
+  <apex:messages style="color:red"></apex:messages>
+ 
+   <apex:form >
+ 
+      <apex:pageblock title="Opportunity List">
+            //This will display that the StageStatus is changed. 
+            // The 'status' attribute on the actionSupport tag is referencing this
+            <apex:actionstatus id="stageStatus" starttext=" Opportunity Being Updated…" stoptext=" Update Complete!"></apex:actionstatus>
+ 
+            //The {!oppList} references the oppList list on the controller. 
+            // oppItem is the specific opportunity used to populate each row of the table
+           <apex:pageblocktable value="{!oppList}" var="oppItem" id="oppTable">
+ 
+               <apex:column headervalue="Name">
+                    <apex:outputtext value="{!oppItem.Name}"></apex:outputtext>
+                </apex:column>
+ 
+                <apex:column headervalue="Stage Name">
+            <apex:selectlist value="{!oppItem.StageName}" multiselect="false" size="1">
+                                 //Look at the getOppStages code in the controller. 
+                                 //  It is code that does not hard code the Stage Names
+                <apex:selectoptions value="{!OppStages}"></apex:selectoptions>
+ 
+                                //So when the drop-down list changes the 'onchange' event will fire which
+                                //  will cause the 'updateOpportunity' method to be called on the controller
+ 
+                <apex:actionsupport event="onchange" action="{!updateOpportunity}" rerender="oppTable" status="stageStatus">
+                                         //The opportunityID string will be populated on the controller with the id of the opportunity: "!oppItem.id"
+                    <apex:param name="opportunityID" assignto="{!opportunityID}" value="{!oppItem.id}"></apex:param>
+                </apex:actionsupport>
+            </apex:selectlist> 
+        </apex:column>
+ 
+          </apex:pageblocktable>
+      </apex:pageblock>
+ 
+  </apex:form>
+</apex:page>

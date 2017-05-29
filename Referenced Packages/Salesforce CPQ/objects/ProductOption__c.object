@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>ProductOptionHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Option for a configurable product.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fieldSets>
+        <fullName>OptionConfiguration</fullName>
+        <availableFields>
+            <field>Bundled__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>ExistingQuantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Determines fields presented to users during option configuration.</description>
+        <displayedFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ProductCode__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ProductName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ProductDescription__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>UnitPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>OptionConfiguration</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>OptionLookup</fullName>
+        <availableFields>
+            <field>Bundled__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>ExistingQuantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>UnitPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Determines fields presented to user when looking up option to add.</description>
+        <displayedFields>
+            <field>ProductCode__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ProductName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ProductDescription__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>OptionLookup</label>
+    </fieldSets>
+    <fields>
+        <fullName>AppliedImmediately__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that indicates changes to this option should apply immediately.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to immediately apply changes to this option. Use sparingly to avoid slow user experience.</inlineHelpText>
+        <label>Apply Immediately</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Bundled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates that related product is bundled with the main product. Bundled options have fixed quantity and zero price.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates that related product is bundled with the main product. Bundled options have fixed quantity and zero price as price is included in the main product.</inlineHelpText>
+        <label>Bundled</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ComponentCodePosition__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Position of this component in generated product code for the configuration.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Position of this component in generated product code for the configuration.</inlineHelpText>
+        <label>Component Code Position</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ComponentCode__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Code for the component represented by this option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Code for the component represented by this option.</inlineHelpText>
+        <label>Component Code</label>
+        <length>60</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ConfiguredSKU__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>SKU being configured with this option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Product SKU being configured with this option.</inlineHelpText>
+        <label>Configured SKU</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Options</relationshipLabel>
+        <relationshipName>Options</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DiscountAmount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Discount (Amt)</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DiscountSchedule__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Discount schedule to be applied to the product selected by this option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Discount schedule to be applied to the product selected by this option. This overrides discount schedule selected on the product or feature.</inlineHelpText>
+        <label>Discount Schedule</label>
+        <referenceTo>DiscountSchedule__c</referenceTo>
+        <relationshipLabel>Product Options</relationshipLabel>
+        <relationshipName>ProductOptions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Discount (%)</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>DiscountedByPackage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates that quote lines generated from this component should pick up additional discount from the parent package line. Only percentage based discount can be inherited.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to automatically apply additional discount from parent package to this component. Only percentage-based discount can be applied.</inlineHelpText>
+        <label>Discounted By Package</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExistingQuantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Existing quantity of this product. Computed by looking at the assets attached to the account.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Existing quantity of this product. Computed by looking at the assets attached to the account.</inlineHelpText>
+        <label>Existing Quantity</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Feature__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Feature that selects this option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Feature that includes this option for selection.</inlineHelpText>
+        <label>Feature</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>$Source.ConfiguredSKU__c</field>
+                <operation>equals</operation>
+                <valueField>ProductFeature__c.ConfiguredSKU__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>ProductFeature__c</referenceTo>
+        <relationshipLabel>Product Options</relationshipLabel>
+        <relationshipName>ProductOptions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>MaxQuantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Maximum quantity allowed for this option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Maximum quantity allowed for this option.</inlineHelpText>
+        <label>Max Quantity</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MinQuantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Minimum quantity allowed for this option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Minimum quantity allowed for this option.</inlineHelpText>
+        <label>Min Quantity</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sequential number that determines this option&apos;s sort order.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Display order of this option within the feature it&apos;s assigned to.</inlineHelpText>
+        <label>Number</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OptionalSKU__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>SKU added if this option is selected.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Product SKU added when this option is selected.</inlineHelpText>
+        <label>Optional SKU</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Optional For</relationshipLabel>
+        <relationshipName>OptionalFor</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PriceEditable__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Brings over the value of Price Editable field on the optional SKU in order to avoid loading optional product just to know if the price is editable.</description>
+        <externalId>false</externalId>
+        <formula>IF(OptionalSKU__r.PriceEditable__c, &apos;Yes&apos;, &apos;No&apos;)</formula>
+        <inlineHelpText>Brings over the value of Price Editable field on the optional SKU in order to avoid loading optional product just to know if the price is editable.</inlineHelpText>
+        <label>Price Editable</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductCode__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OptionalSKU__r.ProductCode</formula>
+        <inlineHelpText>Product Code for the optional product SKU.</inlineHelpText>
+        <label>Product Code</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductConfigurationType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Pulls in the value of Configuration Type on Product object in order to avoid loading related product record.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(OptionalSKU__r.ConfigurationType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Pulls in the value of Configuration Type on Product object in order to avoid loading related product record.</inlineHelpText>
+        <label>Product Configuration Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductDescription__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OptionalSKU__r.Description</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Description for the optional SKU.</inlineHelpText>
+        <label>Product Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OptionalSKU__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Name for the optional SKU.</inlineHelpText>
+        <label>Product Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductQuantityScale__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Specifies the number of decimal places used in the Quantity field.</description>
+        <externalId>false</externalId>
+        <formula>OptionalSKU__r.QuantityScale__c</formula>
+        <inlineHelpText>Specifies the number of decimal places used in the Quantity field.</inlineHelpText>
+        <label>Product Quantity Scale</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuantityEditable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that determines whether option quantity is editable regardless of Quantity being specified.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to allow quantity to be edited even though it&apos;s specified on the option.</inlineHelpText>
+        <label>Quantity Editable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Quantity of the related product that should be added to the quote.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Quantity of the related product that should be added to the quote.</inlineHelpText>
+        <label>Quantity</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuoteLineVisibility__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines when quote line generated by this option is visible.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Configure visibility of quote line generated by this option.</inlineHelpText>
+        <label>Quote Line Visibility</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Always</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Editor Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Document Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Never</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that indicates whether this component is required or not.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if this product is required on the bundle.</inlineHelpText>
+        <label>Required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Selected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates this option should be selected by default.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if this product option should be automatically selected by default.</inlineHelpText>
+        <label>Selected</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SubscriptionScope__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Specifies subscription scope for dynamic subscriptions added as components. Overrides Subscription Scope defaulted from the product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Choose how this dynamic subscription determines target product set. Package is just the parent product. Components are the sibling components. Both is parents and sibling components.</inlineHelpText>
+        <label>Subscription Scope</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Package</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Components</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Both</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>System__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Marks this option as managed by the system which means users can not manually select or deselect.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to indicate this option is managed by the system which makes it unavailable for user selection.</inlineHelpText>
+        <label>System</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Type of this option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Use &quot;Component&quot; if this option, including quantity, is dependent on parent. Use&quot; Accessory&quot; if this option is dependent on parent but quantity is independent. Use &quot;Related Product&quot; for related but fully independent products.</inlineHelpText>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Component</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accessory</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Related Product</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>UnitPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price for this option. This will override the value from price book.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unit price for this option. This will override the value from price book.</inlineHelpText>
+        <label>Unit Price</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UpliftedByPackage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Check to automatically apply uplift from parent package to this component. Only applies to components that are multi-segmented products.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to automatically apply uplift from parent package to this component. Only applies to components that are multi-segmented products.</inlineHelpText>
+        <label>Uplifted By Package</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Product Option</label>
+    <nameField>
+        <displayFormat>PO-{000000}</displayFormat>
+        <label>Option Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Product Options</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>ConfiguredSKU__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Feature__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Number__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>OptionalSKU__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Quantity__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Bundled__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ConfiguredSKU__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Feature__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Number__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OptionalSKU__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>ConfiguredSKU__c</searchFilterFields>
+        <searchFilterFields>Number__c</searchFilterFields>
+        <searchFilterFields>Feature__c</searchFilterFields>
+        <searchFilterFields>OptionalSKU__c</searchFilterFields>
+        <searchFilterFields>Bundled__c</searchFilterFields>
+        <searchFilterFields>Quantity__c</searchFilterFields>
+        <searchFilterFields>Discount__c</searchFilterFields>
+        <searchFilterFields>UPDATEDBY_USER</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

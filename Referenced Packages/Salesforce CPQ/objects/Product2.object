@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <fullName>SearchFilters</fullName>
+        <availableFields>
+            <field>Description</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields that are used as search filters in quote product lookup.</description>
+        <displayedFields>
+            <field>ProductCode</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Family</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Search Filters</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>SearchResults</fullName>
+        <availableFields>
+            <field>Hidden__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>NonDiscountable__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>NonPartnerDiscountable__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Optional__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>PricingMethod__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Specifications__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>SubscriptionBase__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>SubscriptionCategory__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>SubscriptionPercent__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>SubscriptionPricing__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>SubscriptionTerm__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Taxable__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields displayed in search results in quote product lookup.</description>
+        <displayedFields>
+            <field>ProductCode</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Family</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Description</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Search Results</label>
+    </fieldSets>
+    <fields>
+        <fullName>AssetConversion__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines how this product is converted to asset.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates how this product is converted to asset.</inlineHelpText>
+        <label>Asset Conversion</label>
+        <picklist>
+            <picklistValues>
+                <fullName>One per quote line</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>One per unit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BatchQuantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Quantity in one batch for products sold in batches. Quantity entered in quote line will be divided by this number.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Non-blank value designates this product is sold in batches. Enter quantity in each batch. Quantity entered in quote will be divided by this value and rounded up to the nearest integer.</inlineHelpText>
+        <label>Batch Quantity</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Component__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Marks this product as a component, excluding it from selection in product lookup.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Marks this product as a component, excluding it from selection in product lookup.</inlineHelpText>
+        <label>Component</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CompoundDiscountRate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Discount rate compounded by quantity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Discount rate compounded by quantity.</inlineHelpText>
+        <label>Compound Discount (%)</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ConfigurationEvent__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Specifies when user is prompted to configure this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Use this to control when Configure Products screen shows up for this product. Choose &quot;Add&quot; to limit to initial configuration. Choose &quot;Edit&quot; to subsequent configuration.</inlineHelpText>
+        <label>Configuration Event</label>
+        <picklist>
+            <controllingField>ConfigurationType__c</controllingField>
+            <picklistValues>
+                <fullName>Always</fullName>
+                <default>false</default>
+                <controllingFieldValues>Allowed</controllingFieldValues>
+                <controllingFieldValues>Disabled</controllingFieldValues>
+                <controllingFieldValues>Required</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Add</fullName>
+                <default>false</default>
+                <controllingFieldValues>Allowed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Edit</fullName>
+                <default>false</default>
+                <controllingFieldValues>Allowed</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ConfigurationFields__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Additional fields collected during configuration of this product. All of these fields must exist on Product Option and Quote Line objects.</description>
+        <externalId>false</externalId>
+        <label>Configuration Fields</label>
+        <length>10000</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ConfigurationFormTitle__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Title of the configuration form rendered from specified configuration fields.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the configuration form rendered from specified configuration fields.</inlineHelpText>
+        <label>Configuration Form Title</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ConfigurationType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Configuration type of this product: Choose Allowed if the user is allowed to configure the product/bundle, but not required to, Disabled when your bundle automatically selects options, or Required if the product/bundle must be configured.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Configuration type of this product: Choose Allowed if the user is allowed to configure the product/bundle, but not required to, Disabled when your bundle automatically selects options, or Required if the product/bundle must be configured.</inlineHelpText>
+        <label>Configuration Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Allowed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disabled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ConfigurationValidator__c</fullName>
+        <deprecated>false</deprecated>
+        <description>JavaScript function used to validate configuration of this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>JavaScript function used to validate configuration of this product.</inlineHelpText>
+        <label>Configuration Validator</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ConfiguredCodePattern__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Pattern used to generate product code (SKU) for configured products.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Pattern used to generate product code (SKU) for configured products.</inlineHelpText>
+        <label>Configured Code Pattern</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CostEditable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Controls whether cost for this product may be modified on individual quotes.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Controls whether cost for this product may be modified on individual quotes.</inlineHelpText>
+        <label>Cost Editable</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CustomConfigurationPage__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Custom Configuration Page</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomConfigurationRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Custom Configuration Required</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DefaultQuantity__c</fullName>
+        <defaultValue>1</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Specifies the starting quantity of the product when added.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify the starting quantity of the product when added.</inlineHelpText>
+        <label>Default Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>5</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DescriptionLocked__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that indicates this product&apos;s description is locked (not editable on the quote).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Flag that indicates this product&apos;s description is locked (not editable on the quote).</inlineHelpText>
+        <label>Lock Description</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DiscountCategory__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Discount category assigned to this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify discount category for this product.</inlineHelpText>
+        <label>Discount Category</label>
+        <referenceTo>DiscountCategory__c</referenceTo>
+        <relationshipLabel>Products</relationshipLabel>
+        <relationshipName>Products</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DiscountSchedule__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Discount schedule for use with this product</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Discount schedule for use with this product</inlineHelpText>
+        <label>Discount Schedule</label>
+        <referenceTo>DiscountSchedule__c</referenceTo>
+        <relationshipLabel>Quantity Discounted Products</relationshipLabel>
+        <relationshipName>Products</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DynamicPricingConstraint__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Specifies constraints on dynamically calculated pricing.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Use to place constraints on dynamically calculated prices.</inlineHelpText>
+        <label>Dynamic Pricing Constraint</label>
+        <picklist>
+            <picklistValues>
+                <fullName>List price is minimum</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>List price is maximum</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ExcludeFromMaintenance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Excludes this product from percent-of-total maintenance calculations.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to always exclude this product from percent-of-total maintenance calculations.</inlineHelpText>
+        <label>Exclude From Maintenance</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExcludeFromOpportunity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates this product should be excluded from transfer to the Opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates this product should not be transferred to the opportunity.</inlineHelpText>
+        <label>Exclude From Opportunity</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Hidden__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Excludes this product from appearing on the quote PDF.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Excludes this product from appearing on the quote PDF.</inlineHelpText>
+        <label>Hidden</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HidePriceInSearchResults__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates whether the product price should be displayed in the Product Search Results.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select checkbox to hide this product&apos;s price in the Product Search Results.</inlineHelpText>
+        <label>Hide Price in Search Results</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IncludeInMaintenance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Includes products in percent-of-total calculations that are normally excluded (e.g.: subscription products).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to always include this product in percent-of-total calculations.</inlineHelpText>
+        <label>Include In Maintenance</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NewQuoteGroup__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Forces this product to be in its own group on a quote.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to create a new quote group when this product is added (unless the current group is empty).</inlineHelpText>
+        <label>New Quote Group</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NonDiscountable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Marks this product as non discountable.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Marks this product as not discountable.</inlineHelpText>
+        <label>Non Discountable</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NonPartnerDiscountable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Marks this product as non-discountable for partners.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check to make this product non-discountable for partners.</inlineHelpText>
+        <label>Non Partner Discountable</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OptionLayout__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines how options are presented to users.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines how options are presented to users.</inlineHelpText>
+        <label>Option Layout</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Sections</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tabs</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wizard</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>OptionSelectionMethod__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines how user selects options attached to this product. &quot;Click&quot; method presents options with checkboxes next to them. &quot;Add&quot; renders a button which brings up a dialog box with available options.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines how user selects options attached to this product. &quot;Click&quot; method presents options with checkboxes next to them. &quot;Add&quot; renders a button which brings up a dialog box with available options.</inlineHelpText>
+        <label>Option Selection Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Click</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Add</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Optional__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates whether this product is optional or not by default. Optional products don&apos;t contribute to quote total or get transferred to the opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if this product is optional by default. Optional products don&apos;t contribute to quote total or get transferred to the opportunity.</inlineHelpText>
+        <label>Optional</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PriceEditable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates this product allows for price to be freely editable when building a quote</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates this product allows for price to be freely editable when building a quote.</inlineHelpText>
+        <label>Price Editable</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PricingMethodEditable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Specifies whether Pricing Method may be changed when this product is added to quote.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select if Pricing Method can be changed when this product is added to quote.</inlineHelpText>
+        <label>Pricing Method Editable</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PricingMethod__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Pricing method that should be applied to this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Pricing method that should be applied to this product.</inlineHelpText>
+        <label>Pricing Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>List</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cost</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Block</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ProductPictureID__c</fullName>
+        <deprecated>false</deprecated>
+        <description>ID of Document or Content record that holds the picture for this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>ID of Document or Content record that holds the picture for this product.</inlineHelpText>
+        <label>Product Picture Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuantityEditable__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that determines whether the quantity is editable.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Allow or prevent changing the quantity for this product.</inlineHelpText>
+        <label>Quantity Editable</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>QuantityScale__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Specifies the number of decimal places used in the Quantity field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specifies the number of decimal places used in the Quantity field.</inlineHelpText>
+        <label>Quantity Scale</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReconfigurationDisabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that disables re-configuration of this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When checked this product can only be configured when first added to a quote. If selected, users will not have access to a Configure link on the Edit Lines page after product has been added.</inlineHelpText>
+        <label>Disable Reconfiguration</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RenewalProduct__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Product that replaces this product on renewal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Product that replaces this product on renewal. Use this to quote a different SKU when renewing.</inlineHelpText>
+        <label>Renewal Product</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Original Products</relationshipLabel>
+        <relationshipName>OriginalProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SortOrder__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines a default sort order of products in the Product Lookup page, and therefore the order in which they are added to the quote.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines a default sort order of products in the Product Lookup page, and therefore the order in which they are added to the quote.</inlineHelpText>
+        <label>Sort Order</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Specifications__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Formatted specifications for this product for use in quote templates to produce spec sheets.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Formatted specifications for this product for use in quote templates to produce spec sheets.</inlineHelpText>
+        <label>Specifications</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>SubscriptionBase__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether dynamic subscriptions are calculated off List or Net product price.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether dynamic subscriptions are calculated off List or Net product price.</inlineHelpText>
+        <label>Subscription Base</label>
+        <picklist>
+            <picklistValues>
+                <fullName>List</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Regular</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Net</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubscriptionCategory__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Subscription category for this product. Applies to all products and used to limit percent-of-total subscriptions to certain products.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Use this to limit percent-of-total subscriptions to certain products. For example, software maintenance should only calculate percentage on software products.</inlineHelpText>
+        <label>Subscription Category</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Hardware</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Software</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubscriptionPercent__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Percent of non-subscription total to be used as the price of this subscription.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percent of non-subscription total to be used as the price of this subscription.</inlineHelpText>
+        <label>Subscription Percent</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>SubscriptionPricing__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Type of pricing to use for this subscription. &quot;None&quot; means this product is not a subscription.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Type of pricing to use for this subscription. &quot;None&quot; means this product is not a subscription.</inlineHelpText>
+        <label>Subscription Pricing</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Fixed Price</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Percent Of Total</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubscriptionTarget__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Effective product on which maintenance should calculate.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify product on which maintenance should calculate.</inlineHelpText>
+        <label>Subscription Target</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Subscription Targeting Products</relationshipLabel>
+        <relationshipName>SubscriptionTargetingProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SubscriptionTerm__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Term length of this subscription. Only applicable if the product is a subscription.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Term length of this subscription. Only applicable if the product is a subscription.</inlineHelpText>
+        <label>Subscription Term</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubscriptionType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Renewalable Subscriptions will transfer to Renewal Quotes. One-time Subscriptions will not.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Renewalable Subscriptions will transfer to Renewal Quotes. One-time Subscriptions will not.</inlineHelpText>
+        <label>Subscription Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Renewable</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>One-time</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Taxable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates whether this product is taxable.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates whether this product is taxable.</inlineHelpText>
+        <label>Taxable</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermDiscountLevel__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Level of subscription term that&apos;s used to calculated term discount.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify subscription term level that should be used in calculating term discount. Leave blank to indicate default.</inlineHelpText>
+        <label>Term Discount Level</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Line</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quote</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TermDiscountSchedule__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Schedule for discounts based on subscription term.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Schedule for discounts based on subscription term.</inlineHelpText>
+        <label>Term Discount Schedule</label>
+        <referenceTo>DiscountSchedule__c</referenceTo>
+        <relationshipLabel>Term Discounted Products</relationshipLabel>
+        <relationshipName>TermDiscountedProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>UpgradeCredit__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Credit product quoted when upgrading this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Use to specify credit when quoting upgrades to this product.</inlineHelpText>
+        <label>Upgrade Credit</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Credited Products</relationshipLabel>
+        <relationshipName>CreditedProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>UpgradeSource__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Specifies the product being upgraded.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Product being upgraded. Populating this field makes this product an upgrade.</inlineHelpText>
+        <label>Upgrade Source</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Target Upgrades</relationshipLabel>
+        <relationshipName>TargetUpgrades</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>UpgradeTarget__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Product being upgraded to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify the upgraded product. Only applicable if this product is an upgrade as indicated by Upgrade From field being populated.</inlineHelpText>
+        <label>Upgrade Target</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Source Upgrades</relationshipLabel>
+        <relationshipName>SourceUpgrades</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <validationRules>
+        <fullName>Include_or_Exclude_Maintenance</fullName>
+        <active>true</active>
+        <description>Validates that either Includes In Maintenance or Excludes From Maintenance checkbox is checked but not both.</description>
+        <errorConditionFormula>AND(IncludeInMaintenance__c,ExcludeFromMaintenance__c)</errorConditionFormula>
+        <errorMessage>You must check either Include In Maintenance or Exclude From Maintenance checkbox.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Term_schedule_requires_subscription</fullName>
+        <active>true</active>
+        <description>Ensures only subscription products have Term Discount Schedule field populated.</description>
+        <errorConditionFormula>AND(ISPICKVAL(SubscriptionPricing__c, &apos;&apos;),NOT(ISBLANK(TermDiscountSchedule__c)))</errorConditionFormula>
+        <errorDisplayField>TermDiscountSchedule__c</errorDisplayField>
+        <errorMessage>Only subscription products may specify term discount schedule</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>CloneWithRelated</fullName>
+        <availability>online</availability>
+        <description>Clones this product with related SteelBrick CPQ records such as Features, Options, Costs and Block Prices</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Clone With Related</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>{!URLFOR($Action.Product2.Clone, Product2.Id, [saveURL=&apos;/apex/SBQQ__CloneProductChildren?id=&apos; &amp; Product2.Id])}</url>
+    </webLinks>
+</CustomObject>

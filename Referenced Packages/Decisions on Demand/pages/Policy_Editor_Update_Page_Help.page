@@ -1,0 +1,36 @@
+<apex:page sidebar="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+   </head>
+  <apex:image id="theImage" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="400 px"/>
+  <br/>
+  <h1 class="help">Deploying your Business Policy</h1>
+  <p class="help">Step 3 of the Business Policy editor wizard allows you to deploy the updated business policy</p>
+  <apex:panelGrid columns="2" rules="rows" columnClasses="width60, width40">
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Enter version label and notes</h3>
+	      <p>You can enter a short label for the version, as well as more a detailed description of the changes made. 
+	      Both will be stored in the policy version history. 
+	      </p>   
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" style="min-width:75%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyUpdateDataEntry_s.png')}"/>
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Save or commit the version</h3>
+	      <p>You can choose to save the version in one of three ways:</p>
+	      <ul>
+	      	<li><b>Save as Draft</b> -- the rules and version information are saved but the version will remain editable. 
+	      	Choose this option if the rules are not yet complete and you anticipate further changes before deploying an update.</li>
+	      	<li><b>Commit</b> -- the rules are saved and the content of this version is frozen, but the version is not yet activated. 
+	      	Any subsequent edits will create a new version so that the current version remains stable. 
+	      	Use this option if the rules of this version are complete but should not go ito effect until a later date.</li>
+	      	<li><b>Commit and activate</b> -- the rules are saved, the content of this version is frozen, and it is immediately deployed and activated.</li>
+	      </ul>  
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" style="min-width:75%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyUpdateButtons_s.png')}"/>
+	</apex:panelGrid>
+  <p class="help">If you need to run further tests or make changes before deploying, click <b>Previous</b> to return to the <a href="{!$Page.DecsOnD__Policy_Editor_Test_Page_Help}" target="_top">test console</a>.
+  </p>
+  <p class="help">You can also click <b>Cancel</b> to return to the <a href="{!$Page.DecsOnD__PolicyDetailHelp}" target="_top">policy detail page</a>. 
+  Note that any changes made to the policy in the edit step will already have been saved as a new draft version.
+  </p>
+</apex:page>

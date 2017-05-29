@@ -1,0 +1,505 @@
+<!-- 
+ Copyright 2012-2014, Decisions on Demand, Inc.
+ All Rights Reserved.
+ -->
+ <!--  Patch 1.8.27 Set page title -->
+<apex:page standardController="DecsOnD__Policy__c" extensions="DecsOnD.PolicyListControllerExtension" recordSetVar="policies" action="{!refreshPolicies}" id="thePage" title="Business Policies" cache="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+        <!--  TODO Externalize styles -->
+        <style>
+            .optGroupLabel{
+                text-decoration:none;
+            }
+            .colValign{
+                vertical-align:middle;
+            }
+            .gridPosition{
+                margin-left:50px;
+            }
+            .loadingpanel{
+                padding-top:160px;
+                padding-left:320px;
+                font-size:95%;
+            }
+            .overlaypanel{
+                height:320px;
+                background-color: white;
+            }
+            .labeltext{
+                font-weight: bold;
+                font-size: 1.0em;
+            }
+            .listspace{
+                margin-top: 6px;
+            }
+.help, .decsond {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5625;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+h1.help,h1.decsond {
+    font-size: 20px;            
+}
+h2.help,h2.decsond {
+    font-size: 16px;            
+}
+a.button-link {
+    border: 1px solid #6297ad;
+    color: #fff;
+    cursor: pointer;
+//    font-family: 'PT Sans', sans-serif;
+    font-size: 14px;
+    padding: 6px 7px;
+    text-decoration: none;
+    text-shadow: 1px 1px #47819b;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 8px 15px;
+    vertical-align:middle;
+}
+
+a.button-link:hover {
+    border: 1px solid #6297ad;
+    text-decoration: none;
+}
+p.help,p.decsond {
+    width: 80%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.align-center {
+    text-align:center;                  
+}
+
+/* Hyperlinks
+------------------------------------------------------------ */
+
+a.help,
+a.help:visited,
+a.decsond,
+a.decsond:visited {
+    color: #5397b4;
+    text-decoration: none;
+}
+
+a.help:hover ,a.decsond.hover {
+    text-decoration: underline;
+}
+        </style>
+    </head>
+<!-- 
+    <apex:enhancedList type="Policy__c" height="300" rowsPerPage="10" id="PolicyList" />
+    <apex:listViews type="Policy__c" />
+
+ -->
+    <script>
+        function refreshPage() {
+            //parent.window.opener.location.href = "/apex/DecsOnD__PolicyBrowser";
+            if ({!totalPolicyCount}<1) {
+                window.location.href = "/apex/DecsOnD__PolicyBrowser";
+            }
+        }
+/*        function goSelectorPage() {
+            top.location = "/apex/DecsOnD__InstallTemplates";
+        }
+*/        
+
+
+        function installTemplate(installBtnId, templateFQN, templateCount){
+            //set install button status
+            setInstallBtnStatus(installBtnId, false, templateCount);
+            //@Sothea #442 Deprecated since a template can be installed more than once
+            //Call controller action to install template
+            //installTemplateAction(templateFQN); 
+            
+            //@Sothea #442 open CreateNewPolicy page
+            return top.location.href="/apex/CreatePolicyWizard?key="+templateFQN+"&action=installTemplate";
+        }
+        
+        /**
+         * Disable or enable install button when clicking/table refreshing
+         */
+        function setInstallBtnStatus(selectedBtnId, isEnable, templateCount){
+            if (!templateCount) return;
+            // TODO Avoid hard-coding full path
+            var mainId = 'thePage:installTemplatesForm:pbTemplates:tempSection:templateTable:';
+            for(var i = 0 ; i < templateCount ; i++){
+                var btnInstallId = mainId + i + ':IdInstall';
+                var btnInstall = document.getElementById(btnInstallId);                         
+                //@Sothea #442 Deprecated since a template can be installed more than once              
+                //@Vichet 141006: condition before setting Install button status 
+                /*if (btnInstall && (selectedBtnId == btnInstallId)){
+                    //change label of selected button
+                    btnInstall.value = 'Installing...';
+                    //show loading status
+                    var imgLoading = document.getElementById(mainId + i + ':imgLoading');
+                    imgLoading.style.display = 'inline';
+                }*/
+                
+                //set status for all install buttons
+                btnInstall.disabled = isEnable ? false : true;
+                btnInstall.className = isEnable ? 'btn' : 'btnDisabled';
+            }
+        }
+        
+    </script>  
+    <apex:outputPanel id="pbHeaderNewUser" rendered="{!totalPolicyCount==0}">
+    <!-- JVG This line was removed in patch branch-- not 100% sure which is correct...
+        <apex:pageMessages showDetail="true" id="msg"/>
+        -->
+        <apex:image id="logoNewUserBlock" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'LogoClearBGNameOnRightBlack.png')}" width="200 px" styleClass="float-right"/>
+        <br/>
+        <h1 class="help">Creating Your First Business Policy</h1>
+        <br/>
+        <p class="help">
+            Welcome to Decisions on Demand! 
+            We will help you automate a wide range of operational decisions related to any Salesforce object, standard or custom.
+        </p>
+        <p class="help">
+            To get started with Decisions on Demand, you can either install a pre-built template for a common CRM decision point, 
+            or request a custom policy to meet your specific requirements. 
+            For an overview of the app as well as links to documentation and other available resources, please refer to the <a class="help" href="{!$Page.Welcome}" target="_top">Welcome</a> tab.
+        </p>
+        <a id="InstallTemplate"></a><h2 class="help">Install a template</h2>
+        <p class="help">        
+            The list below shows the available templates. 
+            <apex:outputText styleClass="help" rendered="{!isPolicyAdmin}"> 
+               Click <b>View</b> in the Documentation column to learn more about a template, 
+               or <b>Install</b> to use it in your organization. After installing a template you can proceed to: 
+                <ul class="help" >   
+                    <li><b>Configure the policy</b> -– optionally, add, remove or hide columns to match your requirements and object model (<a class="help" href="{!$Page.PolicyDetailHelp}#ConfigurePolicy" target="_blank">details &gt;&gt;</a>)</li>
+                    <li><b>Write business rules</b> -– edit the decision tables to implement your business rules (<a class="help" href="{!$Page.PolicyDetailHelp}#EditPolicy" target="_blank">details &gt;&gt;</a>)</li>
+                    <li><b>Set up policy invocation</b> -– apply the policy to your data from a custom button, trigger, Batch Apex, Visual Workflow or custom VisualForce page (<a class="help" href="{!$Page.PolicyDetailHelp}#ConfigurePolicyInvocation" target="_blank">details &gt;&gt;</a>)</li>    
+                </ul>
+            </apex:outputText>   
+            <apex:outputText styleClass="help" rendered="{!NOT(isPolicyAdmin)}"> 
+               Click <b>View</b> in the Documentation column to learn more about a template. 
+               To install a template for use in your organization, please contact your administrator. 
+            </apex:outputText>   
+        </p>     
+        <a id="RequestCustomPolicy"></a><h2 class="help">Request a custom policy</h2>
+        <p class="help">
+            If none of the pre-built templates meets your needs, we can help you configure business policies for most operational decision points. 
+            Just <a class="help" href="mailto:sfdc-support@decisionsondemand.com?Subject=Custom business policy">send us an email</a>, 
+            provide us your contact information and a brief description of your objectives and we'll set up a call to discuss your requirements.
+        </p>
+    </apex:outputPanel>
+<!-- 
+<apex:pageBlock id="pbHeader" rendered="{!totalPolicyCount>0}">
+ -->    
+     <apex:outputPanel id="pbHeader" layout="block" rendered="{!totalPolicyCount>0}">
+        <apex:image id="logoReturningUserBlock" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'LogoClearBGNameOnRightBlack.png')}" width="200 px" styleClass="float-right"/>
+        <br/>
+        <h1 class="decsond">Managing Business Policies</h1>
+        <br/>
+        <p class="decsond">
+            In this tab you can access and manage your Decisions on Demand business policies.
+        </p>
+        <ul class="decsond">
+        <li>The <b class="decsond">Available Business Policies</b> section shows all business policies currently installed for your organization</li>
+        <li>The <b class="decsond">Business Policy Template Library</b> section shows additional business policies available to install</li> 
+        </ul>
+        <apex:outputPanel layout="block" rendered="{!isPolicyAdmin}">
+            <p class="decsond">To add custom business policies not found in the Template Library, 
+                please contact <a class="decsond" href="mailto:sfdc-support@decisionsondemand.com?Subject=Custom business policy">Decisions on Demand support</a>
+            </p>
+        </apex:outputPanel>  
+        <apex:outputPanel layout="block" rendered="{!NOT(isPolicyAdmin)}">
+            <p class="help">To add custom business policies not covered by the available templates, please contact your administrator</p>
+        </apex:outputPanel>
+    </apex:outputPanel>
+    <a id="AvailableBusinessPolicies"></a>
+    <apex:form id="theForm" target="_self" rendered="{!totalPolicyCount>0}">
+        <apex:pageMessages showDetail="true" id="msg"/>
+        <apex:pageBlock id="pbPolicies" title="Available Business Policies" helpTitle="Help" helpUrl="{!$Page.DecsOnD__PolicyListHelp}" mode="edit">
+            <apex:pageBlockSection columns="1" >
+                <apex:outputPanel rendered="{!isPolicyAdmin}">
+                    The following policies are installed and available in your organization. Click the name of a policy to view or edit it
+                </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(isPolicyAdmin)}">
+                The following policies are installed and available to you. Click the name of a policy to view or edit it. 
+                Note that you may not have access rights to all installed policies -- contact your administrator if you need access to policies not shown below  
+            </apex:outputPanel>
+                <apex:outputPanel id="pnFilterOpt" layout="block">
+                    <apex:outputLabel value="Select view: " for="theListCheckbox"/>
+                    <apex:selectList title="View:" value="{!filterid}" size="1" id="theListCheckbox">
+                         <apex:selectOptions value="{!listviewoptions}"/>
+                         <apex:actionSupport event="onchange" rerender="pbsPolicies" status="theSelectViewStatus"/><!-- action="{!updateFilter}"  -->
+                    </apex:selectList>
+                    <apex:actionStatus id="theSelectViewStatus">
+                        <apex:facet name="start">   
+                            <apex:image url="/img/loading.gif"/> 
+                        </apex:facet>
+                    </apex:actionStatus>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbsPolicies" columns="1">                        <!-- @Sothea 140403 : set 'first' and 'rows' attributes -->
+                <apex:pageBlockTable value="{!policies}" var="policy" id="policyTable" first="{!policyTablePaginator.startRow}" rows="{!policyTablePaginator.pageSize}"> 
+                    <apex:column width="100px">
+                        <apex:facet name="header">Policy Name</apex:facet>
+                        <apex:outputLink value="{!$Site.CurrentSiteUrl}/{!policy.ID}" target="_blank">{!policy.name}</apex:outputLink>
+                    </apex:column>
+<!--                    <apex:column value="{!policy.Applies_to__c}" width="85px" headerValue="Applies To"/> -->
+                    <apex:column value="{!mapObjectLabels[policy.DecsOnD__Applies_to__c]}" width="85px" headerValue="Applies To" />
+                    <apex:column value="{!policy.DecsOnD__Status__c}" width="85px" headerValue="Status"/> 
+                    <apex:column value="{!policy.DecsOnD__Current_Version__c}" headerValue="Current Version" width="100px"/>
+                    <apex:column value="{!policy.DecsOnD__Active_Version__c}" headerValue="Active Version" width="100px"/>
+                    <apex:column value="{!policy.Owner.Name}" headerValue="Owner" width="100px"/> 
+                    <apex:column value="{!policy.LastModifiedBy.Name}" headerValue="Last Modified By" width="100px"/> 
+                    <apex:column value="{!policy.DecsOnD__Description__c}" width="300px" headerValue="Description"/>  
+                    <apex:column width="75px">
+                        <apex:facet name="header">Documentation</apex:facet>
+                        <apex:outputLink rendered="{!policy.DecsOnD__Documentation_Link__c!=null}" 
+                                        value="{!policy.DecsOnD__Documentation_Link__c}" target="_blank">
+                            View
+                        </apex:outputLink>
+                        <apex:outputText rendered="{!policy.DecsOnD__Documentation_Link__c==null}">Not available</apex:outputText>
+                    </apex:column>
+                </apex:pageBlockTable>
+               
+                <!-- @Sothea 140403 : the paginator of policies table -->
+                <apex:outputpanel id="policyPagination" layout="block" styleClass="paginator" rendered="{!totalPolicyCount>0}">
+                     <apex:outputpanel id="pnDisplayRecordPerPage" styleClass="left">
+                          <apex:outputLabel value="Display"/>&nbsp;
+                          <apex:selectList value="{!policyTablePaginator.pageSize}" size="1" >
+                                <apex:selectOption itemValue="5" itemLabel="5"/>
+                                <apex:selectOption itemValue="10" itemLabel="10"/>
+                                <apex:selectOption itemValue="15" itemLabel="15"/>
+                                <apex:selectOption itemValue="20" itemLabel="20"/> 
+                                <apex:actionSupport event="onchange" action="{!policyTablePaginator.onPageSizeChange}" reRender="pbsPolicies" status="theSelectPageSizeStatus"/>
+                          </apex:selectList>           
+                          <apex:outputLabel value="records per page"/> &nbsp;&nbsp;
+                          <apex:actionStatus id="theSelectPageSizeStatus">
+                                <apex:facet name="start">   
+                                <apex:image url="/img/loading.gif"  /> 
+                                </apex:facet>
+                          </apex:actionStatus>
+                    </apex:outputpanel>
+                     <apex:outputpanel id="pngPrevNext" styleClass="prevNextLinks">
+                         <apex:outputpanel id="pnPrev">
+                             <apex:outputpanel id="clickablePrev" rendered="{!policyTablePaginator.hasPrevious}">  
+                                   <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!policyTablePaginator.firstPage}" reRender="pbsPolicies" status="">
+                                            <apex:image value="/s.gif" styleClass="first" title="First Page" alt="First Page"/>
+                                      </apex:commandlink>   
+                                  </apex:outputpanel> 
+                                  <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!policyTablePaginator.previous}" reRender="pbsPolicies" status="">
+                                            <apex:image value="/s.gif" styleClass="prev" title="Previous Page" alt="Previous Page"/>
+                                      </apex:commandlink>
+                                  </apex:outputpanel> 
+                             </apex:outputpanel> 
+                             <apex:outputpanel id="unclickablePrev" rendered="{!NOT(policyTablePaginator.hasPrevious)}">   
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="firstoff" title="First Page" alt="First Page"/>
+                                  </apex:outputpanel>
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="prevoff" title="Previous Page" alt="Previous Page"/>
+                                  </apex:outputpanel>
+                             </apex:outputpanel>
+                         </apex:outputpanel>
+                        
+                         <apex:outputpanel id="theRecordNum" style="color:black;" styleClass="prevNext">
+                                <apex:outputLabel value="{!policyTablePaginator.fromRow} - {!policyTablePaginator.toRow} of {!policyTablePaginator.resultSize} Records"/>
+                         </apex:outputpanel> 
+                        
+                        <apex:outputpanel id="pnNext">
+                            <apex:outputpanel id="clickableNext" rendered="{!policyTablePaginator.hasNext}">
+                                  <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!policyTablePaginator.next}" reRender="pbsPolicies" status="">
+                                            <apex:image value="/s.gif" styleClass="next" title="Next Page" alt="Next Page"/>
+                                      </apex:commandlink>
+                                  </apex:outputpanel>
+                                  <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!policyTablePaginator.lastPage}" reRender="pbsPolicies" status="">
+                                            <apex:image value="/s.gif" styleClass="last" title="Last Page" alt="Last Page"/>
+                                      </apex:commandlink>
+                                 </apex:outputpanel>
+                            </apex:outputpanel>
+                            <apex:outputpanel id="unclickableNext" rendered="{!NOT(policyTablePaginator.hasNext)}">
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="nextoff" title="Next Page" alt="Next Page"/> 
+                                  </apex:outputpanel>
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="lastoff" title="Last Page" alt="Last Page"/>
+                                  </apex:outputpanel>
+                            </apex:outputpanel>
+                        </apex:outputpanel>
+                     </apex:outputpanel>
+                     <apex:outputpanel id="thePageNum" styleClass="right">
+                          <apex:outputLabel value="Page {!policyTablePaginator.pageNumber} of {!policyTablePaginator.totalPage}"/>
+                     </apex:outputpanel>
+                </apex:outputpanel>
+            <!-- END -->
+                
+            </apex:pageBlockSection> 
+            
+<!--            <apex:panelGrid columns="3">-->
+<!--                <apex:commandLink action="{!previous}" rendered="{!hasPrevious}">&lt; Previous Page</apex:commandlink>-->
+<!--                <apex:outputText rendered="{!hasPrevious && hasNext}">&nbsp;|&nbsp;</apex:outputText>-->
+<!--                <apex:commandLink action="{!next}" rendered="{!hasNext}">Next Page &gt;</apex:commandlink>-->
+<!--            </apex:panelGrid>-->
+            <br/>
+        </apex:pageBlock>
+<!-- 
+        <apex:panelGrid columns="3" id="refreshButtonPanel" rendered="{!isPolicyAuthor}">
+            <apex:commandButton value="Install templates" action="{!installTemplates}" rerender="theForm" status="installStatus" onclick="goSelectorPage(); return false;"/>
+            <apex:outputText style="vertical-align:-16px" value="Install policy templates from the Decisions on Demand server"/>
+            <apex:actionstatus startStyle="vertical-align:-16px;color:red" startText=" (installing...)" stopText="" id="installStatus"/>
+        </apex:panelGrid>
+ -->
+         <apex:panelGrid columns="3" id="refreshButtonPanelAdmin" rendered="{!isPolicyAdmin}">
+<!-- 
+            <apex:commandButton value="Install templates" action="{!installTemplates}" rerender="theForm" status="installStatus" onclick="goSelectorPage(); return false;"/>
+            <apex:outputText style="vertical-align:-16px" value="Install policy templates from the Decisions on Demand server"/>
+            <apex:actionstatus startStyle="vertical-align:-16px;color:red" startText=" (installing...)" stopText=""  id="installStatus"/>
+ -->
+            <!--  JVG Patch 1.8.7 Make sure message gets displayed if there is an issue refreshing a policy -->
+            <apex:commandButton value="Refresh from server" action="{!doRefresh}" rerender="theForm,installTemplatesForm" status="refreshStatus"/> <!-- oncomplete="refreshPage()" -->
+            <apex:outputText style="vertical-align:-16px"  value="Refresh the list of installed policies from the Decisions on Demand server"/>
+            <apex:actionstatus startStyle="vertical-align:-16px;color:red" startText=" (refreshing...)" stopText="" id="refreshStatus"/>
+        </apex:panelGrid>
+        <br/>
+    </apex:form>
+    <a id="TemplateLibrary"></a>
+    <apex:form id="installTemplatesForm" target="_self">
+        <apex:variable var="isClicked" value="{!isClickedInstall}" />
+<!--         <apex:actionFunction action="{!doInstall}" rerender="theForm, installTemplatesForm, pbHeaderNewUser, pbHeader" name="installTemplateAction" oncomplete="refreshPage()"> -->
+<!--             <apex:param name="templateFQN" assignTo="{!selectedFQN}" value="" /> -->
+<!--         </apex:actionFunction>  -->
+        <apex:pageBlock id="pbTemplates" title="Business Policy Template Library" helpTitle="Help" helpUrl="{!$Page.DecsOnD__PolicyListHelp}#TemplateLibrary" mode="edit">
+            <apex:pageBlockSection columns="1" rendered="{!numTemplates>0}" id="tempSection">
+                <apex:outputText rendered="{!isPolicyAdmin}">The templates below are available to install. Click <b>View</b> next to a template to consult its documentation, or <b>Install</b> to make it available for use in your organization</apex:outputText>  
+                <apex:outputText rendered="{!NOT(isPolicyAdmin)}">The templates below are available for use. Contact your administrator to install a template for your organization</apex:outputText>                   
+                                                                                             <!-- @Sothea 140403 : set 'first' and 'rows' attributes -->
+                 <apex:pageBlockTable value="{!templates}" var="template" id="templateTable" first="{!templateTablePaginator.startRow}" rows="{!templateTablePaginator.pageSize}" > 
+                    <apex:column value="{!template.name}" width="85px" headerValue="Policy Name"/> 
+                    <apex:column value="{!template.objectLabel}" width="85px" headerValue="Applies To"/>
+<!--
+TODO Find a way similar to this to embed icon for the object
+    <img src="/s.gif" alt="Lead" class="pageTitleIcon" title="Lead" style="background-image: url(../img/sprites/master.png); background-position:0px -1166px;"/>
+ -->            
+                    <apex:column value="{!template.description}" width="200px" headerValue="Description"/> 
+                    <apex:column width="75px">
+                        <apex:facet name="header">Documentation</apex:facet>
+                        <apex:outputLink value="{!template.documentationURL}" target="_blank" rendered="{!template.documentationURL!=null}">
+                            View
+                        </apex:outputLink>
+                        <apex:outputText rendered="{!template.documentationURL==null}">Not available</apex:outputText>
+                    </apex:column>  
+                    <apex:column width="50px">
+                        <apex:facet name="header">Action</apex:facet>   
+                        <!-- @Vichet 141006: pass one more argument - template size  -->                                        
+                        <apex:commandButton id="IdInstall" value="Install" style="width:65px;" onclick="installTemplate(this.id, '{!template.FQN}', '{!numTemplates}'); return false;" disabled="{!NOT(isPolicyAdmin)}">
+                            <apex:image id="imgLoading" url="/apexpages/devmode/img/saveStatus.gif" style="vertical-align: middle; padding-left: 2px; display : none" /> 
+                        </apex:commandButton>
+                    </apex:column>
+                </apex:pageBlockTable> 
+                <script>
+                   //@Vichet 141006: pass one more argument - template size
+                   // TODO Move this snippet somewhere more obvious
+                   if('{!isClicked}' === "true") setInstallBtnStatus(null, true, '{!numTemplates}');
+                </script>
+<!--                 <apex:actionstatus stopText="" id="installTemplate">  -->
+<!--                    <apex:facet name="start">-->
+<!--                        <apex:outputpanel layout="block" styleclass="overlaypanel">-->
+<!--                            <apex:panelGrid columns="2" styleclass="loadingpanel">-->
+<!--                                <apex:image value="/img/loading.gif"/>-->
+<!--                                <apex:outputText value="Installing..."/>-->
+<!--                            </apex:panelGrid>-->
+<!--                        </apex:outputpanel>-->
+<!--                    </apex:facet>-->
+<!--                </apex:actionstatus> -->
+
+            
+                 <!-- @Sothea 140403 : the paginator of templates table -->
+                <apex:outputpanel id="theTemplatePagination" layout="block" styleClass="paginator" rendered="{!numTemplates>0}">
+                     <apex:outputpanel id="pnDisplayRecordPerPage" styleClass="left">
+                          <apex:outputLabel value="Display"/>&nbsp;
+                          <apex:selectList value="{!templateTablePaginator.pageSize}" size="1" >
+                                <apex:selectOption itemValue="5" itemLabel="5"/>
+                                <apex:selectOption itemValue="10" itemLabel="10"/>
+                                <apex:selectOption itemValue="15" itemLabel="15"/>
+                                <apex:selectOption itemValue="20" itemLabel="20"/> 
+                                <apex:actionSupport event="onchange" action="{!templateTablePaginator.onPageSizeChange}" reRender="pbTemplates" status="theSelectPageSizeStatus"/>
+                          </apex:selectList>           
+                          <apex:outputLabel value="records per page"/>&nbsp;&nbsp; 
+                          <apex:actionStatus id="theSelectPageSizeStatus">
+                                <apex:facet name="start">   
+                                <apex:image url="/img/loading.gif"  /> 
+                                </apex:facet>
+                          </apex:actionStatus>
+                    </apex:outputpanel>
+                     <apex:outputpanel id="pngPrevNext" styleClass="prevNextLinks">
+                         <apex:outputpanel id="pnPrev">
+                             <apex:outputpanel id="clickablePrev" rendered="{!templateTablePaginator.hasPrevious}">  
+                                   <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!templateTablePaginator.firstPage}" reRender="pbTemplates"  >
+                                            <apex:image value="/s.gif" styleClass="first" title="First Page" alt="First Page"/>
+                                      </apex:commandlink>   
+                                  </apex:outputpanel> 
+                                  <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!templateTablePaginator.previous}" reRender="pbTemplates">
+                                            <apex:image value="/s.gif" styleClass="prev" title="Previous Page" alt="Previous Page"/>
+                                      </apex:commandlink>
+                                  </apex:outputpanel> 
+                             </apex:outputpanel> 
+                             <apex:outputpanel id="unclickablePrev" rendered="{!NOT(templateTablePaginator.hasPrevious)}">   
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="firstoff" title="First Page" alt="First Page"/>
+                                  </apex:outputpanel>
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="prevoff" title="Previous Page" alt="Previous Page"/>
+                                  </apex:outputpanel>
+                             </apex:outputpanel>
+                         </apex:outputpanel>
+                        
+                         <apex:outputpanel id="theRecordNum" style="color:black;" styleClass="prevNext">
+                                <apex:outputLabel value="{!templateTablePaginator.fromRow} - {!templateTablePaginator.toRow} of {!templateTablePaginator.resultSize} Records"/>
+                         </apex:outputpanel> 
+                        
+                        <apex:outputpanel id="pnNext">
+                            <apex:outputpanel id="clickableNext" rendered="{!templateTablePaginator.hasNext}">
+                                  <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!templateTablePaginator.next}" reRender="pbTemplates">
+                                            <apex:image value="/s.gif" styleClass="next" title="Next Page" alt="Next Page"/>
+                                      </apex:commandlink>
+                                  </apex:outputpanel>
+                                  <apex:outputpanel styleClass="prevNext">
+                                      <apex:commandLink action="{!templateTablePaginator.lastPage}" reRender="pbTemplates">
+                                            <apex:image value="/s.gif" styleClass="last" title="Last Page" alt="Last Page"/>
+                                      </apex:commandlink>
+                                 </apex:outputpanel>
+                            </apex:outputpanel>
+                            <apex:outputpanel id="unclickableNext" rendered="{!NOT(templateTablePaginator.hasNext)}">
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="nextoff" title="Next Page" alt="Next Page"/> 
+                                  </apex:outputpanel>
+                                  <apex:outputpanel styleClass="prevNext">
+                                       <apex:image value="/s.gif" styleClass="lastoff" title="Last Page" alt="Last Page"/>
+                                  </apex:outputpanel>
+                            </apex:outputpanel>
+                        </apex:outputpanel>
+                     </apex:outputpanel>
+                     <apex:outputpanel id="thePageNum" styleClass="right">
+                          <apex:outputLabel value="Page {!templateTablePaginator.pageNumber} of {!templateTablePaginator.totalPage}"/>
+                     </apex:outputpanel>
+                </apex:outputpanel>
+                <!-- END -->
+                
+            
+
+             </apex:pageBlockSection> 
+            <apex:pageBlockSection columns="1" rendered="{!numTemplates==0}">
+                <apex:outputText >All available templates have already been installed for your organization</apex:outputText>  
+            </apex:pageBlockSection>
+            <br/>
+        </apex:pageBlock>
+    </apex:form>
+ </apex:page>

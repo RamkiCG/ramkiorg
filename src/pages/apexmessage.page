@@ -1,0 +1,25 @@
+<apex:page controller="MyPageMessageController" tabStyle="Account">
+    <style>
+    .locationError { color: red; font-weight: strong;}
+    .employeeError { color: green; font-weight: strong;}
+    </style>
+
+    <apex:form > 
+        <apex:pageBlock title="Hello {!$User.FirstName}!">
+        This is your new page for the {!name} controller. <br/>
+        You are viewing the {!account.name} account.
+
+        <p>:<apex:InputText value="{!$ObjectType.Account.Fields.Name.Label}" />
+         <apex:inputField value="{!account.Name}" 
+            id="Location_validation"/> 
+             <apex:message for="Location_validation" styleClass="locationError" />
+        (Enter an alphabetic character here, then click Save to see what happens.) </p>
+       
+        <apex:commandButton action="{!save}" value="Save"/>    
+         <p />
+        <p /> 
+         
+        </apex:pageBlock>  
+    </apex:form>  
+    <apex:ListViews type="Account" />
+</apex:page>

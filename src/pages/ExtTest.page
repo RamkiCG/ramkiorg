@@ -1,0 +1,4 @@
+<apex:page standardController="Account" 
+     showHeader="false">
+   
+</apex:page>

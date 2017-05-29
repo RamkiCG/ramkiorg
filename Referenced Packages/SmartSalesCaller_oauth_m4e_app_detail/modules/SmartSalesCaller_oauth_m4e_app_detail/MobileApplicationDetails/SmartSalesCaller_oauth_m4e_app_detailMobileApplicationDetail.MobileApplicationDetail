@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MobileApplicationDetail xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationInstallUrl>https://play.google.com/store/apps/details?id=com.sf.salessmartcaller</applicationInstallUrl>
+    <devicePlatform>android</devicePlatform>
+    <deviceType>phone</deviceType>
+    <minimumOsVersion>Android 2.2 (Froyo) to MAX</minimumOsVersion>
+    <privateApp>false</privateApp>
+    <version>1.0</version>
+</MobileApplicationDetail>

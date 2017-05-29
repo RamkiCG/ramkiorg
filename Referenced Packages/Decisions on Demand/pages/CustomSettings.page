@@ -1,0 +1,71 @@
+<apex:page controller="DecsOnD.CustomSettingsController" action="{!initialize}">
+<style type="text/css">
+ul {
+    list-style-position:outside;
+    margin-left: -2.5em;
+}
+
+.firstCol {
+    font-style:italic;
+}
+.secondCol {
+    font-style:italic;
+    font-weight:bold;
+}
+</style>
+  <apex:form id="custom_settings_form">
+  	<apex:pageBlock id="pb_key_block_prod_id" title="Access key management">
+	   <apex:pageMessages showDetail="true" rendered="{!settingsValid}"/>
+       <p>Your secret access key protects your organization’s business policies from unauthorized access.</p>
+       <p>Current status:&nbsp;<b>
+        <apex:outputPanel rendered="{!keyNotSet}" layout="inline" style="color:Darkorange ">NOT INSTALLED</apex:outputPanel>
+        <apex:outputPanel rendered="{!keyValid}" layout="inline" style="color:green">VALID KEY</apex:outputPanel>
+        <apex:outputPanel rendered="{!keyInvalid}" layout="inline" style="color:red">key is NOT VALID</apex:outputPanel>
+        <apex:outputPanel rendered="{!keyStatusUnknown}" layout="inline" style="color:gray">UNKNOWN</apex:outputPanel>
+        </b></p>
+        <p>
+	      	<apex:outputPanel rendered="{!keyValid}">For added security we recommend that you refresh your secret key regularly.</apex:outputPanel>
+	      	<apex:outputPanel rendered="{!settingsInvalid}">There are issues with your configuration settings. Please correct those first, then return here to request or enter your Secret Key</apex:outputPanel>
+      	</p> 
+      <apex:pageBlockButtons location="bottom">
+	      <apex:commandButton rendered="{!AND(keyNotSet, NOT(keyEditMode))}" disabled="{!OR(NOT(settingsValid), settingsEditMode)}" id="btn_installkey" action="{!installKey}" value="Install key" style="font-size: 150%"/> 
+	      <apex:commandButton rendered="{!AND(keyValid, NOT(keyEditMode))}" disabled="{!OR(NOT(settingsValid), settingsEditMode)}" id="btn_refresh" action="{!refreshKey}" value="Refresh key"/>
+       </apex:pageBlockButtons>
+   </apex:pageBlock>
+
+  	<apex:pageBlock id="pb_setup_block_prod_id" title="Configuration settings">
+	   <apex:pageMessages showDetail="true" rendered="{!NOT(settingsValid)}" id="settingsErrorMessages"/>
+        <apex:outputPanel rendered="{!settingsInvalid}">
+        	<p>There were issues connecting to the Decisions on Demand server. Please refer to the messages above and enter corrected values or restore the default settings.</p>
+        </apex:outputPanel>
+<!-- 
+        <apex:outputPanel rendered="{!AND(settingsValid, keyInvalid, settingsEditMode)}">If you do not know your secret key just leave the field blank -- you will be able to request a new key.</apex:outputPanel> 
+        <apex:pageMessage rendered="{!AND(settingsValid, settingsEditMode)}" summary="Please check your settings carefully before saving -- incorrect values will disable the connection to the Decisions on Demand servers"  severity="info" strength="2"/>
+ -->
+      <apex:outputPanel rendered="{!AND(NOT(settingsEditMode), settingsValid)}">
+      Please edit the settings below only if requested by Decisions on Demand technical support.   
+      </apex:outputPanel> 
+         <apex:panelGrid columns="3" id="customSettingsGrid" cellspacing="10" >
+            <apex:outputLabel for="application_name" style="width:400px">Application Name</apex:outputLabel>
+            <apex:inputText id="application_name" value="{!applicationName}" size="60" disabled="{!NOT(settingsEditMode)}"/>
+            <apex:outputLabel >(differentiates sets of independent business policies for the same organization)</apex:outputLabel>
+            
+            <apex:outputLabel for="policy_server_url" style="width:400px">Policy Management Server</apex:outputLabel>
+            <apex:inputText id="policy_server_url" value="{!policyServerURL}" size="60" disabled="{!NOT(settingsEditMode)}"/>
+            <apex:outputLabel >(the URL of the Policy Management Server)</apex:outputLabel>
+            
+            <apex:outputLabel for="decision_server_url" style="width:400px">Decision Server</apex:outputLabel>
+            <apex:inputText id="decision_server_url" value="{!decisionServerURL}" size="60" disabled="{!NOT(settingsEditMode)}"/>
+            <apex:outputLabel >(the URL of the Decision Server)</apex:outputLabel>          
+      	</apex:panelGrid> 
+      <apex:actionFunction name="reinitialize" action="{!initialize}"/> 
+      <apex:pageBlockButtons location="bottom">
+	      <apex:commandButton rendered="{!NOT(settingsEditMode)}" disabled="{!keyEditMode}" id="btn_edit" action="{!editSettings}" value="Edit settings" reRender="pb_setup_block_prod_id"/> 
+	      <apex:commandButton rendered="{!settingsEditMode}" disabled="{!keyEditMode}" id="btn_save" action="{!saveSettings}" value="Save" reRender="pb_setup_block_prod_id, pb_key_block_prod_id"/>  
+	      <apex:commandButton rendered="{!settingsEditMode}" disabled="{!keyEditMode}" id="btn_cancel" action="{!cancelSettingsEdit}" value="Cancel" reRender="pb_setup_block_prod_id"/>
+	      <apex:commandButton rendered="{!NOT(settingsValid)}" disabled="{!keyEditMode}" id="btn_restore" action="{!restoreDefaultSettings}" value="Restore default settings" reRender="pb_setup_block_prod_id"/> 
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+  </apex:form>
+  <p>Questions? Contact <a href="mailto:sfdc-support@decisionsondemand.com?Subject=Need help with configuration settings [Org ID: {!$Organization.Id}]">Decisions on Demand support</a></p>
+</apex:page>

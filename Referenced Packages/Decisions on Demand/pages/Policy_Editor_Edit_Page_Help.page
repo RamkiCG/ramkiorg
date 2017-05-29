@@ -1,0 +1,57 @@
+<apex:page sidebar="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+   </head>
+  <apex:image id="theImage" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="400 px"/>
+  <br/>
+  <h1 class="help">Editing your Business Policy</h1>
+  <p class="help">Step 1 of the Business Policy editor wizard allows you to edit the decision tables</p>
+  <apex:panelGrid columns="2" rules="rows" columnClasses="width40, width60">
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Edit cell contents</h3>
+	      <p>To edit a value simply click a cell and enter a new value. 
+	      Immediate validation will be applied, and errors (such as entering text in a numeric field) will be highlighted in red.
+	      Numbers are entered without formatting, but will be displayed as currency or percentage values where relevant. 
+	      Dropdowns and lookup dialogs are also available. 
+	      </p>   
+	      <p>During editing you may click <b>Save Draft</b> to save a snapshot of your changes. When you are ready to test the new policy version, click <b>Next</b></p>
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="help">
+	      <apex:image styleClass="float-left" style="min-width:25%;max-width:50%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyEditComposite1_s.png')}"/>
+	      <apex:image styleClass="float-left" style="min-width:25%;max-width:50%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyEditComposite2_s.png')}"/>
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Add and remove rows</h3>
+	      <p>To add a new row, click the <b>Duplicate row</b> icon (<apex:image url="{!URLFOR($Resource.DecsOnD__Doc_images, 'duplicate-icon.png')}"/>)</p>
+	      <p>To remove a row, click the <b>Delete row</b> icon (<apex:image url="{!URLFOR($Resource.DecsOnD__Doc_images, 'delete-icon.png')}"/>)</p>
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" style="min-width:50%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyEditAddRemoveRows_s.png')}"/>
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Review warnings and correct errors</h3>
+	      <p>Picklist and lookup values are checked against the actual data in your Salesforce org. Values that do not match will be highlighted. 
+	      In some cases you may ignore these warnings, for example if you plan to add the missing value to your Salesforce setup later. 
+	      </p>   
+	      <p>Additional policy-specific errors may be flagged when you click <b>Next</b> or <b>Save Draft</b>. These errors must be corrected before saving or testing the policy. 
+	      </p>
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="help">
+	      <apex:image styleClass="float-left" style="min-width:50%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyEditWarning_s.png')}"/>
+	      <br/>
+	      <apex:image styleClass="float-left" style="min-width:50%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyEditErrorMessage_s.png')}"/>
+      </apex:outputPanel>      
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Upload data from Excel</h3>
+	      <p>To create an initial policy version or make a large number of updates, it can be convenient to upload rules from an Excel spreadsheet.</p>
+	      <p>To do so, click the <b>Choose File</b> button to select a file (<code>.xls</code> and <code>.xlsx</code> formats are supported) and then click <b>Upload</b> to update the policy.
+	      The Excel must have the same format as the policy decision tables. 
+	      We recommend that you download a properly formatted copy by clicking the <b>Download the most recent Excel</b> link and make your edits based on that file.
+	      </p> 
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" style="min-width:50%;max-width:100%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyEditExcelUpload_s.png')}"/>
+  </apex:panelGrid>  
+  <p class="help">After completing your edits, click <b>Next</b> to save a draft of the policy and proceed to the <a href="{!$Page.DecsOnD__Policy_Editor_Test_Page_Help}" target="_top">test console</a>.
+  If you need to make further changes after running your tests, you can always come back to the editing page before deploying your policy. 
+  </p>
+  <p class="help">You can also click <b>Cancel</b> to abandon any unsaved changes and return to the <a href="{!$Page.DecsOnD__PolicyDetailHelp}" target="_top">policy detail page</a>.
+  </p>
+</apex:page>

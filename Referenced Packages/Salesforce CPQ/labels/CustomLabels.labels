@@ -1,0 +1,1593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>lbl_actions</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Actions Label</shortDescription>
+        <value>Actions</value>
+    </labels>
+    <labels>
+        <fullName>lbl_add</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Label</shortDescription>
+        <value>Add</value>
+    </labels>
+    <labels>
+        <fullName>lbl_add_group</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Group Label</shortDescription>
+        <value>Add Group</value>
+    </labels>
+    <labels>
+        <fullName>lbl_add_products</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Products Label</shortDescription>
+        <value>Add Products</value>
+    </labels>
+    <labels>
+        <fullName>lbl_add_subscriptions</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Subscriptions Label</shortDescription>
+        <value>Add Subscription</value>
+    </labels>
+    <labels>
+        <fullName>lbl_additional_docs</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Additional Documents Label</shortDescription>
+        <value>Additional Documents</value>
+    </labels>
+    <labels>
+        <fullName>lbl_additional_settings</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Additional Settings</shortDescription>
+        <value>Additional Settings</value>
+    </labels>
+    <labels>
+        <fullName>lbl_all</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>All Label</shortDescription>
+        <value>All</value>
+    </labels>
+    <labels>
+        <fullName>lbl_amendment_opportunity_name</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Amendment Opportunity Name</shortDescription>
+        <value>Amendment for contract #{0}</value>
+    </labels>
+    <labels>
+        <fullName>lbl_apply</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Apply</shortDescription>
+        <value>Apply</value>
+    </labels>
+    <labels>
+        <fullName>lbl_asset_selection</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Selection Label</shortDescription>
+        <value>Asset Selection</value>
+    </labels>
+    <labels>
+        <fullName>lbl_attachment_target</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Attachment Target</shortDescription>
+        <value>Attachment Target</value>
+    </labels>
+    <labels>
+        <fullName>lbl_available_content</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Content Label</shortDescription>
+        <value>Available Content</value>
+    </labels>
+    <labels>
+        <fullName>lbl_browse_import_file</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Browse import File</shortDescription>
+        <value>Browse import file</value>
+    </labels>
+    <labels>
+        <fullName>lbl_calculate</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Calculate Label</shortDescription>
+        <value>Calculate</value>
+    </labels>
+    <labels>
+        <fullName>lbl_cancel</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cancel Label</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>lbl_clear_fields</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Clear panel fields</shortDescription>
+        <value>Clear Fields</value>
+    </labels>
+    <labels>
+        <fullName>lbl_click_follow_product</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Click to follow the product</shortDescription>
+        <value>Click the icon to follow the product.</value>
+    </labels>
+    <labels>
+        <fullName>lbl_click_unfollow_product</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Click to unfollow the product</shortDescription>
+        <value>Click the icon to unfollow the product.</value>
+    </labels>
+    <labels>
+        <fullName>lbl_clone</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Clone Label</shortDescription>
+        <value>Clone Group</value>
+    </labels>
+    <labels>
+        <fullName>lbl_close</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Close Label</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>lbl_collapse_all</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Segmented Products Collapse All</shortDescription>
+        <value>Collapse All</value>
+    </labels>
+    <labels>
+        <fullName>lbl_configure</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Configure Label</shortDescription>
+        <value>Configure</value>
+    </labels>
+    <labels>
+        <fullName>lbl_configure_products</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Configure Products Label</shortDescription>
+        <value>Configure Products</value>
+    </labels>
+    <labels>
+        <fullName>lbl_create_new_name</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>-- Create New --</shortDescription>
+        <value>-- Create New --</value>
+    </labels>
+    <labels>
+        <fullName>lbl_custom</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Custom Label</shortDescription>
+        <value>Custom</value>
+    </labels>
+    <labels>
+        <fullName>lbl_default_group_name</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label: Default Group Name</shortDescription>
+        <value>Default</value>
+    </labels>
+    <labels>
+        <fullName>lbl_del</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Del Label</shortDescription>
+        <value>Del</value>
+    </labels>
+    <labels>
+        <fullName>lbl_delete</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete Label</shortDescription>
+        <value>Delete Group</value>
+    </labels>
+    <labels>
+        <fullName>lbl_delete_lines</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete Lines Labels</shortDescription>
+        <value>Delete Lines</value>
+    </labels>
+    <labels>
+        <fullName>lbl_description_field</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Description Field</shortDescription>
+        <value>Description Field</value>
+    </labels>
+    <labels>
+        <fullName>lbl_document_folder</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Document Folder</shortDescription>
+        <value>Document Folder</value>
+    </labels>
+    <labels>
+        <fullName>lbl_document_options</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Document Options Label</shortDescription>
+        <value>Document Options</value>
+    </labels>
+    <labels>
+        <fullName>lbl_document_settings</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Document Settings</shortDescription>
+        <value>Documents</value>
+    </labels>
+    <labels>
+        <fullName>lbl_edit</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Edit Label</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>lbl_email_me</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Email Me Label</shortDescription>
+        <value>Email Me</value>
+    </labels>
+    <labels>
+        <fullName>lbl_expand_all</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Segmented Products Expand All</shortDescription>
+        <value>Expand All</value>
+    </labels>
+    <labels>
+        <fullName>lbl_filter</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Filter</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>lbl_find_assets</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Find Assets Label</shortDescription>
+        <value>Find Assets</value>
+    </labels>
+    <labels>
+        <fullName>lbl_find_products</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Find Products Label</shortDescription>
+        <value>Find Products</value>
+    </labels>
+    <labels>
+        <fullName>lbl_find_subscriptions</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Find Subscriptions Label</shortDescription>
+        <value>Find Subscriptions</value>
+    </labels>
+    <labels>
+        <fullName>lbl_generate_document</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Generate Document Label</shortDescription>
+        <value>Generate Document</value>
+    </labels>
+    <labels>
+        <fullName>lbl_group_settings</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Group Settings</shortDescription>
+        <value>Groups</value>
+    </labels>
+    <labels>
+        <fullName>lbl_guided_selling</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Guided Selling Label</shortDescription>
+        <value>Guided Selling</value>
+    </labels>
+    <labels>
+        <fullName>lbl_import</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Import</shortDescription>
+        <value>Import</value>
+    </labels>
+    <labels>
+        <fullName>lbl_included_content</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Included Content Label</shortDescription>
+        <value>Included Content</value>
+    </labels>
+    <labels>
+        <fullName>lbl_line_editor_settings</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Line Editor Settings</shortDescription>
+        <value>Line Editor</value>
+    </labels>
+    <labels>
+        <fullName>lbl_modified</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Modified Label</shortDescription>
+        <value>Modified</value>
+    </labels>
+    <labels>
+        <fullName>lbl_multi_segment_products</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Multi Segment Products</shortDescription>
+        <value>Segmented Products</value>
+    </labels>
+    <labels>
+        <fullName>lbl_name_field</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Name Field</shortDescription>
+        <value>Name Field</value>
+    </labels>
+    <labels>
+        <fullName>lbl_new_group_name</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>New Group Name</shortDescription>
+        <value>New Group Name</value>
+    </labels>
+    <labels>
+        <fullName>lbl_next</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Next Label</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>lbl_none</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>None Label</shortDescription>
+        <value>None</value>
+    </labels>
+    <labels>
+        <fullName>lbl_object</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Object</shortDescription>
+        <value>Object</value>
+    </labels>
+    <labels>
+        <fullName>lbl_opportunity_additional_document_upload</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Opportunity Additional Document Upload</shortDescription>
+        <value>Opportunity Additional Document Upload</value>
+    </labels>
+    <labels>
+        <fullName>lbl_oppty_prefix</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Related Content Oppty Prefix</shortDescription>
+        <value>Opportunity</value>
+    </labels>
+    <labels>
+        <fullName>lbl_other</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Other Label</shortDescription>
+        <value>Other</value>
+    </labels>
+    <labels>
+        <fullName>lbl_other_options</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Other Options Label</shortDescription>
+        <value>Other Options</value>
+    </labels>
+    <labels>
+        <fullName>lbl_page_first</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>First Page Label</shortDescription>
+        <value>First Page</value>
+    </labels>
+    <labels>
+        <fullName>lbl_page_last</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last Page Label</shortDescription>
+        <value>Last Page</value>
+    </labels>
+    <labels>
+        <fullName>lbl_page_next</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Next Page Label</shortDescription>
+        <value>Next Page</value>
+    </labels>
+    <labels>
+        <fullName>lbl_page_prev</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Previous Page Label</shortDescription>
+        <value>Previous Page</value>
+    </labels>
+    <labels>
+        <fullName>lbl_percent_of_total</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Percent of Total Label</shortDescription>
+        <value>Percent of Total</value>
+    </labels>
+    <labels>
+        <fullName>lbl_plugins</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Plugins</shortDescription>
+        <value>Plugins</value>
+    </labels>
+    <labels>
+        <fullName>lbl_post_to_feed</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Post to Feed</shortDescription>
+        <value>Post to Feed?</value>
+    </labels>
+    <labels>
+        <fullName>lbl_preview</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Preview Label</shortDescription>
+        <value>Preview</value>
+    </labels>
+    <labels>
+        <fullName>lbl_preview_document</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Preview Document Label</shortDescription>
+        <value>Preview Document</value>
+    </labels>
+    <labels>
+        <fullName>lbl_previous</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Previous Label</shortDescription>
+        <value>Previous</value>
+    </labels>
+    <labels>
+        <fullName>lbl_price_included</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Price Included Label</shortDescription>
+        <value>Included</value>
+    </labels>
+    <labels>
+        <fullName>lbl_pricing_calc_settings</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Pricing and Calculation Settings</shortDescription>
+        <value>Pricing and Calculation</value>
+    </labels>
+    <labels>
+        <fullName>lbl_product_prefix</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Related Content Product Prefix</shortDescription>
+        <value>Product</value>
+    </labels>
+    <labels>
+        <fullName>lbl_product_selection</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Product Selection Label</shortDescription>
+        <value>Product Selection</value>
+    </labels>
+    <labels>
+        <fullName>lbl_products_found</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Products found in search and suggest</shortDescription>
+        <value>Products Found</value>
+    </labels>
+    <labels>
+        <fullName>lbl_quote_fields_section_title</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quote Fields Section Title</shortDescription>
+        <value>{0} Information</value>
+    </labels>
+    <labels>
+        <fullName>lbl_quote_line_group_to_import</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quote Line Group</shortDescription>
+        <value>Quote Line Group</value>
+    </labels>
+    <labels>
+        <fullName>lbl_quote_prefix</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Related Content Quote Prefix</shortDescription>
+        <value>Quote</value>
+    </labels>
+    <labels>
+        <fullName>lbl_quote_preview</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quote Preview Label</shortDescription>
+        <value>Quote Preview</value>
+    </labels>
+    <labels>
+        <fullName>lbl_quote_related_content_upload</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Document Upload</shortDescription>
+        <value>Document Upload</value>
+    </labels>
+    <labels>
+        <fullName>lbl_related_content</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Additional Document Label</shortDescription>
+        <value>Additional Document</value>
+    </labels>
+    <labels>
+        <fullName>lbl_renew_subscriptions</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Renew Subscriptions Label</shortDescription>
+        <value>Renew Subscriptions</value>
+    </labels>
+    <labels>
+        <fullName>lbl_request_authorization</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Request Authorization Label</shortDescription>
+        <value>Request Authorization</value>
+    </labels>
+    <labels>
+        <fullName>lbl_reset_discounts</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Reset Discounts Label</shortDescription>
+        <value>Reset Discounts</value>
+    </labels>
+    <labels>
+        <fullName>lbl_save</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Save Label</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>lbl_save_and_email</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Save &amp; Email Label</shortDescription>
+        <value>Save &amp; Email</value>
+    </labels>
+    <labels>
+        <fullName>lbl_search</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Search Label</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>lbl_search_filters</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Search Filters Label</shortDescription>
+        <value>Search Filters</value>
+    </labels>
+    <labels>
+        <fullName>lbl_see_price_in_quote</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add to Quote to see price</shortDescription>
+        <value>Add to Quote to see price</value>
+    </labels>
+    <labels>
+        <fullName>lbl_select</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Select Label</shortDescription>
+        <value>Select</value>
+    </labels>
+    <labels>
+        <fullName>lbl_select_add_more</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Select &amp; Add More Label</shortDescription>
+        <value>Select &amp; Add More</value>
+    </labels>
+    <labels>
+        <fullName>lbl_select_upgrades</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Select Upgrades Label</shortDescription>
+        <value>Select Upgrades</value>
+    </labels>
+    <labels>
+        <fullName>lbl_standard</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Standard Label</shortDescription>
+        <value>Standard</value>
+    </labels>
+    <labels>
+        <fullName>lbl_standard_products</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Standard Products</shortDescription>
+        <value>Standard Products</value>
+    </labels>
+    <labels>
+        <fullName>lbl_sub_renewal_settings</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Subscription and Renewal Settings</shortDescription>
+        <value>Subscriptions and Renewals</value>
+    </labels>
+    <labels>
+        <fullName>lbl_subscription_selection</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Subscription Selection Label</shortDescription>
+        <value>Subscription Selection</value>
+    </labels>
+    <labels>
+        <fullName>lbl_subtotal</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Subtotal Label</shortDescription>
+        <value>SUBTOTAL</value>
+    </labels>
+    <labels>
+        <fullName>lbl_suggest</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Suggest label</shortDescription>
+        <value>Suggest</value>
+    </labels>
+    <labels>
+        <fullName>lbl_total</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Total Label</shortDescription>
+        <value>TOTAL</value>
+    </labels>
+    <labels>
+        <fullName>lbl_upgrade_assets</fullName>
+        <categories>Labels</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Upgrade Assets Label</shortDescription>
+        <value>Upgrade Assets</value>
+    </labels>
+    <labels>
+        <fullName>msg_add_group_quote</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Group Tip</shortDescription>
+        <value>Add new group to this quote</value>
+    </labels>
+    <labels>
+        <fullName>msg_add_min_and_max_options</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Min and Max Options on Configure</shortDescription>
+        <value>Add at least {0} but no more than {1} options</value>
+    </labels>
+    <labels>
+        <fullName>msg_add_min_options</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Min Options on Configure</shortDescription>
+        <value>Add at least {0} options</value>
+    </labels>
+    <labels>
+        <fullName>msg_add_products_group</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Products to Group Tip</shortDescription>
+        <value>Add products to this group</value>
+    </labels>
+    <labels>
+        <fullName>msg_add_products_quote</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add Products to Quote Tip</shortDescription>
+        <value>Add products to this quote</value>
+    </labels>
+    <labels>
+        <fullName>msg_bundle_cannot_be_imported</fullName>
+        <categories>Messages, Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CSV: Bundle cannot be imported.</shortDescription>
+        <value>CSV Import: Bundle ({0}) cannot be imported.</value>
+    </labels>
+    <labels>
+        <fullName>msg_calculate_quote</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Calculate Quote Tip</shortDescription>
+        <value>Recalculate this quote</value>
+    </labels>
+    <labels>
+        <fullName>msg_cancel_configuration_confirmation</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cancel Configuration Confirmation</shortDescription>
+        <value>All of your existing configuration will be lost. Are you sure you want to cancel?</value>
+    </labels>
+    <labels>
+        <fullName>msg_cancel_quote</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cancel Quote Tip</shortDescription>
+        <value>Discard any changes made to this quote</value>
+    </labels>
+    <labels>
+        <fullName>msg_cannot_calculate_subscription_length</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Need subscription term length</shortDescription>
+        <value>Contract was not created. Unable to calculate subscription term.</value>
+    </labels>
+    <labels>
+        <fullName>msg_choose_min_and_max_options</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Choose Min and Max Options on Configure</shortDescription>
+        <value>Choose at least {0} but no more than {1} of the following:</value>
+    </labels>
+    <labels>
+        <fullName>msg_choose_min_options</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Choose Min Options on Configure</shortDescription>
+        <value>Choose at least {0} of the following:</value>
+    </labels>
+    <labels>
+        <fullName>msg_choose_output_format</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Output Format Message</shortDescription>
+        <value>Choose the format for generated quote document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_choose_template</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Choose Template Prompt</shortDescription>
+        <value>The Quote Template used to generate your quote</value>
+    </labels>
+    <labels>
+        <fullName>msg_clone_group</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Clone Group Tip</shortDescription>
+        <value>Clone this group</value>
+    </labels>
+    <labels>
+        <fullName>msg_configure_multiple_warning</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Multiple Quantity Configuration Warning</shortDescription>
+        <value>Configurations made here will apply to all products of the quantity specified.</value>
+    </labels>
+    <labels>
+        <fullName>msg_configure_product</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Configure Product Message</shortDescription>
+        <value>Configure this product</value>
+    </labels>
+    <labels>
+        <fullName>msg_confirm_group_delete</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Group Delete Warning</shortDescription>
+        <value>All lines will also be deleted. Are you sure you want to delete this group?</value>
+    </labels>
+    <labels>
+        <fullName>msg_currency_change_quote_with_line_items</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Currency Change On Quote With Line Items</shortDescription>
+        <value>Changing currency on quotes with line items is not allowed. You must first delete the line items.</value>
+    </labels>
+    <labels>
+        <fullName>msg_delete_lines</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete Lines Message</shortDescription>
+        <value>Delete selected lines.</value>
+    </labels>
+    <labels>
+        <fullName>msg_different_column_def</fullName>
+        <categories>Messages, Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CSV format: Selected column format difference</shortDescription>
+        <value>CSV format invalid: Selected column format is different from imported file ({0}).</value>
+    </labels>
+    <labels>
+        <fullName>msg_document_name_required</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Document Name is required</shortDescription>
+        <value>Missing Document Name. Please enter a name for the document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_empty_group</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty Group Message</shortDescription>
+        <value>This group has no line items. Click on Add Products button or drag lines from other groups.</value>
+    </labels>
+    <labels>
+        <fullName>msg_empty_grouped_quote</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty Grouped Quote Message</shortDescription>
+        <value>This quote has no line items. Click on Add Group button to create a new group.</value>
+    </labels>
+    <labels>
+        <fullName>msg_empty_ms_table</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty MS Table Message</shortDescription>
+        <value>This group has no multi-segment line items. Click on Add Products button or drag lines from other groups.</value>
+    </labels>
+    <labels>
+        <fullName>msg_empty_quote</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty Quote Message</shortDescription>
+        <value>This quote has no line items. Click on Add Products button to select products.</value>
+    </labels>
+    <labels>
+        <fullName>msg_empty_standard_table</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty Standard Table Message</shortDescription>
+        <value>This group has no standard line items. Click on Add Products button or drag lines from other groups.</value>
+    </labels>
+    <labels>
+        <fullName>msg_error</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error Message</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>msg_error_invalid_data</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error Invalid Data Message</shortDescription>
+        <value>Error: Invalid data</value>
+    </labels>
+    <labels>
+        <fullName>msg_error_on_upload_attachment</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error on upload attachment</shortDescription>
+        <value>File attachment is required.</value>
+    </labels>
+    <labels>
+        <fullName>msg_error_on_upload_attachment_not_pdf</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error on upload non-pdf attachment</shortDescription>
+        <value>PDF File attachment is required.</value>
+    </labels>
+    <labels>
+        <fullName>msg_generated_document_name</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Document Name Prompt</shortDescription>
+        <value>Enter name for the generated quote document</value>
+    </labels>
+    <labels>
+        <fullName>msg_group_description</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Group Description Message</shortDescription>
+        <value>Double click to edit description</value>
+    </labels>
+    <labels>
+        <fullName>msg_group_name_missing</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>You must enter a group name</shortDescription>
+        <value>You must enter a group name</value>
+    </labels>
+    <labels>
+        <fullName>msg_group_name_required</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>You must enter group name</shortDescription>
+        <value>You must enter name for group {0}</value>
+    </labels>
+    <labels>
+        <fullName>msg_import_format_select</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Choose CSV File Format Label</shortDescription>
+        <value>Choose CSV File Format</value>
+    </labels>
+    <labels>
+        <fullName>msg_import_lines_group_help</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help Message on Import Lines Group</shortDescription>
+        <value>Select None if the line items will not be included in a group.  Select Create New to create a new group that the line items will belong to upon upload.</value>
+    </labels>
+    <labels>
+        <fullName>msg_import_new_group_name_required</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Import New Group Name Required</shortDescription>
+        <value>New Group Name is required.</value>
+    </labels>
+    <labels>
+        <fullName>msg_import_required_csv_column_tip</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Required CSV Column Headers Tip</shortDescription>
+        <value>Required CSV Column Headers</value>
+    </labels>
+    <labels>
+        <fullName>msg_incorrect_option_count</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Incorrect Number Of Options</shortDescription>
+        <value>Incorrect product selections in some or all categories. Look for messages in affected option category for details.</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_attachment_id_error</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid attachment ID</shortDescription>
+        <value>The ID you entered is not related to attachment. To continue, please enter the record ID for a document or a workspace document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_configuration_selections</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid Configuration Selections</shortDescription>
+        <value>Invalid configuration. Please check your selections and try again.</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_csv_format</fullName>
+        <categories>Messages, Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CSV format: File should be saved as Windows comma separated.</shortDescription>
+        <value>CSV format invalid: When saving a CSV file using Microsoft Excel on a Mac computer, choose the &apos;Windows Comma Separated (.csv)&apos; file format type</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_document_attachment_or_workspace_document_id_error</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid doc, workspace document ID</shortDescription>
+        <value>The ID you entered is not related to a document, a workspace document or attachment. To continue, please enter the record ID for a document or a workspace document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_document_id_error</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid document id</shortDescription>
+        <value>The ID you entered is not related to an existing PDF document. To continue, please enter the record ID for an existing PDF document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_num_of_column</fullName>
+        <categories>Messages, Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CSV format: Invalid number of column</shortDescription>
+        <value>CSV format invalid: Invalid number of columns.</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_pricebook_entry</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid Pricebook Entry</shortDescription>
+        <value>There is not a valid price book entry for this line item.</value>
+    </labels>
+    <labels>
+        <fullName>msg_invalid_workspace_doc_id_error</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid Workspace Document ID</shortDescription>
+        <value>The ID you entered is not related to an existing library document. To continue, please enter the record ID for an existing library document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_mass_document_authorization_instructions</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mass Document Authorization Instructions</shortDescription>
+        <value>Click Request Authorization to allow SteelBrick CPQ to mass generate and send quote documents on your behalf when you are not logged into Salesforce.
+You must click Save after you’ve requested authorization.</value>
+    </labels>
+    <labels>
+        <fullName>msg_mass_document_sender_all_sent</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mass Document Sender All Sent</shortDescription>
+        <value>Your request to mass generate and send quote documents has completed successfully.</value>
+    </labels>
+    <labels>
+        <fullName>msg_mass_document_sender_errors_subject</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mass Document Sender Errors Subject</shortDescription>
+        <value>Mass Document Send Was Completed with Errors</value>
+    </labels>
+    <labels>
+        <fullName>msg_mass_document_sender_some_sent</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mass Document Sender Some Sent</shortDescription>
+        <value>Your request to mass generate and send quote documents has completed  with the following exceptions:</value>
+    </labels>
+    <labels>
+        <fullName>msg_mass_document_sender_success_subject</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mass Document Sender Success Subject</shortDescription>
+        <value>Mass Document Send Was Successful</value>
+    </labels>
+    <labels>
+        <fullName>msg_max_option_quantity_exceeded</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Maximum Option Quantity Exceeded</shortDescription>
+        <value>You exceeded the maximum allowed quantity ({0}) for {1}</value>
+    </labels>
+    <labels>
+        <fullName>msg_mdq_cannot_be_imported</fullName>
+        <categories>Messages, Error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CSV: Multi-dimensional Product cannot be imported.</shortDescription>
+        <value>CSV Import: Multi-dimensional Product ({0}) cannot be imported.</value>
+    </labels>
+    <labels>
+        <fullName>msg_min_option_quantity_unmet</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Minimum Option Quantity Unmet</shortDescription>
+        <value>You have not met minimum quantity ({0}) for {1}.</value>
+    </labels>
+    <labels>
+        <fullName>msg_missing_import_format</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Missing Import Format</shortDescription>
+        <value>You must select an import format.</value>
+    </labels>
+    <labels>
+        <fullName>msg_missing_opportunity_line_item</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Missing Opportunity Line Item</shortDescription>
+        <value>This product will not sync to the opportunity because a valid pricebook entry does not exist.</value>
+    </labels>
+    <labels>
+        <fullName>msg_missing_unique_key</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CSV: Unable to find a product</shortDescription>
+        <value>Unable to find a product ({0}) in the Products DB. Please contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>msg_no_active_import_format</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CSV: No active import format available</shortDescription>
+        <value>CSV: No active import format available. Please contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>msg_no_products_selected</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No Products Selected</shortDescription>
+        <value>You selected no products. Please select at least one product.</value>
+    </labels>
+    <labels>
+        <fullName>msg_not_csv_format</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Import file is not CSV format</shortDescription>
+        <value>Import File is not a CSV format</value>
+    </labels>
+    <labels>
+        <fullName>msg_not_pdf_id_error</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Not a PDF</shortDescription>
+        <value>The ID you entered is not related to a PDF document. To continue, please enter the record ID for a PDF document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_opportunity_required</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Opportunity is required</shortDescription>
+        <value>You have to specify an Opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>msg_opportunity_with_wrong_quote_currencies</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Opportunity with primary quotes in different currency.</shortDescription>
+        <value>Currency selection you made is incompatible with existing primary quotes. Change all primary quotes that are using different currency to no longer be primary.</value>
+    </labels>
+    <labels>
+        <fullName>msg_option_requires_configuration</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Option Requires Configuration Message</shortDescription>
+        <value>Configuration of this product is required.</value>
+    </labels>
+    <labels>
+        <fullName>msg_option_used_on_quotes</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Product Option Used On Quotes</shortDescription>
+        <value>Unable to delete product option because it&apos;s in use on prior quotes.</value>
+    </labels>
+    <labels>
+        <fullName>msg_options_missing_config</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Options Missing Configuration Message</shortDescription>
+        <value>Some or all options require further configuration. Look for information icon next to options that must be configured</value>
+    </labels>
+    <labels>
+        <fullName>msg_price_refresh_all_updated</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Price Refresh All Updated Message</shortDescription>
+        <value>Your request to refresh pricing was successful.  List prices on all selected quotes now reflect current pricing.</value>
+    </labels>
+    <labels>
+        <fullName>msg_price_refresh_errors_subject</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Price Refresh Errors Subject</shortDescription>
+        <value>Request to Refresh Pricing Has Completed With Errors</value>
+    </labels>
+    <labels>
+        <fullName>msg_price_refresh_invalid_entries</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Price Refresh Invalid Entries</shortDescription>
+        <value>Pricing has been refreshed with exceptions.  The line items, indicated below as unresolved, reference a product without a valid price book entry.</value>
+    </labels>
+    <labels>
+        <fullName>msg_price_refresh_some_updated</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Price Refresh Some Updated Message</shortDescription>
+        <value>Your request to refresh pricing was successful with the following exceptions. These quote lines were not updated because the Opportunity price book does not have an entry for these products or the entry is inactive.</value>
+    </labels>
+    <labels>
+        <fullName>msg_price_refresh_success_subject</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Price Refresh Success Subject</shortDescription>
+        <value>Request to Refresh Prices Was Successful</value>
+    </labels>
+    <labels>
+        <fullName>msg_primary_quote_wrong_currency</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wrong currency on primary Quote</shortDescription>
+        <value>Currency on primary quotes must match opportunity currency. Either change quote currency or make it no longer primary.</value>
+    </labels>
+    <labels>
+        <fullName>msg_product_not_available_in_pricebook</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Product is not available in this pricebook.</shortDescription>
+        <value>Line ({0}): Product ({1}) is not available in the selected pricebook.</value>
+    </labels>
+    <labels>
+        <fullName>msg_product_option_dependent</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Product Option Dependent</shortDescription>
+        <value>This option may not be selected because it depends on the following:</value>
+    </labels>
+    <labels>
+        <fullName>msg_product_option_excluded</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Product Option Excluded</shortDescription>
+        <value>This option may not be selected because it&apos;s mutually exclusive with the following:</value>
+    </labels>
+    <labels>
+        <fullName>msg_product_required</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Prodcut is required.</shortDescription>
+        <value>You have to specify a Product.</value>
+    </labels>
+    <labels>
+        <fullName>msg_prorate_multiplier_divide_by_0_when_unit_day</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Prorate Multiplier is Calculated With Divided By 0</shortDescription>
+        <value>Subscription term cannot be 0. Contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>msg_prorate_multiplier_divide_by_0_when_unit_month</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Prorate Multiplier is Calculated With Divided By 0</shortDescription>
+        <value>Must use daily proration with subscription term less than one month. Contact your Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>msg_qty_only_can_increase</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Decrease asset quantity is not allowed in renewal and amendment quotes</shortDescription>
+        <value>The quantities of the assets in the {0} Quote are not allowed to be decreased.</value>
+    </labels>
+    <labels>
+        <fullName>msg_quantity_required_grouped</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Require line quantity (grouped)</shortDescription>
+        <value>You must enter quantity on line {0} in group &quot;{1}&quot;</value>
+    </labels>
+    <labels>
+        <fullName>msg_quote_line_import_format_option_missing</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Missing Quote Line Import Format Option</shortDescription>
+        <value>Please contact the administrator for the quote line import format.</value>
+    </labels>
+    <labels>
+        <fullName>msg_quote_related_content_display_order</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quote Supplemental Document Display Order Message</shortDescription>
+        <value>Determines the order in which attachments will appear in the Quote Document.</value>
+    </labels>
+    <labels>
+        <fullName>msg_quote_related_content_upload</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quote Additional Document Upload</shortDescription>
+        <value>Only PDF file attachments are accepted.</value>
+    </labels>
+    <labels>
+        <fullName>msg_quote_required</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quote is required.</shortDescription>
+        <value>You have to specify a Quote.</value>
+    </labels>
+    <labels>
+        <fullName>msg_remove_group</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Remove Group Tip</shortDescription>
+        <value>Remove this group</value>
+    </labels>
+    <labels>
+        <fullName>msg_remove_line</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Remove Line Message</shortDescription>
+        <value>Remove this line</value>
+    </labels>
+    <labels>
+        <fullName>msg_required_by</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Required By Message</shortDescription>
+        <value>Required by {0}</value>
+    </labels>
+    <labels>
+        <fullName>msg_required_quote_line_import_format_missing</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Missing Required Quote Line Import Format Selection</shortDescription>
+        <value>You must select one of the import format option.</value>
+    </labels>
+    <labels>
+        <fullName>msg_review_errors_in_config_form</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Review Errors in Config Form</shortDescription>
+        <value>Review all error messages in {0} to correct your data</value>
+    </labels>
+    <labels>
+        <fullName>msg_save_quote</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Save Quote Tip</shortDescription>
+        <value>Save this quote</value>
+    </labels>
+    <labels>
+        <fullName>msg_script_statement_limit_warning</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Script Statement Limit Warning</shortDescription>
+        <value>Due to size and/or complexity of this quote clicking Save will not calculate and update opportunity in real time. Click Calculate button before Saving or wait for synchronous process to complete.</value>
+    </labels>
+    <labels>
+        <fullName>msg_select_related_content</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Select Supplemental Document Prompt</shortDescription>
+        <value>Choose supplemental document files to be included in the generated quote document</value>
+    </labels>
+    <labels>
+        <fullName>msg_subscription_scope</fullName>
+        <categories>Messages, Help</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Subscription Scope Help</shortDescription>
+        <value>This line item is for a subscription product which price is calculated dynamically by taking configured percentage of non-subscription product total. &quot;Quote&quot; specifies that non-subscription total is calculated from products in the entire quote. &quot;Group&quot; specifies that only non-subscription products in the same group are totaled.</value>
+    </labels>
+    <labels>
+        <fullName>msg_template_quote_opportunity_or_product_required</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Template, product, quote, or Opportunity Id is required</shortDescription>
+        <value>You have to specify at least a Template, a Quote, an Opportunity or a Product</value>
+    </labels>
+    <labels>
+        <fullName>msg_template_quote_or_product_required</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Template or product ID is required</shortDescription>
+        <value>You have to specify at least a Template, a Quote or a Product</value>
+    </labels>
+    <labels>
+        <fullName>msg_template_required</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Template is required.</shortDescription>
+        <value>You have to specify a Template.</value>
+    </labels>
+    <labels>
+        <fullName>msg_too_many_options_selected</fullName>
+        <categories>Messages, Errors</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Too Many Options Selected</shortDescription>
+        <value>Too many options have been selected.</value>
+    </labels>
+    <labels>
+        <fullName>msg_too_many_products</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Too Many Products Message</shortDescription>
+        <value>The search returned more than the maximum number of products ({0}). Please refine your search criteria.</value>
+    </labels>
+    <labels>
+        <fullName>msg_value_required</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Value Required Message</shortDescription>
+        <value>You must enter a value</value>
+    </labels>
+    <labels>
+        <fullName>msg_web_quote_missing_pricebookid</fullName>
+        <categories>Messages</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>When a web quote does not have a pricebookid or a opportunity</shortDescription>
+        <value>A PriceBook Id is missing. Please contact your administrator to resolve the issue.</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,7 @@
+<apex:page standardcontroller="COMMISSION_PAYMENT_SCHEDULE__c">
+    <!-- Pass parameters from visualforce page to controller -->
+    <apex:form >
+            <apex:inputField value="{!COMMISSION_PAYMENT_SCHEDULE__c.Name}"/>
+            
+    </apex:form>
+</apex:page>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SmartSalesCaller_oauth_m4e_app_detail</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <modules>
+        <module>
+            <label>SmartSalesCaller_oauth_m4e_app_detail</label>
+            <moduleType>mobile_app_detail</moduleType>
+            <name>SmartSalesCaller_oauth_m4e_app_detail</name>
+            <types>
+                <members>SmartSalesCaller_oauth_m4e_app_detailMobileApplicationDetail</members>
+                <name>MobileApplicationDetail</name>
+            </types>
+            <types>
+                <members>SmartSaleCaller__SmartSalesCaller_oauth_m4e_app_detail</members>
+                <name>Module</name>
+            </types>
+            <version>1.0</version>
+        </module>
+    </modules>
+    <namespacePrefix>SmartSaleCaller</namespacePrefix>
+    <version>36.0</version>
+</Package>

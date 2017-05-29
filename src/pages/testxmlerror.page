@@ -1,0 +1,37 @@
+<apex:page controller="XMLCasePopupController" title="Search" showHeader="false" sideBar="false" tabStyle="Case" id="page" >
+  <!-- messages -->
+  <apex:outputPanel id="top" layout="block">
+    <apex:outputLabel value="Possible duplicates" style="margin:20px; padding:10px; margin-top:10px; font-weight:bold; font-size: 1.5em;"/>
+  </apex:outputPanel>
+
+  <apex:form >
+  <apex:pageBlock title="XML Case Edit" id="XML_Case_Edit" mode="Edit">
+      <!-- Buttons toolbar -->    
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Finish" action="{!endCaseCreation}"/>
+        <!--    <apex:commandButton value="Back" action="{!backStep}"/> -->
+        </apex:PageBlockButtons>
+       
+        <apex:outputPanel id="page" layout="block" style="margin:5px;padding:10px;padding-top:2px;">
+              <apex:actionRegion >
+                  <!-- results panel -->
+                      <apex:outputPanel id="pnlSearchResults" style="margin:10px;height:350px;overflow-Y:auto;" layout="block">
+                          <apex:pageBlock id="searchResults">
+                             <apex:pageBlockTable value="{!results}" var="c" id="tblResults">
+                                    <apex:column >
+                                    <apex:facet name="header">
+                                        <apex:outputPanel >Release</apex:outputPanel>
+                                    </apex:facet>
+                                    <apex:outputLink onClick="test('{!c.Id}');return false;">{!c.id}</apex:outputLink>
+                                   </apex:column>
+                             </apex:pageBlockTable>
+                         </apex:pageBlock>
+                      </apex:outputPanel>
+              </apex:actionRegion>
+     </apex:outputPanel>
+ </apex:pageBlock>
+ <apex:actionFunction name="test" action="{!ShowCaseToTrue}">
+      <apex:param name="param1" assignto="{!IdChosen}" value=""/>
+  </apex:actionFunction>
+ </apex:form>
+ </apex:page>

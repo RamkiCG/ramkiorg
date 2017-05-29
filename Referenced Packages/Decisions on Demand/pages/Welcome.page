@@ -1,0 +1,144 @@
+<apex:page >
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+		<!-- Resource lookups needs to be inline --> 
+		<style>
+			a.button-link {
+    			background: url({!URLFOR($Resource.Doc_images, 'button.png')}) 0 0;
+    		}
+			a.button-link:hover {
+    			background: url({!URLFOR($Resource.Doc_images, 'button.png')}) 0 -40px;
+    		}
+		</style>
+    </head>
+    <apex:image id="mainLogo" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="400 px"/>
+    <br/>
+    <h1 class="help">Welcome to Decisions on Demand!</h1>
+    <div style="min-width:640px;">
+	<apex:image styleClass="float-right" style="width:40%;min-width:400px;max-width:600px;padding-top:35px;padding-left:10px;padding-right:10px;" id="docImage1" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'SampleDecisionTable_s.png')}"/>
+	<p class="help">We make it easier to automate sophisticated business logic in Salesforce. With Decisions on Demand:</p>
+	<ul class="help">
+        <li><b>Business users own the business logic</b> -– create and manage business rules in a simple, spreadsheet-like format, without IT or admin support</li>    
+        <li><b>Changes are fast, easy and safe</b> -– test rules against real Salesforce data, deploy and roll-back versions with one click, and keep track of everything with audit trails and execution logs</li>    
+        <li><b>Collaboration is seamless</b> -– gather feedback on Chatter or share with offline users through Excel import and export</li>    
+<!--         <li><b>Simplify compliance</b> -– generate self-documenting business rules reports instantly, and log every rule execution for full traceability</li>
+-->
+    </ul>
+    <br/>
+	<p class="help">We designed our product for maximum flexibility -- so that you can handle a wide range of use cases with one tool:</p>
+ 	<ul class="help">
+        <li>Common CRM functions like <b>Lead Assignment</b>, <b>Case Assignment</b>, <b>Discounting</b> and <b>Service Recovery</b></li>
+        <li>Domain-specific decision points such as <b>Eligibility Determination</b>, <b>Online Quotes</b> and <b>Claims</b></li>
+    </ul>
+    </div>
+    <br/>
+    <h1 class="help">Get Started</h1>
+    <p class="help">To get started with Decisions on Demand:</p>
+    <apex:panelGrid columns="2" rules="rows" frame="hsides" width="90%" columnClasses="width20, width80">
+		    <apex:outputPanel > <!--  style="vertical-align:middle;width:300px;"  -->
+		    	<p style="width:200px">
+			        <a class="button-link" href="https://s3.amazonaws.com/decsond_doc/1_8/DecisionsOnDemand-GettingStarted.pdf" target="_blank">Download tutorial</a>
+		        </p>
+		    </apex:outputPanel>
+			<apex:outputPanel >
+		      	<p class="help align-middle">
+		      			Follow the Getting Started <a class="help" href="https://s3.amazonaws.com/decsond_doc/1_8/DecisionsOnDemand-GettingStarted.pdf" target="_blank">tutorial</a> to see the main features in action.
+		      	</p>       
+			</apex:outputPanel>
+
+		    <apex:outputPanel >
+		    	<p style="width:200px">
+			        <a class="button-link" href="{!$Page.DecsOnD__PolicyBrowser}" target="_blank">Install a template</a>
+		        </p>
+			</apex:outputPanel>
+			<apex:outputPanel >
+		      	<p class="help align-middle">
+		      		<a class="help" href="{!$Page.DecsOnD__PolicyBrowser}" target="_blank">Explore</a> our library of pre-built business policy templates for common CRM use cases. 
+		        </p>
+			</apex:outputPanel>
+
+		    <apex:outputPanel >
+		    	<p style="width:250px">
+			        <a class="button-link" href="mailto:sfdc-support@decisionsondemand.com?Subject=Need custom template or policy" target="_blank">Request a custom template</a>
+		        </p>
+			</apex:outputPanel>
+			<apex:outputPanel styleClass="align-middle">
+				<p class="help">
+					<a class="help" href="mailto:sfdc-support@decisionsondemand.com?Subject=Custom template or policy">Contact us</a> if the pre-built templates don't meet your needs.
+					We'll do basic customizations (like adding your custom fields) for free, and we can build completely custom policies for you too.
+    			</p>
+			</apex:outputPanel>
+	</apex:panelGrid>
+	<p class="help">Continue reading for an <a class="help" href="#Overview">overview</a> of the app, a brief section on <a class="help" href="#Terminology">terminology</a> and links to <a class="help" href="#MoreInfo">more information</a>. 
+	</p> 
+<!--     <apex:panelGrid columns="2" width="90%" columnClasses="width80, width40">
+		<apex:outputPanel style="width:500px">
+		</apex:outputPanel>
+	
+	    <apex:outputPanel style="margin-top:0;margin-bottom:auto;" >
+		</apex:outputPanel>
+	</apex:panelGrid>
+	-->
+<!-- 
+<p>
+    Decisions on Demand gives business users a simple and flexible tool to automate operational decisions like:
+    </p>
+    <ul class="help">
+        <li><b>Lead and Sales Team Assignment</b></li>    
+        <li><b>Pricing and discounting</b></li>    
+        <li><b>Case Assignment</b></li>  
+        <li><b>Service Recovery</b></li>  
+    </ul>  
+--> 
+    <br/>
+    <a name="Overview"></a><h1 class="help">App overview</h1>
+    <p class="help">
+      The Decisions on Demand app includes the following tabs:
+    </p>
+    <ul class="help">
+      <li><a class="help" href="{!$Page.PolicyBrowser}" target="_top">Policies</a> -- lists all the installed business policies to which you have access.
+      Admins can also install new policies from our template library
+</li>
+      <li><a class="help" href="../{!$ObjectType.PolicyExecutionRecord__c}/o" target="_top">Policy Execution Records</a> -- shows the execution history of all business policies to which you have access</li>
+      <li><a class="help" href="{!$Page.CustomSettings}" target="_top">Setup</a> -- Configuration settings (accessible to administrators only)</li>
+    </ul>
+    <a name="Terminology"></a><h1 class="help">Terminology</h1>
+    <p class="help">The following key terms are used in the product and documentation:</p>
+    <ul class="help">
+	  <li>Business rules are managed in spreadsheet-like <b>decision tables</b>, where each row corresponds to a rule </li>
+	  <li>One or more decision tables make up a <b>business policy</b>, or <b>policy</b> for short</li> 
+	  <li>A policy contains all the logic needed to automate one <b>decision point</b> related to a specific Salesforce object, such as a Lead, Opportunity or custom object. 
+	  Examples of decision points include Assignment, Validation, Scoring and Discounting.</li>
+	  <li>A policy is created from a <b>template</b>, which defines the structure (column names and order) of the decision tables that make up a policy</li>  
+  </ul> 
+    <a name="MoreInfo"></a><h1 class="help">For more information</h1>
+	<ul class="help">
+  		<li>Check the online help on each of the pages of the app</li>
+  		<li>Download the <a class="help" href="https://s3.amazonaws.com/decsond_doc/1_8/DecisionsOnDemand-AdministratorGuide.pdf" target="_blank">Decisions on Demand Administrator Guide</a>, which explains how to how to integrate the app into a Salesforce org</li>
+  		<li><a class="help" href="mailto:sfdc-support@decisionsondemand.com">Contact us</a> for any other questions</li>
+  	</ul>
+    <!-- 
+    consult the following documents:  
+    </p>
+    <ul class="help">
+      <li><a class="help" href="{!$Page.TemplateInstallationHelp}" target="_self">Getting Started tutorial</a>
+       Step by step description showing how to write your first business rules</li>
+      <li><a class="help" href="https://s3.amazonaws.com/decsond_doc/1_8/DecisionsOnDemand-AdministratorGuide.pdf">User Guide</a>
+       Guide for Salesforce business users explaining how to edit and manage business policies. Includes the Getting Started tutorial</li>
+      <li><a class="help" href="https://s3.amazonaws.com/decsond_doc/1_8/DecisionsOnDemand-AdministratorGuide.pdf">Administrator Guide</a>
+       Guide for Salesforce system administrators explaining how to how to integrate the app into a Salesforce org</li>
+      <li><a class="help" href="https://s3.amazonaws.com/decsond_doc/1_8/DecisionsOnDemand-AdministratorGuide.pdf">Installation Guide</a>
+       Guide for Salesforce system administrators explaining how to install the app from the AppExchange and perform initial configuration</li>
+    </ul>
+    <p class="help">Questions? -->
+<!-- 
+	<br/>
+    <p class="help">With Decisions on Demand:</p>
+    <ul class="help">
+	    <li>Business users manage business rules themselves, using an intuitive, non-technical interface. </li>
+	    <li>You can test rules thoroughly before deployment</li>
+	    <li>All policy updates are logged in an audit trail, and can be rolled back easily if needed.</li>
+	    <li>Collaboration is easy using Chatter and Tasks, or through import and export of Excel files</li>
+    </ul>
+ -->    
+ </apex:page>

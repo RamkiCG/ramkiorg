@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>application/zip</contentType>
+    <description>Contextual menu plugin for jQuery (source: http://medialize.github.io/jQuery-contextMenu/)
+Authors: Rodney Rehm, Addy Osmani (patches for FF)
+License: MIT (http://opensource.org/licenses/mit-license)</description>
+</StaticResource>

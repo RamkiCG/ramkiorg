@@ -1,0 +1,23 @@
+<apex:page controller="OppRevChartController">
+
+<apex:chart data="{!OppData}" width="40%" height="100%" theme="Salesforce" background="#E6E6FA">
+
+<apex:legend position="right" font="bold 8px Helvetica" padding="5"/>
+
+<apex:axis type="Category" position="bottom" fields="name" title="Month" margin="0">
+
+<apex:chartLabel rotate="300"/>
+
+</apex:axis>
+
+<apex:axis type="Numeric" position="left" fields="{!listOfFieldNames}" title="Revenue" grid="true" steps="1" minimum="0"/>
+
+<apex:barSeries orientation="vertical" axis="bottom" xField="name" yField="{!listOfFieldNames}" stacked="true" title="{!stagenameslist}" >
+
+<apex:chartTips width="150"/>
+
+</apex:barSeries>
+
+</apex:chart>
+
+</apex:page>

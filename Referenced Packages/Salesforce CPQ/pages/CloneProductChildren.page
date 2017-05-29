@@ -1,0 +1,5 @@
+<apex:page standardController="Product2" extensions="SBQQ.ProductExtController" action="{!onCloneProductChildren}">
+    <apex:sectionHeader title="Clone Related Records" subtitle="{!Product2.Name}"/>
+
+    <apex:pageMessages />   
+</apex:page>

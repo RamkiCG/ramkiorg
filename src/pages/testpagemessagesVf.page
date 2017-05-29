@@ -1,0 +1,35 @@
+<apex:page standardController="Opportunity" recordSetVar="opportunities"
+                        
+    tabStyle="Opportunity" sidebar="false">
+    <p>Enter an alphabetic character for the "Close Date," 
+       then click Save to see what happens.</p>
+        <apex:Messages title="testmessages"/>
+    <apex:form >
+        <apex:pageBlock >
+        <apex:pageMessage Title="Info" summary="This pageMessage will always display. Validation error 
+           messages appear in the pageMessages component." severity="Info" strength="3" />
+             <apex:pageMessage Title="warning" summary="This pageMessage will always display. Validation error 
+           messages appear in the pageMessages component." severity="warning" strength="3" />
+             <apex:pageMessage Title="Fatal" summary="This pageMessage will always display. Validation error 
+           messages appear in the pageMessages component." severity="Fatal" strength="3" />
+             <apex:pageMessage Title="Error" summary="This pageMessage will always display. Validation error 
+           messages appear in the pageMessages component." severity="Error" strength="3" />
+            <apex:pageMessage Title="Confirm" summary="This pageMessage will always display. Validation error 
+           messages appear in the pageMessages component." severity="Confirm" strength="3" />
+        <apex:pageMessages />
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!save}"/>
+        </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!opportunities}" var="opp">
+                <apex:column value="{!opp.name}"/>
+                <apex:column headerValue="Close Date">
+                    <apex:inputField value="{!opp.closeDate}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:pageBlock title="OpportunityList" >
+   <apex:page action="{!URLFOR($Action.Opportunity.List,$ObjectType.Opportunity)}" />
+    </apex:pageBlock>
+    
+</apex:page>

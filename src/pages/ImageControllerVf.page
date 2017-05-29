@@ -1,0 +1,7 @@
+<apex:page controller="ImageController" showheader="false" sidebar="false">
+ 
+    <apex:form >
+      <apex:image url="{!imageURL}">
+    </apex:image></apex:form>
+ 
+</apex:page>

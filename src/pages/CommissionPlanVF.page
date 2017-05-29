@@ -1,0 +1,44 @@
+<apex:page standardController="CommissionPlan__c" recordSetVar="commissionplans" extensions="CommissionPlan">
+<apex:messages /> 
+<apex:form >
+
+<apex:pageBlock title="NewCommissionPlan">
+    <apex:panelGrid id="newPlanPanelGrid">
+             <apex:panelGroup id="newPlanPanelGroup">              
+                <apex:outputLabel value="PlanName" />
+                    <apex:inputtext value="{!PlanName}" required="true" />              
+                    <apex:commandButton value="AddPlan" action="{!AddPlanName}"/>  
+                    
+                    <br/>
+                    <apex:commandButton value="+AddRange" action="{!AddRange}"/>  
+                     <apex:commandButton value="-RemoveRange" action="{!RemoveRange}"/>                
+                </apex:panelGroup>
+                <apex:panelGrid id="newRangePanelGrid">
+                 <apex:panelGroup id="newRangePanelGroup">              
+                 <apex:pageBlock >
+                 <apex:pageBlockTable value="{!RangeList}" var="range">
+                  <apex:column >
+                    <apex:inputCheckbox value="{!range.IsSelected}"/>
+                   </apex:column>
+                   <apex:column headerValue="LowerRange">
+                    <apex:inputField value="{!range.CommissionRange.LowerRange__c}"/>
+                   </apex:column>
+                     <apex:column headerValue="UpperRange">
+                    <apex:inputField value="{!range.CommissionRange.UpperRange__c}"/>
+                   </apex:column>
+                     <apex:column headerValue="CommissionPercentage">
+                    <apex:inputField value="{!range.CommissionRange.CommissionPercentage__c}"/>
+                   </apex:column>
+              
+                 </apex:pageBlockTable>
+                 </apex:pageBlock>                  
+                </apex:panelGroup>
+    
+    </apex:panelGrid>
+    </apex:panelGrid>
+
+   <apex:commandButton value="Save" action="{!Save}"/>
+</apex:pageBlock>
+
+</apex:form>
+</apex:page>

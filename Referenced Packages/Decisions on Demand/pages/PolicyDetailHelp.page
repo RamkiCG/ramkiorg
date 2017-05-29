@@ -1,0 +1,209 @@
+<apex:page sidebar="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+        <style>
+            /* For some reason we cannot call this helpText -- styles get all mixed up */
+			td.width40 {
+			    width: 40%;
+			    min-width: 320px;
+			    vertical-align:top;
+			}
+			
+			td.helpImage {
+			    width: 60%;
+			    min-width: 480px;
+			    vertical-align:top;
+			}
+        </style>
+    </head>
+    <a id="Top"></a>
+    <apex:image id="theImage" style="float-right" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="250 px"/>
+    <br/>
+    <apex:pageBlock title="">
+    <apex:panelGrid columns="2" rules="rows" columnClasses="width50, width50">
+        <apex:outputPanel styleClass="help" >
+            <h1 class="help">Business Policy Detail Page - Help</h1>
+		    <p class="help">The Business Policy Detail Page allows users with read access to a policy to:</p>
+		    <ul class="help">
+		        <li><a href="#ViewPolicy" class="help"><b>View</b></a> its content and version history</li>
+		        <li><a href="#TestPolicy" class="help"><b>Test</b></a> it against real data to validate the logic</li>
+		    </ul> 
+		    <p class="help">Users with read/write access to the policy can also:</p>
+		    <ul class="help">
+		        <li><a href="#EditPolicy" class="help"><b>Edit</b></a> the business rules</li>
+		        <li><a href="#ConfigurePolicy" class="help"><b>Configure</b></a> the policy to add, remove or hide columns as well as change labels and display formats</li>
+		        <li><a href="#ManagePolicyLifecycle" class="help"><b>Manage</b></a> policy versions, share access with other users, or archive, restore and delete a policy</li>
+                <li><a href="#ConfigurePolicyInvocation" class="help"><b>Set up</b></a> triggers to invoke a policy when records are created or updated</li>
+		    </ul> 
+		    <p class="help">For an overview of the app as well as links to documentation and other available resources, please refer to the <a class="help" href="{!$Page.Welcome}" target="_top">Welcome</a> tab.</p>
+        </apex:outputPanel>
+        <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" id="docImage1" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'SampleDecisionTable_s.png')}"/>
+    </apex:panelGrid>
+    </apex:pageBlock>
+    <a id="ViewPolicy"></a>
+    <apex:pageBlock title="Viewing a policy and its version history">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width50, width50">
+	        <apex:outputPanel styleClass="help" >
+	            <h3 class="help">View policy contents</h3>
+				<p>
+	                Each policy has one or more decision tables, shown in separate tabs. In each tab, you can search the table using the <b>Filter</b> field. 
+	                Every time a policy is modified, a new version is created. To show a previous version of the policy, select it from the <b>Version</b> dropdown above the table view.
+	            </p>   
+	        </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyContents_s.png')}"/>
+            <apex:outputPanel styleClass="help">
+                <h3 class="help">View the version history</h3>
+                <p>
+                    The Version History table (found below the table editor) lists all policy versions, along with an audit trail of their creation and modification and (optional) explanatory notes. 
+                    Click on the <b>Download</b> link to retrieve a copy of the version contents as an Excel spreadsheet.
+                </p> 
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyVersionHistory_s.png')}"/>
+            <apex:outputPanel styleClass="help">
+                <h3 class="help">View the execution log</h3>
+                <p>The Policy Execution Log related list shows details of every time this policy was executed, if logging was enabled.
+                For complete details including exactly which decision table rows were matched, click on the <b>Execution ID</b> field.
+                </p>
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyExecutionLog_s.png')}"/>
+            <apex:outputPanel styleClass="help">
+                <h3 class="help">Collaborate using Chatter or Tasks</h3>
+                <p>Collaborate on your policies using standard Salesforce tools like Chatter and Tasks.</p>
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyChatter_s.png')}"/>
+            <apex:outputPanel />
+            <apex:outputPanel styleClass="help, float-right">
+                <a class="help" href="#Top" target="_top">^ Top</a>
+            </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <a id="TestPolicy"></a>
+    <apex:pageBlock title="Testing a policy">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width50, width50">
+            <apex:outputPanel styleClass="help">
+                <h3 class="help">Launch the test console</h3>
+                <p>To interactively test the policy against real data, click the <b>Test</b> button. 
+                This opens the test console, which is described more fully <a href="{!$Page.DecsOnD__Policy_Editor_Test_Page_Help}" target="_top">here</a>.
+                </p>
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyTest_s.jpg')}"/>
+            <apex:outputPanel />
+            <apex:outputPanel styleClass="help, float-right">
+                <a class="help" href="#Top" target="_top">^ Top</a>
+            </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <a id="EditPolicy"></a>
+    <apex:pageBlock title="Editing business rules">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width50, width50">
+            <apex:outputPanel styleClass="help">      
+                <h3 class="help">Launch the policy editor wizard</h3>
+                <p class="help">
+                    If you have read/write access to the policy, you can click the <b>Edit</b> button to launch the policy editor wizard.
+                    The wizard allows you to edit, test and deploy a new or updated policy version. 
+                    See more details <a href="{!$Page.DecsOnD__Policy_Editor_Edit_Page_Help}" target="_top">here</a>.
+                </p>
+                <p>Note that editing is only enabled when the current (most recent) policy version is shown in the table.</p> 
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_EditPolicy_s.png')}"/>
+            <apex:outputPanel />
+            <apex:outputPanel styleClass="help, float-right">
+                <a class="help" href="#Top" target="_top">^ Top</a>
+            </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <a id="ConfigurePolicy"></a>
+    <apex:pageBlock title="Configuring the policy">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width50, width50">
+            <apex:outputPanel styleClass="help">      
+                <h3 class="help">Open the policy configuration dialog</h3>
+                <p class="help">You can add new columns to the policy, remove or hide existing columns, as well as change the width, labels and other attributes of columns. 
+                To open the decision table configuration dialog, select the table you want to configure, then click the gear icon at the top right of the table.</p>
+                <!--  TODO Link to full doc of the config dialog -->
+            </apex:outputPanel>            
+            <apex:image styleClass="float-left" style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyConfigurationDialog_s.jpg')}"/>
+            <apex:outputPanel />
+            <apex:outputPanel styleClass="help, float-right">
+                <a class="help" href="#Top" target="_top">^ Top</a>
+            </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <a id="ManagePolicyLifecycle"></a>
+    <apex:pageBlock title="Managing the policy lifecycle">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width50, width50">
+            <apex:outputPanel styleClass="help">
+                <h3 class="help">Change the active version</h3>
+                <p>
+                    You can change active version either from the version history table or by using the <b>Activate</b> button above the content viewer pane.
+                    The <b>Activate</b> button is disabled if the currently shown version is already active.
+                </p>    
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="float-left" style="min-width:50%;max-width:600px;" >
+                <apex:image style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyChangeActiveVersion2_s.jpg')}"/>
+                <apex:image style="min-width:50%;max-width:600px;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyChangeActiveVersion1_s.png')}"/>
+            </apex:outputPanel>
+			<apex:outputPanel styleClass="help">
+				<h3 class="help">Share a policy</h3>
+				<p>
+				    You can grant other users, roles or groups access to a policy using standard Sharing rules. Access rights can be read-only or read-write. 
+				    Users with Policy Administrator rights automatically have full access to all policies.
+				</p> 
+			</apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:10%;max-width:50%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicySharing_s.png')}"/>
+			<apex:outputPanel styleClass="help">
+				<h3 class="help">Archiving and restoring a policy</h3>
+				<p>When a policy is no longer actively used you can archive it by clicking <b>Change</b> next to the <b>Status</b> field, and then clicking the <b>Archive</b> button.
+				Archived policies and their execution logs can still be viewed but they can no longer be executed or edited. 
+				</p>
+                <p>A policy can be restored to <b>Active</b> state by clicking <b>Change</b> again and selecting <b>Restore</b> in the dialog that appears.</p>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="float-left" style="min-width:50%;max-width:600px;" >
+                <apex:image styleClass="float-left" width="40%" id="docImage2c1" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyChangeStatus1_s.png')}"/>
+                <apex:image styleClass="float-right" width="50%" id="docImage2c2" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyChangeStatus2_s.png')}"/>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="help">
+                <h3 class="help">Deleting a policy</h3>
+                <p class="help">
+                    Policy owners, administrators and others with full access to the policy can permanently delete the policy -- but only after it has been archived.
+                    Note that when a policy is deleted it will be permanently removed, along with its version history and execution logs. 
+                    It is not possible to restore a policy once it has been deleted
+                </p>
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:400px;max-width:600px;" id="docImage3" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_DeletePolicy_s.png')}"/>
+            <apex:outputPanel />
+            <apex:outputPanel styleClass="help, float-right">
+                <a class="help" href="#Top" target="_top">^ Top</a>
+            </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <a id="ConfigurePolicyInvocation"></a>
+    <apex:pageBlock title="Setting up policy invocation">
+        <apex:panelGrid columns="2" rules="rows" columnClasses="width50, width50">
+            <apex:outputPanel styleClass="help">
+                <h3 class="help">Set up triggers to invoke the policy automatically</h3>
+                <p class="help">
+                    To have the policy invoked automatically when a record is created or updated, select the appropriate checkboxes in the <b>Triggers</b> section of the policy detail page, then click <b>Apply</b>. 
+                </p> 
+                <p class="help">
+                    You can optionally create a policy execution record each time the policy is invoked. 
+                    This is typically useful for compliance purposes when the policy is used to make sensitive decisions, or during initial deployment to validate functionality.   
+                </p> 
+                <p class="help">
+                To learn about other policy invocation options, including custom buttons, Batch APEX and Visual Workflow, 
+                consult the <a class="help" href="https://s3.amazonaws.com/decsond_doc/1_8/DecisionsOnDemand-AdministratorGuide.pdf" target="_blank">Decisions on Demand Administrator Guide</a>.
+                </p>
+            </apex:outputPanel>
+            <apex:image styleClass="float-left" style="min-width:400px;max-width:600px;" id="docImage3" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_ActivatePolicyTriggers_s.jpg')}"/>
+            <apex:outputPanel />
+            <apex:outputPanel styleClass="help, float-right">
+                <a class="help" href="#Top" target="_top">^ Top</a>
+            </apex:outputPanel>
+        </apex:panelGrid>
+    </apex:pageBlock>
+    <apex:pageBlock title="Additional resources">
+        <apex:outputPanel styleClass="help">
+            Please see the <a class="help" href="{!$Page.DecsOnD__Welcome}" target="_top">Welcome</a> tab for an overview of the app, and links to additional documentation and resources. 
+            Questions or comments? Please <a class="help" href="mailto:sfdc-support@decisionsondemand.com?Documentation question or comment">contact us!</a>
+        </apex:outputPanel>
+    </apex:pageBlock>
+</apex:page>

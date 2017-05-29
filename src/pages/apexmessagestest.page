@@ -1,0 +1,12 @@
+<apex:page controller="TestMessageController">
+<apex:form >
+ <apex:outputLabel value="Test String" />
+  
+  <apex:inputText value="{!test.Name}" id="test1">   
+           
+    </apex:inputtext>
+      <apex:message for="test1"/>
+ 
+<apex:commandButton value="test msg" action="{!testmessage}"/>
+</apex:form>
+</apex:page>

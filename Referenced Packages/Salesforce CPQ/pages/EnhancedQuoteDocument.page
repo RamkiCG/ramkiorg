@@ -1,0 +1,27 @@
+<apex:page controller="SBQQ.DocumentGeneratorController" contentType="text/xml" cache="false" showHeader="false" sidebar="false">
+    
+    <root> 
+        <c:layoutMasterSet template="{!template}" headerHeight="{!template.SBQQ__HeaderHeight__c}" footerHeight="{!template.SBQQ__FooterHeight__c}"/>
+        
+        <page-sequence master-reference="default-master">
+        	<static-content flow-name="xsl-region-before">
+                <block font-size="9pt" width="100%" text-align="center">
+                    <c:documentHeader quote2="{!quote2}" template="{!template}" quoteDocument="{!quoteDocument}"/>
+                </block>
+            </static-content>
+            <static-content flow-name="xsl-region-after">
+                <block font-size="9pt" width="100%" text-align="center">
+                    <c:documentFooter quote2="{!quote2}" template="{!template}" quoteDocument="{!quoteDocument}"/>
+                    Page <page-number /> of <page-number-citation ref-id="last-page"/>
+                </block>
+            </static-content>
+            <flow flow-name="xsl-region-body" background-image="url('qq://watermark')">
+                <apex:outputPanel layout="none" rendered="{!hasQuote}">
+                    <c:documentSections quote2="{!quote2}" template="{!template}" quoteDocument="{!quoteDocument}"/>
+                </apex:outputPanel>
+                <!--  This is here to get total page count -->
+                <block id="last-page" />
+            </flow>
+        </page-sequence>
+    </root>
+</apex:page>

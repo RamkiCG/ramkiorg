@@ -1,0 +1,15 @@
+<apex:page standardController="Account" renderAs="pdf">
+
+<apex:pageBlock title="Hello {!$User.FirstName}!">
+You are viewing the {!account.name} account.
+</apex:pageBlock>
+<apex:pageBlock title="Contacts">
+<apex:pageBlockTable value="{!account.Contacts}" var="contact">
+<apex:column value="{!contact.Name}"/>
+<apex:column value="{!contact.MailingCity}"/>
+<apex:column value="{!contact.Phone}"/>
+</apex:pageBlockTable>
+<apex:image url="{!URLFOR($Resource.SystemImages,
+                  'Images/Desert.jpg')}" />
+</apex:pageBlock>
+</apex:page>

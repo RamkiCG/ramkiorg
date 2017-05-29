@@ -1,0 +1,29 @@
+<apex:page standardController="Contract" extensions="SBQQ.RenewContractsController" recordSetVar="contracts" action="{!onInit}">
+	<apex:sectionHeader title="Renew Contracts"/>
+	
+	<apex:form >
+	<apex:pageBlock title="Selected Contracts">
+		<apex:pageBlockButtons >
+			<apex:commandButton value="Renew" action="{!onRenew}"/>
+		</apex:pageBlockButtons>
+		<apex:inputHidden id="masterContractId" value="{!masterContractId}"/>
+		<apex:pageBlockTable var="contract" value="{!selectedContracts}">
+			<apex:column headerValue="Master">
+				<input type="radio" name="masterSelector" onclick="selectMaster('{!contract.Id}')"/>
+			</apex:column>
+			<apex:column headerValue="Contract #" value="{!contract.ContractNumber}"/>
+			<apex:column headerValue="Start Date" value="{!contract.StartDate}"/>
+			<apex:column headerValue="End Date" value="{!contract.EndDate}"/>
+		</apex:pageBlockTable>
+		
+		<script type="text/javascript">
+			function selectMaster(contractId) {
+				var field = document.getElementById('{!$Component.masterContractId}');
+				if (field != null) {
+					field.value = contractId;
+				}
+			}
+		</script>
+	</apex:pageBlock>
+	</apex:form>
+</apex:page>

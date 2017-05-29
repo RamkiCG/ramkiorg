@@ -1,0 +1,34 @@
+<apex:page sidebar="false">
+    <head>
+        <link rel="stylesheet" href="{!URLFOR($Resource.Doc_images, 'HelpPagesStyles.css')}" type="text/css" media="screen"/>
+   </head>
+  <apex:image id="theImage" value="{!$Resource.DecsOnD__DecsOnD_logo_full}" width="400 px"/>
+  <br/>
+  <h1 class="help">Testing your Business Policy</h1>
+  <p class="help">The test console allows you to test the functionality of your business policy against real data, but without actually making any changes.
+  </p>
+    <apex:panelGrid columns="2" rules="rows" columnClasses="width40, width80">
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Select test objects</h3>
+	      <p>Using the standard Salesforce list view, select one or more records to use as test cases. 
+	      The test results will show the actions that would be applied if the policy was used -- but no changes will be made to the records during the test.
+	      </p>   
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" style="min-width:50%;max-width:75%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyTestSelect_s.png')}"/>
+      <apex:outputPanel styleClass="help">
+	      <h3 class="help">Run the test</h3>
+	      <p>Click the <b>Run test</b> button to execute the business policy for the selected objects. 
+	      A summary of the results is shown below the table, including the actions that the policy would apply if deployed.	      
+	      For further details on each execution, click the <b>Execution Record</b> link.
+	      </p>   
+      </apex:outputPanel>
+      <apex:image styleClass="float-left" style="min-width:50%;max-width:75%;" url="{!URLFOR($Resource.DecsOnD__Doc_images, 'Help_PolicyTestRun_s.png')}"/>
+  </apex:panelGrid>
+  <p class="help">If you are using the test console in the Policy Editor wizard, you can click:</p>
+  <ul class="help">
+	  <li><b>Next</b> to proceed to the <a href="{!$Page.DecsOnD__Policy_Editor_Update_Page_Help}" target="_top">deployment step</a></li>
+	  <li><b>Previous</b> to return to the <a href="{!$Page.DecsOnD__Policy_Editor_Edit_Page_Help}" target="_top">edit page</a> and make further changes</li>
+  </ul> 
+  <p class="help">Otherwise, click <b>Cancel</b> to exit the test console and return to the <a href="{!$Page.DecsOnD__PolicyDetailHelp}" target="_top">policy detail page</a>.
+  </p>
+</apex:page>

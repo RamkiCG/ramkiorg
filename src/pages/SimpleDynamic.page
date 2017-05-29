@@ -1,0 +1,8 @@
+<apex:page >
+
+<apex:enhancedList type="Account" height="300" rowsPerPage="10" id="AccountList" customizable="true" />
+
+<apex:enhancedList type="Lead" height="300" rowsPerPage="10"
+id="LeadList" customizable="False" />
+ 
+</apex:page>

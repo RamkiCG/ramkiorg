@@ -1,0 +1,22 @@
+<apex:page standardController="Case" recordSetVar="cases"  extensions="listcase">
+    <apex:form >
+        <apex:pageBlock id="list">
+           <apex:pageBlock title="Case List">
+             <apex:pageBlockTable value="{!cases}" var="cas">
+               <apex:column >
+                    <a href="/{!cas.ID}" target="ShowRecord"><apex:outputText value="{!cas.CaseNumber}"/></a>
+                </apex:column>
+                <apex:column value="{!cas.Type}"/>
+                <apex:column value="{!cas.Subject}"/>
+                <apex:column value="{!cas.Reason}"/>
+                <apex:column value="{!cas.Status}"/>
+                <apex:column value="{!cas.IsSelfServiceClosed}"/>
+                <apex:column value="{!cas.ClosedDate}"/>
+                <apex:column value="{!cas.CreatorName}"/>
+    
+            </apex:pageBlockTable>
+           </apex:pageBlock><br/>
+            <apex:commandLink value="Show More ({!ResultSize}) >>" action="{!ShowAll}" rendered="{!ResultSize>PageSize}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

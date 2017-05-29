@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Synchronization Process completed successfully</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Synchronization Process Completed</name>
+    <style>none</style>
+    <subject>{!Callidus_Synchronization_ActivityHistory__c.Callidus_Synchronization__c} process completed successfully</subject>
+    <textOnly>Hi {!Callidus_Synchronization_ActivityHistory__c.LastModifiedBy},  The {!Callidus_Synchronization_ActivityHistory__c.Callidus_Synchronization__c} job completed successfully at {!Callidus_Synchronization_ActivityHistory__c.Finish_Time__c}.  Regards, {!Callidus_Synchronization_ActivityHistory__c.LastModifiedBy}</textOnly>
+    <type>custom</type>
+</EmailTemplate>

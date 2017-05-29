@@ -1,0 +1,759 @@
+<apex:page sidebar="false" standardStylesheets="false"  controller="SWATRuleConfigAdmin" >
+ <style>
+        .form-control{
+            display:inline;
+            width:75%;
+        }
+        body {
+            font-size:12px;
+        }
+        .h1, h1 {
+            font-size: 36px;
+        }
+        .h1, .h2, .h3, h1, h2, h3 {
+            margin-bottom: 10px;
+            margin-top: 0px;
+        }
+        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+            color: inherit;
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+            
+        }
+        h1 {
+            font-size: 2em;
+            margin: 0.67em 0;
+        }
+        .tab-content{
+            margin-top:15px;
+        }
+        h4 {
+            margin-top:20px;
+            margin-bottom:20px;
+            display:block;
+        }
+        ul li, ol li {
+            margin-left: 0;
+            padding-left: 0;
+        }
+        .dateFormat {
+            display: none;
+        }
+        body .bPageTitle {
+            padding: 0px;
+        }
+        .bPageTitle {
+            margin-bottom: 0px;            
+        }
+        .apexp .bPageBlock p {
+            margin: 0 0 10px;
+        }
+        .form-control {
+            font-size: 12px;
+            padding:4px 12px;
+            height: 27px;
+        }
+        .codeViewPortContainer {
+            background-color: rgb(206, 239, 255);
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+        .codeViewPort {
+            font-family: courier,monotype;
+            white-space: pre-wrap;
+        }
+
+    </style>
+    <script>
+        function lookupFill(elementId, elementName, elementIdValue, elementNameValue){
+            document.getElementById(elementId).value = elementIdValue;
+            document.getElementById(elementName).value = elementNameValue;
+            passSelectedValueToController();
+            popUp.close();
+        }
+    
+    </script>
+    
+    <apex:sectionHeader title="SWAT" subtitle="Configuration"/>   
+        <apex:pageBlock mode="maindetail" id="theBlock">
+         
+        
+        <apex:composition template="SWATTemplate">
+            <apex:define name="sidebar">
+            
+                <apex:form >     
+                  
+                    <div class="list-group">        
+                        <apex:commandLink styleClass="{!IF(linkAction == 'home','list-group-item active','list-group-item')}" reRender="theBlock" status="homeStatus">        
+                            <span class="glyphicon glyphicon-home"></span> Home 
+                            <span class="pull-right">
+                                <apex:actionStatus id="homeStatus">
+                                    <apex:facet name="start">
+                                        <apex:image id="theImage" value="/img/loading32.gif" style="height: 15px;"/>
+                                    </apex:facet>
+                                </apex:actionStatus>
+                            </span>
+                            <apex:param name="actionName" value="home" assignTo="{!linkAction}"/>
+                        </apex:commandLink>
+                        <apex:commandLink styleClass="{!IF(linkAction == 'managerules','list-group-item active','list-group-item')}" reRender="theBlock" status="ruleGroupStatus">        
+                            <span class="glyphicon glyphicon-tasks"></span> Manage Rules
+                            <span class="pull-right">
+                                <apex:actionStatus id="ruleGroupStatus">
+                                    <apex:facet name="start">
+                                        <apex:image id="theImageRuleGroup" value="/img/loading32.gif" style="height: 15px;"/>
+                                    </apex:facet>
+                                </apex:actionStatus>
+                            </span>
+                            <apex:param name="actionName" value="managerules" assignTo="{!linkAction}"/>
+                            <apex:param name="actionTab" value="rule" assignTo="{!activeTab}"/>
+                        </apex:commandLink>                                       
+                        <apex:commandLink styleClass="{!IF(linkAction == 'configure','list-group-item active','list-group-item')}" reRender="theBlock" status="configStatus">        
+                            <span class="glyphicon glyphicon-cog"></span> Configure Rules
+                            <span class="pull-right" >
+                                <apex:actionStatus id="configStatus">
+                                    <apex:facet name="start">
+                                        <apex:image id="theImage3" value="/img/loading32.gif" style="height: 15px;"/>
+                                    </apex:facet>
+                                </apex:actionStatus>
+                            </span>
+                            <apex:param name="actionName" value="configure" assignTo="{!linkAction}"/>
+                        </apex:commandLink>  
+                        <!--
+                        <apex:commandLink styleClass="{!IF(linkAction == 'productrecommend','list-group-item active','list-group-item')}" reRender="theBlock" status="productReco">        
+                            <span class="glyphicon glyphicon-cog"></span> Need Analysis
+                            <span class="pull-right" >
+                                <apex:actionStatus id="productReco">
+                                    <apex:facet name="start">
+                                        <apex:image id="theImage4" value="/img/loading32.gif" style="height: 15px;"/>
+                                    </apex:facet>
+                                </apex:actionStatus>
+                            </span>
+                            <apex:param name="actionName" value="productrecommend" assignTo="{!linkAction}"/>
+                            <apex:param name="actionTab" value="createreco" assignTo="{!activeTab}"/>
+                        </apex:commandLink>    -->                                   
+                    </div>
+                    
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">SWAT Business Rule Engine</div>
+                        <apex:outputPanel layout="block" styleClass="panel-body" rendered="{!linkAction == 'home'}">
+                            <div>
+                                <p>Create and Configure Business Rules in 3 easy steps</p>
+                                <ol type="1">
+                                    <li>Create Rules &amp; Rule Groups</li>
+                                    <li>Associate Rules to Rule Groups</li>
+                                    <li>Attach Rule Groups to Business Process</li>
+                                </ol>
+                            </div>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel layout="block" styleClass="panel-body" rendered="{!linkAction == 'managerules'}">
+                            <div>
+                                <p>Facilitates the creation and modification of</p>
+                                <ol type="1">
+                                    <li>Rules</li>
+                                    <li>Rule Groups</li>
+                                    <li>Rule - Group Associations</li>
+                                </ol>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="block" styleClass="panel-body" rendered="{!linkAction == 'configure'}">
+                            <div><p>Allows you to attach a rule group or rule groups to a business process in a few clicks</p></div>
+                        </apex:outputPanel>
+                    </div>
+                    
+                </apex:form>
+            </apex:define>
+            <apex:define name="body"> 
+                <apex:outputPanel layout="block" id="panelBody" styleClass="panel panel-primary">
+                    <div class="panel-heading">{!panelTitleMap[linkAction]}</div>
+                        <div class="panel-body">
+                            <apex:outputPanel layout="block" id="homeContents" rendered="{!linkAction == 'home'}">
+                                <h4>SWAT Business Rule Engine</h4> 
+                                <div>
+                                    <p>Create and Configure Business Rules in 3 easy steps</p>
+                                    <ol type="1">
+                                        <li>Create Rules &amp; Rule Groups</li>
+                                        <li>Associate Rules to Rule Groups</li>
+                                        <li>Attach Rule Groups to Business Process</li>
+                                    </ol>
+                                </div>
+                                <h4>Manage Rules</h4>
+                                <div>
+                                    <p>Facilitates the creation and modification of</p>
+                                    <ol type="1">
+                                        <li>Rules</li>
+                                        <li>Rule Groups</li>
+                                        <li>Rule - Group Associations</li>
+                                    </ol>
+                                </div>
+                                <h4>Configure Rules</h4>
+                                <div>
+                                    <p>Allows you to attach a rule group or rule groups to a business process in a few clicks</p>                                   
+                                </div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel layout="block" id="ruleGroupContents" rendered="{!linkAction == 'managerules'}">
+                                <div class="tabbable">
+                                <div class="tabbable tabs-right">
+                                    <ul class="nav nav-tabs">
+                                        <li class="{!IF(activeTab == 'rule','active','')}"><a data-toggle="tab" href="#rA">Create Rule</a></li>
+                                        <li class="{!IF(activeTab == 'rulegroup','active','')}"><a data-toggle="tab" href="#rB">Create Rule Group</a></li>
+                                        <li class="{!IF(activeTab == 'maprule','active','')}"><a data-toggle="tab" href="#rC">Map Rules</a></li>
+                                    </ul>
+                                    <div class="tab-content" >
+                                        <div id="rA" class="{!IF(activeTab == 'rule','tab-pane active','tab-pane')}">
+                                            <apex:form >
+                                                <apex:pageBlock mode="maindetail" id="createRule" >
+                                                <apex:pagemessages rendered="{!IF(activeTab == 'rule',true,false)}"></apex:pagemessages> 
+                                                    <apex:pageBlockButtons location="bottom">
+                                                        <apex:actionStatus id="saveRuleStatus">
+                                                            <apex:facet name="stop">                                                                    
+                                                                <apex:commandButton value="Save Rule" action="{!save}" reRender="createRule, ruleTable" status="saveRuleStatus" disabled="{!IF(ruleDetails.Name == '' && ruleDetails.Name == NULL ,'true','false')}" />
+                                                             
+                                                            </apex:facet>
+                                                            <apex:facet name="start">
+                                                                <apex:outputPanel >
+                                                                    <apex:commandButton value="Saving..." disabled="true" />                                         
+                                                                </apex:outputPanel>
+                                                            </apex:facet>
+                                                        </apex:actionStatus> 
+                                                        
+                                                        <apex:actionStatus id="SaveEnable">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImageField" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                                </apex:actionStatus>
+                                                        
+                                                        <apex:commandButton action="{!resetForm}" value="Cancel" reRender="createRule"/>
+                                                        
+                                                    </apex:pageBlockButtons>
+                                                    <apex:pageBlockSection title="" collapsible="false" showHeader="false">
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRule__c.fields.Name.label}" for="name"/>                                                            
+                                                            <apex:inputField value="{!ruleDetails.Name}" styleClass="form-control">
+                                                            <apex:actionSupport event="onblur" reRender="saveRuleStatus" status="SaveEnable"/>
+                                                            </apex:inputField>
+                                                        </apex:pageBlockSectionItem>
+                                                        
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRule__c.fields.ActiveFlag__c.label}" for="name"/>
+                                                            <apex:inputField value="{!ruleDetails.ActiveFlag__c}" styleClass=""/>
+                                                        </apex:pageBlockSectionItem>
+                                                        
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRule__c.fields.RuleDescription__c.label}" for="name"/>
+                                                            <apex:inputField value="{!ruleDetails.RuleDescription__c}" styleClass="form-control"/>
+                                                        </apex:pageBlockSectionItem>
+                                                        
+                                                    </apex:pageBlockSection>
+                                                    <apex:outputPanel id="ruleBuilder">
+                                                        <h4>Build Rule Expression</h4>
+                                                        <apex:pageBlockTable value="{!expressionList}" var="w" id="theTable">
+                                                            <apex:column width="2%" >
+                                                                <!--<apex:outputText value="{!w.index + 1}"/> --> 
+                                                                <apex:selectList value="{!w.logicalOperator}" size="1" multiselect="false" style="width:75px;" styleClass="form-control" rendered="{!w.index > 0}">
+                                                                    <apex:selectOptions value="{!w.logicalOperators}"></apex:selectOptions>                                                                    
+                                                                </apex:selectList>
+                                                            </apex:column>
+                                                            <apex:column headerValue="Object Name" width="25%">
+                                                                <apex:selectList value="{!w.objectName}" size="1" multiselect="false" style="width:175px;" styleClass="form-control">
+                                                                    <apex:selectOptions value="{!w.objects}"></apex:selectOptions>
+                                                                    <apex:actionSupport event="onchange" reRender="ruleBuilder" status="objectStatus" />
+                                                                </apex:selectList>
+                                                                <apex:actionStatus id="objectStatus">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImage3" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                                </apex:actionStatus>
+                                                            </apex:column>
+                                                            <apex:column headerValue="Field Name" width="20%">
+                                                                <apex:selectList value="{!w.fieldName}" size="1" multiselect="false" style="width:150px;" styleClass="form-control">
+                                                                    <apex:selectOptions value="{!w.fields}"></apex:selectOptions>    
+                                                                    <apex:actionSupport event="onchange" reRender="ruleBuilder" status="fieldStatus" />                                
+                                                                </apex:selectList>
+                                                                <apex:actionStatus id="fieldStatus">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImageField" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                                </apex:actionStatus>
+                                                            </apex:column>
+                                                            <apex:column headerValue="Operator" width="20%">
+                                                                <apex:selectList value="{!w.operator}" size="1" multiselect="false" style="width:150px;" styleClass="form-control">
+                                                                    <apex:selectOptions value="{!w.operators}"></apex:selectOptions>                                    
+                                                                </apex:selectList>
+                                                            </apex:column>
+                                                            <apex:column headerValue="Value" width="20%">
+                                                                <apex:inputText value="{!w.fieldValue}" styleClass="form-control" rendered="{!w.fieldName == null}"/>
+                                                                <apex:inputField value="{!w.selectedObject[w.fieldName]}" styleClass="form-control" rendered="{!w.fieldName <> null}"/>
+                                                            </apex:column>
+                                                            <apex:column headerValue="" width="15%">
+                                                                <apex:commandButton value="+" action="{!addNewExpressionIntoRule}" reRender="ruleBuilder" status="actionStatus"  style="width:25px; height:25px;" styleClass="glyphicon glyphicon-plus">
+                                                                    <apex:param name="indexValue" value="{!w.index}" assignTo="{!selectedIndex}"/>
+                                                                </apex:commandButton>
+                                                                <apex:commandButton value="–" action="{!deleteExpressionFromRule}" reRender="ruleBuilder" status="actionStatus" disabled="{!w.disabled}" styleClass="glyphicon glyphicon-minus" style="width:25px; height:25px;margin-left:5px">
+                                                                    <apex:param name="indexValue" value="{!w.index}" assignTo="{!selectedIndex}"/>    
+                                                                </apex:commandButton>
+                                                                <apex:actionStatus id="actionStatus">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImage4" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                                </apex:actionStatus>
+                                                            </apex:column>
+                                                        </apex:pageBlockTable>                                                    
+                                                    </apex:outputPanel>                        
+                                                </apex:pageBlock>
+                                                <!-- list of rules -->
+                                                <apex:pageBlock mode="maindetail" id="theRuleBlock">
+                                                    <h4>Available Rules</h4>
+                                                        <apex:pageBlockTable value="{!rules}" var="c" id="ruleTable" rendered="{!rules.size > 0}">                                        
+                                                            <apex:column width="10%">
+                                                                <apex:commandLink rerender="ruleGroupContents" value="Edit " action="{!editOrDeleteRecord}" status="editDeleteactionStatus">                                                                                              
+                                                                    <apex:param value="{!c.Id}" name="editRecord{!c.Id}" assignTo="{!selectedRecordToEdit}" />
+                                                                    <apex:param value="SWATRule__c" name="editObjectType{!c.Id}" assignTo="{!objectType}" />                                                                
+                                                                </apex:commandLink>|                                                                
+                                                                <apex:commandLink rerender="ruleGroupContents" value=" Delete" action="{!editOrDeleteRecord}" status="editDeleteactionStatus">                                                                
+                                                                    <apex:param name="deleteRecord{!c.Id}" value="{!c.Id}" assignTo="{!selectedRecordToDelete}" />
+                                                                    <apex:param value="SWATRule__c" name="editObjectType{!c.Id}" assignTo="{!objectType}" />
+                                                                </apex:commandLink>
+                                                                
+                                                                <apex:actionStatus id="editDeleteactionStatus">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImage4" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                                </apex:actionStatus> 
+                                                            </apex:column>                                
+                                                            <apex:column value="{!c.Name}" width="40%" >
+                                                                <apex:facet name="footer">Showing Page # {!pageNumber} of {!totalPages}</apex:facet>
+                                                            </apex:column>                  
+                                                            <apex:column width="40%" value="{!c.RuleDescription__c}" />
+                                                            <apex:column width="10%" value="{!c.ActiveFlag__c}" />                                                                          
+                                                        </apex:pageBlockTable>
+                                                        
+                                                        <apex:outputPanel layout="block" id="pagination" rendered="{!lastPage > 1}">
+                                                            <ul class="pagination pagination-sm">
+                                                                <li class="{!IF(pageNumber == 1, 'disabled','')}">
+                                                                    <apex:commandLink reRender="theRuleBlock, pagination"> 
+                                                                        &laquo;
+                                                                        <apex:param name="previousPageNumber" value="{!pageNumber - 1}" assignTo="{!pageNumber}" />
+                                                                    </apex:commandLink>
+                                                                </li>                                            
+                                                                
+                                                                <li>
+                                                                    <apex:commandLink rendered="{!startPage > 1}" reRender="theRuleBlock, pagination">1
+                                                                        <apex:param name="firstPageNumber" value="1" assignTo="{!pageNumber}" />
+                                                                    </apex:commandLink>
+                                                                </li>
+                                                                <li class="disabled"><apex:outputText rendered="{!startPage > 1}"><span>...</span></apex:outputText></li>
+                                                                                                                                                                                        
+                                                                <apex:repeat value="{!counter}" var="cntr">
+                                                                    <li class="{!IF(pageNumber == cntr, 'active','')}">
+                                                                        <apex:commandLink reRender="theRuleBlock, pagination">{!cntr}
+                                                                            <apex:param name="pageNumber{!cntr}" value="{!cntr}" assignTo="{!pageNumber}" />
+                                                                        </apex:commandLink>
+                                                                    </li>
+                                                                </apex:repeat> 
+                                                                
+                                                                
+                                                                <li class="disabled"><apex:outputText rendered="{!endPage < lastPage}"><span>...</span></apex:outputText></li>
+                                                                <li>
+                                                                    <apex:commandLink rendered="{!endPage < lastPage}" reRender="theRuleBlock, pagination">{!lastPage}
+                                                                        <apex:param name="lastPageNumber" value="{!lastPage}" assignTo="{!pageNumber}" />
+                                                                    </apex:commandLink>
+                                                                </li>
+                                                                    
+                                                                
+                                                                                                                           
+                                                                <li class="{!IF(pageNumber == lastPage, 'disabled','')}">
+                                                                    <apex:commandLink reRender="theRuleBlock, pagination">
+                                                                        &raquo;
+                                                                        <apex:param name="nextPageNumber" value="{!pageNumber + 1}" assignTo="{!pageNumber}" />
+                                                                    </apex:commandLink>
+                                                                </li>
+                                                            </ul>
+                                                        </apex:outputPanel>
+                                                </apex:pageBlock>
+                                            </apex:form>
+                                        </div>
+                                        <div id="rB" class="{!IF(activeTab == 'rulegroup','tab-pane active','tab-pane')}">
+                                            <apex:form >
+                                                <apex:pageBlock mode="maindetail" id="theBlockRuleGroup">
+                                                <apex:pagemessages rendered="{!IF(activeTab == 'rulegroup',true,false)}"></apex:pagemessages> 
+                                                    <apex:pageBlockButtons location="bottom">
+                                                        <apex:actionStatus id="saveRuleGroupStatus">
+                                                            <apex:facet name="stop">                                                                    
+                                                                <apex:commandButton value="Save Group" action="{!saveRuleGroup}" reRender="theBlockRuleGroup, theRuleGroupTable, theBlockMapRule" status="saveRuleGroupStatus" disabled="{!if(ruleGroup.Name==''&& ruleGroup.Name ==NULL , true,false)}" />
+                                                            </apex:facet>
+                                                         
+                                                            <apex:facet name="start">
+                                                                <apex:outputPanel >
+                                                                    <apex:commandButton value="Saving..." disabled="true" />                                         
+                                                                </apex:outputPanel>
+                                                            </apex:facet>
+                                                        </apex:actionStatus>
+                                                        
+                                                        
+                                                        <apex:actionStatus id="SaveGrpEnable">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImageField" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                        </apex:actionStatus>
+                                                        
+                                                         <apex:commandButton action="{!resetRuleGrp}" value="Cancel" reRender="theBlockRuleGroup"/>
+                                                        
+                                                    </apex:pageBlockButtons>
+                                                    <apex:pageBlockSection >
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleGroup__c.fields.Name.label}"></apex:outputLabel>
+                                                            <apex:panelGroup >
+                                                                <apex:inputField value="{!ruleGroup.Name}" styleClass="form-control">
+                                                                <apex:actionSupport event="onblur" reRender="theBlockRuleGroup" status="SaveGrpEnable"/>
+                                                                 </apex:inputField>
+                                                            </apex:panelGroup>
+                                                        </apex:pageBlockSectionItem>
+                                                        
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleGroup__c.fields.Active__c.label}"></apex:outputLabel>
+                                                            <apex:panelGroup >
+                                                                <apex:inputField value="{!ruleGroup.Active__c}" styleClass=""/> 
+                                                            </apex:panelGroup>
+                                                        </apex:pageBlockSectionItem>                                         
+                                                    </apex:pageBlockSection>
+                                                </apex:pageBlock>
+                                                <apex:outputPanel layout="block" style="margin-top:20px;"></apex:outputPanel>
+                                                <apex:pageBlockTable value="{!ruleGroups}" var="rg" id="theRuleGroupTable">
+                                                    <apex:column headerValue="Actions" width="15%">
+                                                        <apex:commandLink rerender="ruleGroupContents" value="Edit " action="{!editOrDeleteRecord}" status="editDeleteactionStatus">                                                                                              
+                                                            <apex:param value="{!rg.Id}" name="editRecord{!rg.Id}" assignTo="{!selectedRecordToEdit}" />
+                                                            <apex:param value="SWATRuleGroup__c" name="editObjectType{!rg.Id}" assignTo="{!objectType}" />                                                                
+                                                        </apex:commandLink>|
+                                                        
+                                                        <apex:commandLink rerender="ruleGroupContents" value=" Delete" action="{!editOrDeleteRecord}" status="editDeleteactionStatus">                                                                
+                                                            <apex:param name="deleteRecord{!rg.Id}" value="{!rg.Id}" assignTo="{!selectedRecordToDelete}" />
+                                                            <apex:param value="SWATRuleGroup__c" name="editObjectType{!rg.Id}" assignTo="{!objectType}" />
+                                                        </apex:commandLink>
+                                                        
+                                                        <apex:actionStatus id="editDeleteactionStatus">
+                                                            <apex:facet name="start">
+                                                                <apex:image id="theImage4" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                            </apex:facet>
+                                                        </apex:actionStatus>
+                                                    </apex:column>
+                                                    <apex:column value="{!rg.Name}" width="75%"/>
+                                                    <apex:column value="{!rg.Active__c}" width="10%"/>
+                                                </apex:pageBlockTable>   
+                                                <!--  <apex:outputPanel layout="block" id="paginationRuleGroup" rendered="{!lastPage > 1}">
+                                                    <ul class="pagination pagination-sm">
+                                                        <li class="{!IF(pageNumber == 1, 'disabled','')}">
+                                                            <apex:commandLink reRender="theRuleGroupTable, paginationRuleGroup"> 
+                                                                &laquo;
+                                                                <apex:param name="previousPageNumber" value="{!pageNumber - 1}" assignTo="{!pageNumber}" />
+                                                            </apex:commandLink>
+                                                        </li>                           
+                                                        
+                                                        <li>
+                                                            <apex:commandLink rendered="{!startPage > 1}" reRender="theRuleGroupTable, paginationRuleGroup">1
+                                                                <apex:param name="firstPageNumber" value="1" assignTo="{!pageNumber}" />
+                                                            </apex:commandLink>
+                                                        </li>
+                                                        <li class="disabled"><apex:outputText rendered="{!startPage > 1}"><span>...</span></apex:outputText></li>
+                                                                                                                                                                                
+                                                        <apex:repeat value="{!counter}" var="cntr">
+                                                            <li class="{!IF(pageNumber == cntr, 'active','')}">
+                                                                <apex:commandLink reRender="theRuleGroupTable, paginationRuleGroup">{!cntr}
+                                                                    <apex:param name="pageNumber{!cntr}" value="{!cntr}" assignTo="{!pageNumber}" />
+                                                                </apex:commandLink>
+                                                            </li>
+                                                        </apex:repeat>                                                     
+                                                        
+                                                        <li class="disabled"><apex:outputText rendered="{!endPage < lastPage}"><span>...</span></apex:outputText></li>
+                                                        <li>
+                                                            <apex:commandLink rendered="{!endPage < lastPage}" reRender="theRuleGroupTable, paginationRuleGroup">{!lastPage}
+                                                                <apex:param name="lastPageNumber" value="{!lastPage}" assignTo="{!pageNumber}" />
+                                                            </apex:commandLink>
+                                                        </li>                                                                                                                  
+                                                        <li class="{!IF(pageNumber == lastPage, 'disabled','')}">
+                                                            <apex:commandLink reRender="theRuleGroupTable, paginationRuleGroup">
+                                                                &raquo;
+                                                                <apex:param name="nextPageNumber" value="{!pageNumber + 1}" assignTo="{!pageNumber}" />
+                                                            </apex:commandLink>
+                                                        </li>
+                                                    </ul>
+                                                </apex:outputPanel> -->                                          
+                                            </apex:form>
+                                        </div>
+                                        <div id="rC" class="{!IF(activeTab == 'maprule','tab-pane active','tab-pane')}">
+                                            <apex:form >
+                                                <apex:pageBlock mode="maindetail" id="theBlockMapRule">
+                                                    <apex:pageBlockSection columns="1"> 
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleMapping__c.fields.RuleGroupID__c.label}"></apex:outputLabel>
+                                                            <apex:panelGroup >
+                                                                <apex:actionRegion >
+                                                                    <apex:selectList value="{!ruleMapping.RuleGroupID__c}" size="1" multiselect="false" styleClass="form-control" style="width:300px;">
+                                                                        <apex:selectOptions value="{!groups}"></apex:selectOptions>
+                                                                        <apex:actionSupport event="onchange" reRender="mappingRecordsTable" status="mappingStatus" />                                                               
+                                                                    </apex:selectList>
+                                                                </apex:actionRegion>
+                                                                <apex:actionStatus id="mappingStatus">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImage4" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                                </apex:actionStatus>
+                                                            </apex:panelGroup>
+                                                        </apex:pageBlockSectionItem>
+                                                    </apex:pageBlockSection>
+                                                    <apex:outputPanel layout="block" style="margin-top:10px;margin-bottom:10px;" id="mappingRecordsTable" >                                                     
+                                                        <h4>Attached Rules</h4>
+                                                        <apex:pageBlockTable value="{!ruleAndGroupMapping}" var="mapRec" rendered="{!ruleAndGroupMapping.size > 0}">
+                                                            <apex:column headerValue="Actions" width="15%">
+                                                                <apex:actionRegion >    
+                                                                    <apex:commandLink rerender="newRuleMappingPanel" value="Edit " action="{!editOrDeleteRecord}" status="editDeleteMappingStatus">                                                                                              
+                                                                        <apex:param value="{!mapRec.Id}" name="editRecord{!mapRec.Id}" assignTo="{!selectedRecordToEdit}" />
+                                                                        <apex:param value="SWATRuleMapping__c" name="editObjectType{!mapRec.Id}" assignTo="{!objectType}" />                                                                
+                                                                    </apex:commandLink>|                                                                
+                                                                    <apex:commandLink rerender="mappingRecordsTable" value=" Delete" action="{!editOrDeleteRecord}" status="editDeleteMappingStatus">                                                                
+                                                                        <apex:param name="deleteRecord{!mapRec.Id}" value="{!mapRec.Id}" assignTo="{!selectedRecordToDelete}" />
+                                                                        <apex:param value="SWATRuleMapping__c" name="editObjectType{!mapRec.Id}" assignTo="{!objectType}" />
+                                                                    </apex:commandLink> 
+                                                                </apex:actionRegion>                                                            
+                                                                <apex:actionStatus id="editDeleteMappingStatus">
+                                                                    <apex:facet name="start">
+                                                                        <apex:image id="theImage5" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                                    </apex:facet>
+                                                                </apex:actionStatus>
+                                                            </apex:column>
+                                                            <apex:column value="{!mapRec.SWATRule__c}"  />
+                                                            <apex:column value="{!mapRec.EffectiveDate__c}" />
+                                                            <apex:column value="{!mapRec.ExpirationDate__c}" />
+                                                            <apex:column value="{!mapRec.Priority__c}" />
+                                                            <apex:column value="{!mapRec.Message__c}" />
+                                                            <apex:column value="{!mapRec.Severity__c}" />                                                           
+                                                        </apex:pageBlockTable>
+                                                        <apex:outputPanel layout="block" rendered="{!ruleAndGroupMapping.size == 0}" > <!-- style="border:1px solid #e0e3e5; padding: 5px"-->
+                                                            <apex:outputLabel value="No records to display"></apex:outputLabel>
+                                                        </apex:outputPanel>
+                                                    </apex:outputPanel>                                              
+                                                    
+                                                </apex:pageBlock>
+                                            
+                                            <apex:outputPanel layout="block" id="newRuleMappingPanel">
+                                                <h4>Attach New Rule</h4>  
+                                                <apex:pageBlock mode="maindetail">
+                                                  <apex:pagemessages rendered="{!IF(activeTab == 'maprule',true,false)}"></apex:pagemessages> 
+                                                    <apex:pageBlockButtons location="bottom">
+                                                        <apex:actionStatus id="saveMappingStatus">
+                                                           <apex:facet name="stop">                                                                    
+                                                               <apex:commandButton value="Save Mapping" action="{!saveRuleMapping}" reRender="newRuleMappingPanel, mappingRecordsTable" status="saveMappingStatus" disabled="{!if(ruleMapping.SWATRule__c==''&& ruleMapping.SWATRule__c==NULL , true,false)}"  />
+                                                           </apex:facet>
+                                                           <apex:facet name="start">
+                                                               <apex:outputPanel >
+                                                                   <apex:commandButton value="Saving..." disabled="true" />                                         
+                                                               </apex:outputPanel>
+                                                           </apex:facet>
+                                                       </apex:actionStatus>
+                                                        
+                                                        <apex:commandButton action="{!resetMapRule}" value="Cancel"/>
+                                                        
+                                                    </apex:pageBlockButtons>
+                                                    <apex:pageBlockSection >
+                                                   
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleMapping__c.fields.SWATRule__c.label}" />
+                                                            <apex:inputField value="{!ruleMapping.SWATRule__c}" styleClass="form-control">
+                                                            <apex:actionsupport event="onblur" reRender="newRuleMappingPanel"/>
+                                                            
+                                                            </apex:inputField>
+                                                        </apex:pageBlockSectionItem>
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleMapping__c.fields.EffectiveDate__c.label}" />
+                                                            <apex:inputField value="{!ruleMapping.EffectiveDate__c}" styleClass="form-control"/>
+                                                        </apex:pageBlockSectionItem>
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleMapping__c.fields.ExpirationDate__c.label}" />
+                                                            <apex:inputField value="{!ruleMapping.ExpirationDate__c}" styleClass="form-control"/>
+                                                        </apex:pageBlockSectionItem>
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleMapping__c.fields.Priority__c.label}" />
+                                                            <apex:inputField value="{!ruleMapping.Priority__c}" styleClass="form-control"/>
+                                                        </apex:pageBlockSectionItem>
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleMapping__c.fields.Message__c.label}" />
+                                                            <apex:inputField value="{!ruleMapping.Message__c}" styleClass="form-control"/>
+                                                        </apex:pageBlockSectionItem>
+                                                        <apex:pageBlockSectionItem >
+                                                            <apex:outputLabel value="{!$ObjectType.SWATRuleMapping__c.fields.Severity__c.label}" />
+                                                            <apex:inputField value="{!ruleMapping.Severity__c}" styleClass="form-control"/>
+                                                        </apex:pageBlockSectionItem>
+                                                    </apex:pageBlockSection>                                                        
+                                                </apex:pageBlock>                                               
+                                            </apex:outputPanel> 
+                                            </apex:form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>                                                                
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel layout="block" id="configureRule" rendered="{!linkAction == 'configure'}">                                
+                                <apex:form >
+                                    <apex:pageBlock mode="maindetail">
+                                        <apex:pageBlockSection showHeader="false" >
+                                            <apex:pageBlockSectionItem >
+                                                <apex:outputLabel value="Type" for="type" />
+                                                <apex:panelGroup styleClass="form-group">
+                                                    <apex:selectList value="{!objectType}" size="1" multiselect="false" id="theObject" styleClass="form-control" >
+                                                        <apex:selectOptions value="{!ruleConfigurationTypes}" />
+                                                        <apex:actionSupport reRender="configureRule" event="onchange" status="typeStatus"/>
+                                                    </apex:selectList>
+                                                    <apex:actionStatus id="typeStatus">
+                                                        <apex:facet name="start">
+                                                            <apex:image id="theImage3" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                        </apex:facet>
+                                                    </apex:actionStatus>
+                                                </apex:panelGroup>
+                                            </apex:pageBlockSectionItem>
+                                            
+                                            <apex:pageBlockSectionItem id="recordInfo" rendered="{!objectType <> null}">
+                                                <apex:outputLabel value="Select Record" for="sObjectName" />
+                                                <apex:panelGroup styleClass="form-group">
+                                                    <!-- <apex:inputHidden value="{!ruleEngineConfiguration.ObjectRecordName__c}" id="sObjectName"/>  -->
+                                                    <apex:inputHidden value="{!ruleEngineConfiguration.ObjectRecordId__c}" id="sObjectId"/>
+                                                    
+                                                    <apex:inputText id="sObjectName"  value="{!ruleEngineConfiguration.ObjectRecordName__c}" styleClass="form-control" >
+                                                        <!--  <apex:actionSupport event="onchange" reRender="confRecordsTable" status="recordSelectStatus"> 
+                                                            <apex:param value="{!ruleEngineConfiguration.ObjectRecordId__c}" name="selectedRecord" />
+                                                        </apex:actionSupport> -->                                              
+                                                    </apex:inputText>
+                                                    
+                                                    <a class="{!objectType}Link" onclick="javascript: openWin()" style="cursor:pointer;">
+                                                        <img class="lookupIcon" title="{!objectType} Name Lookup (New Window)" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onblur="this.className = 'lookupIcon';" alt="{!objectType} Name Lookup" src="/s.gif" />
+                                                    </a>
+                                                    <script>
+                                                       function openWin()  {  
+                                                           //alert('{!$Component.sObjectName}');                                                  
+                                                            var width  = 700;
+                                                            var height = 500;
+                                                            var left   = (screen.width  - width)/2;
+                                                            var top    = (screen.height - height)/2;
+                                                            var searchValue = escapeUTF(document.getElementById('{!$Component.sObjectName}').value);
+                                                            //var objName = escapeUTF(document.getElementById('{!$Component.theObject}').value);                                                            
+                                                            var baseUrl = '/apex/CCLvSobjectLookup?objName={!objectType}' + '&lkname='+ escapeUTF("{!$Component.sObjectName}") +'&lkid='+escapeUTF("{!$Component.sObjectId}")+'&lksearch='+searchValue;
+                                                            var paramz = 'width='+width+',height='+height+',top='+top+',left='+left+',toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=yes';
+                                                            popUp = (window.open(baseUrl,'LookupWindow',paramz));//'Lookup Window','left=100,top=100,width=700,height=500,dependent=yes,toolbar=0,resizable=0,scrollbars=1'
+                                                       }  
+                                                    </script>
+                                                    <apex:actionFunction name="passSelectedValueToController" rerender="confRecordsTable" status="recordSelectStatus">
+                                                        <apex:param value="{!ruleEngineConfiguration.ObjectRecordId__c}" name="selectedRecord" />
+                                                    </apex:actionFunction>
+                                                    <apex:actionStatus id="recordSelectStatus">
+                                                       <apex:facet name="start">
+                                                           <apex:image id="theImage5" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                       </apex:facet>
+                                                   </apex:actionStatus>
+                                                </apex:panelGroup>
+                                            </apex:pageBlockSectionItem>                                             
+                                        </apex:pageblockSection>
+                                        
+                                        <apex:outputPanel layout="block" style="margin-top:10px;margin-bottom:10px;" id="confRecordsTable" >                                                        
+                                            <h4>Attached Rule Groups</h4>
+                                            <apex:pageBlockTable value="{!ruleEngineConfigurationList}" var="conf" rendered="{!ruleEngineConfigurationList.size > 0}">
+                                                <apex:column headerValue="Actions" width="15%">
+                                                    <apex:actionRegion >    
+                                                        <apex:commandLink rerender="newRuleGroupConfPanel" value="Edit " action="{!editOrDeleteRecord}" status="editDeleteConfStatus">                                                                                              
+                                                            <apex:param value="{!conf.Id}" name="editConfRecord{!conf.Id}" assignTo="{!selectedRecordToEdit}" />
+                                                            <apex:param value="SWATRule_Engine_Configuration__c" name="editObjectType{!conf.Id}" assignTo="{!objectType}" />                                                                
+                                                        </apex:commandLink>|                                                                
+                                                        <apex:commandLink rerender="confRecordsTable" value=" Delete" action="{!editOrDeleteRecord}" status="editDeleteConfStatus">                                                                
+                                                            <apex:param name="deleteConfRecord{!conf.Id}" value="{!conf.Id}" assignTo="{!selectedRecordToDelete}" />
+                                                            <apex:param value="SWATRule_Engine_Configuration__c" name="editObjectType{!conf.Id}" assignTo="{!objectType}" />
+                                                        </apex:commandLink> 
+                                                       </apex:actionRegion>                                                             
+                                                       <apex:actionStatus id="editDeleteConfStatus">
+                                                           <apex:facet name="start">
+                                                               <apex:image id="theImage5" value="/img/loading32.gif" style="height: 15px;padding-left:5px"/>
+                                                           </apex:facet>
+                                                       </apex:actionStatus>
+                                                    </apex:column>
+                                                    <apex:column value="{!conf.SWATRuleGroup__c}"   />  
+                                                    <apex:column value="{!conf.ObjectRecordName__c}" />                                                 
+                                                    <apex:column value="{!conf.Priority__c}" />
+                                                    <apex:column value="{!conf.Active__c}" />                                                       
+                                            </apex:pageBlockTable>
+                                            
+                                            <apex:outputPanel layout="block" rendered="{!ruleEngineConfigurationList.size > 0}">
+                                             
+                                                <apex:outputPanel layout="block" rendered="{!ruleEngineExecutionResult <> null}" styleClass="codeViewPortContainer">
+                                                    <pre>
+                                                        <apex:outputText value="{!ruleEngineExecutionResult}" styleClass="codeViewPort" escape="false"/>
+                                                    </pre>
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel layout="block" rendered="{!ruleEngineConfigurationList.size == 0}" > <!-- style="border:1px solid #e0e3e5; padding: 5px"-->
+                                                <apex:outputLabel value="No records to display"></apex:outputLabel>
+                                            </apex:outputPanel>
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel layout="block" id="newRuleGroupConfPanel">
+                                            <h4>Attach New Rule Group</h4>                                                  
+                                            <apex:pageBlock mode="maindetail">
+                                                <apex:pageBlockButtons location="bottom">
+                                                    <apex:actionStatus id="saveConfStatus">
+                                                       <apex:facet name="stop">                                                                    
+                                                           <apex:commandButton value="Save Configuration" action="{!saveRuleEngineConfiguration}" reRender="newRuleGroupConfPanel,confRecordsTable" status="saveConfStatus" />
+                                                       </apex:facet>
+                                                       <apex:facet name="start">
+                                                           <apex:outputPanel >
+                                                               <apex:commandButton value="Saving..." disabled="true" />                                         
+                                                           </apex:outputPanel>
+                                                       </apex:facet>
+                                                   </apex:actionStatus>                                                     
+                                                </apex:pageBlockButtons>
+                                                
+                                                <apex:pageBlockSection >
+                                                    <apex:pageBlockSectionItem >
+                                                        <apex:outputLabel value="{!$ObjectType.SWATRule_Engine_Configuration__c.fields.SWATRuleGroup__c.label}" />
+                                                        <apex:inputField value="{!ruleEngineConfiguration.SWATRuleGroup__c}" styleClass="form-control"/>
+                                                    </apex:pageBlockSectionItem>                                                    
+                                                    <apex:pageBlockSectionItem >
+                                                        <apex:outputLabel value="{!$ObjectType.SWATRule_Engine_Configuration__c.fields.Priority__c.label}" />
+                                                        <apex:inputField value="{!ruleEngineConfiguration.Priority__c}" styleClass="form-control"/>
+                                                    </apex:pageBlockSectionItem>
+                                                    <apex:pageBlockSectionItem >
+                                                        <apex:outputLabel value="{!$ObjectType.SWATRule_Engine_Configuration__c.fields.Active__c.label}" />
+                                                        <apex:inputField value="{!ruleEngineConfiguration.Active__c}" />
+                                                    </apex:pageBlockSectionItem>                                                    
+                                                </apex:pageBlockSection>                                                        
+                                            </apex:pageBlock>                                               
+                                        </apex:outputPanel> 
+                                        
+                                        <!-- <apex:pageBlockTable value="{!ruleEngineConfList}" var="rec" id="conftable" style="margin-top:20px;">                                    
+                                            <apex:column headerValue="Group Name" width="50%">
+                                                    <apex:selectList value="{!rec.conf.SWATRuleGroup__c}" size="1" multiselect="false" styleClass="form-control" style="width:225px;">
+                                                        <apex:selectOptions value="{!rec.groups}"></apex:selectOptions>
+                                                        <apex:actionSupport event="onchange" reRender="ruleBuilder" status="objectStatus" />
+                                                    </apex:selectList>
+                                                </apex:column>
+                                                <apex:column headerValue="Priority" width="25%">
+                                                    <apex:inputField value="{!rec.conf.Priority__c}" styleClass="form-control"/>
+                                                </apex:column>
+                                                <apex:column headerValue="Active" width="25%"> 
+                                                    <apex:inputField value="{!rec.conf.Active__c}" styleClass="form-control"/>
+                                                </apex:column>                               
+                                        </apex:pageBlockTable>-->                                
+                                    </apex:pageBlock>  
+                                </apex:form>                              
+                            </apex:outputPanel>
+                            <!-- Need Analysis Starts Here -->
+                          
+                            
+                          
+                        </div>
+                    </apex:outputPanel>
+                </apex:define>
+            </apex:composition>
+        </apex:pageBlock>
+</apex:page>

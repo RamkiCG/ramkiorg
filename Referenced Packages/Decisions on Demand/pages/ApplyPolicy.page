@@ -1,0 +1,62 @@
+<apex:page controller="DecsOnD.ApplyPolicyController" action="{!applyPolicy}">
+    <apex:pageMessages showDetail="false"/> 
+    <apex:outputPanel id="ErrorPanel" rendered="{!NOT(policyAppliedSuccessfully)}">                
+        <apex:form id="ErrorForm">
+            <!-- This section will only be shown if issues occur. See below for page shown on successful application -->
+            <apex:pageBlock id="ErrorBlock">
+                <p>Errors occurred while applying policy&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!policy.ID}" target="_blank" style="font-weight:bold;" disabled="{!NOT(hasPolicyReadAccess)}">{!policyName}</apex:outputLink> 
+                to&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!$CurrentPage.parameters.Id}">{!recordName}</apex:outputLink>. 
+                No changes will be made to the record.</p>
+                <p>Please contact your system administrator for help in resolving this issue. More details can be found above.</p><br />
+                <apex:outputLabel value="For more information on this policy, please contact " rendered="{!NOT(OR(ISBLANK(policy.OwnerId), hasPolicyReadAccess))}"> <apex:outputField value="{!policy.OwnerId}"/></apex:outputLabel>
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Close" action="{!cancelChanges}"/>               
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>           
+    <apex:outputPanel id="NoChangePanel" rendered="{!AND(policyAppliedSuccessfully, NOT(changesMade))}"> 
+        <apex:form id="NoChangeForm">
+            <!-- This section will only be shown if the policy did not result in any changes -->
+            <apex:pageBlock id="NoChangeBlock" >
+                <p>Policy&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!policy.ID}" target="_blank" style="font-weight:bold;" disabled="{!NOT(hasPolicyReadAccess)}">{!policyName}</apex:outputLink> was successfully applied to&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!record.Id}">{!recordName}</apex:outputLink> but no changes were made to the record, and no other actions were applied.</p>
+                <br/>
+                <apex:outputLabel value="Please review the policy to ensure all cases are covered." rendered="{!hasPolicyReadAccess}"/>
+                <apex:outputLabel value="For more information on this policy, please contact " rendered="{!NOT(OR(ISBLANK(policy.OwnerId), hasPolicyReadAccess))}"> <apex:outputField value="{!policy.OwnerId}"/></apex:outputLabel>
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Close" action="{!cancelChanges}"/>               
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>                
+    <apex:outputPanel id="ConfirmationPanel" rendered="{!AND(policyAppliedSuccessfully, changesMade, NOT(autoMode))}">        
+        <apex:pageBlock id="ConfirmationHeaderBlock" title="Confirmation">
+           <p>Policy&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!policy.ID}" target="_blank" style="font-weight:bold;" disabled="{!NOT(hasPolicyReadAccess)}">{!policyName}</apex:outputLink> was successfully applied to&nbsp;<apex:outputLink value="{!$Site.CurrentSiteUrl}/{!record.ID}">{!recordName}</apex:outputLink></p>
+           <apex:outputLabel value="For more information on this policy, please contact " rendered="{!NOT(OR(ISBLANK(policy.OwnerId), hasPolicyReadAccess))}"> <apex:outputField value="{!policy.OwnerId}"/></apex:outputLabel>
+           <p>Please review the proposed updates below, then click <b>Accept changes</b> to apply them or <b>Cancel</b> to leave your data unchanged.</p>
+        </apex:pageBlock>
+        <apex:form id="ConfirmationForm">
+            <apex:pageBlock id="ConfirmationBodyBlock" title="Proposed updates">
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Accept changes" action="{!acceptChanges}"/>
+                    <apex:commandButton value="Cancel" action="{!cancelChanges}"/>               
+                </apex:pageBlockButtons>
+				<apex:pageBlockTable value="{!actions}" var="action" id="actionList">
+                    <apex:column value="{!action.actionLabel}" headerValue="Update type" width="150px"/> 
+                    <apex:column width="250px"> 
+                        <apex:facet name="header">Object(s)</apex:facet>
+						<apex:repeat value="{!action.targetObjectNames}" var="objectName" id="objectList">
+							{!objectName}<br/>
+						</apex:repeat>
+                    </apex:column> 
+                    <apex:column >
+                        <apex:facet name="header">Details</apex:facet>
+						<apex:repeat value="{!action.messages}" var="message" id="actionList">
+							{!message}<br/>
+						</apex:repeat>
+                    </apex:column> 
+				</apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>                
+</apex:page>

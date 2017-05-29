@@ -1,0 +1,5 @@
+<apex:page >
+ <apex:composition template="testcomposition">
+ <apex:define name="acctable"></apex:define>
+ </apex:composition>
+</apex:page>

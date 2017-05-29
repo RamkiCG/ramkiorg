@@ -1,0 +1,25 @@
+<apex:page controller="QuickBookCustomerController" action="{!completeAuthorization}">
+<apex:Pagemessages escape="false" ></apex:Pagemessages>
+  <apex:form id="main_form">
+       <apex:pageBlock title="Customer" mode="edit">
+            <apex:pageBlockButtons >
+              <apex:commandButton value="Authorize" action="{!qbConnector.authorize }" />
+                <apex:commandButton action="{!CreateCustomer}" value="CreateCustomer"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Customer Section" columns="2">
+             <apex:outputLabel value="{!$ObjectType.Contact.Fields.LastName.Label}" />
+                <apex:inputtext value="{!qbCustomer.FamilyName}"/>
+                 <apex:outputLabel value="{!$ObjectType.Contact.Fields.FirstName.Label}" />
+                <apex:inputtext value="{!qbCustomer.GivenName}"/>
+                 <apex:outputLabel value="IsActive" />
+                <apex:inputCheckbox value="{!qbCustomer.IsActive}"/>
+                 <apex:outputLabel value="Balance" />
+                <apex:inputtext value="{!qbCustomer.Balance}"/>
+                 <apex:outputLabel value="Mobile" />
+                <apex:inputtext value="{!qbCustomer.Mobile}"/>
+                <apex:outputLabel value="Email" />
+                <apex:inputtext value="{!qbCustomer.Email}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

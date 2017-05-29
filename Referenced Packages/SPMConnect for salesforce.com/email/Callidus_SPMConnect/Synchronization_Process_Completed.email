@@ -1,0 +1,10 @@
+Hi {!Callidus_Synchronization_ActivityHistory__c.LastModifiedBy},
+<br/>
+<br/>
+
+The {!Callidus_Synchronization_ActivityHistory__c.Callidus_Synchronization__c} job completed successfully at {!Callidus_Synchronization_ActivityHistory__c.Finish_Time__c}.
+<br/>
+<br/>
+
+Thanks,<br/>
+{!Callidus_Synchronization_ActivityHistory__c.LastModifiedBy}
